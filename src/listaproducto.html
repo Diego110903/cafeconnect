@@ -4,27 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de roles</title>
+    <title>Gestión Producto</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    
+    <style>
+        .logo-container {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+        } 
+
+        .table-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
-<style>
-    .logo-container {
-        text-align: center;
-        margin-bottom: 100px;
-    }
-
-    .logo {
-        width: 200px;
-        height: auto;
-    }
-
-    .table-container {
-        display: flex;
-        justify-content: center;
-    }
-</style>
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-12 text-center my-4">
@@ -34,43 +35,45 @@
 
         <div class="row table-container">
             <div class="col-auto">
-                <button type="button" class="btn btn-primary mb-3">crear roles y permisos</button>
+                <button type="button" class="btn btn-primary mb-3">registrar Producto</button>
                 <table class="table table-striped">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">ID Rol</th>
-                            <th scope="col">Nombre</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Presentación</th>
+                            <th scope="col">Stock Mínimo</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td></td>
+                            <td>Producto A</td>
+                            <td>hit por 200 ml</td>
+                            <td>10</td>
                             <td>
-                            
+                           
+                                <button type="button" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
                                 <button type="button" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i> Editar
+                                    <i class="fas fa-trash-alt"></i> Eliminar
                                 </button>
                             </td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td></td>
+                            <td>1</td>
+                            <td>Producto A</td>
+                            <td>hit por 200 ml</td>
+                            <td>10</td>
                             <td>
-                            
-                                <button type="button" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i> Editar
+                           
+                                <button type="button" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Editar
                                 </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td></td>
-                            <td>
-                             
                                 <button type="button" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i> Editar
+                                    <i class="fas fa-trash-alt"></i> Eliminar
                                 </button>
                             </td>
                         </tr>
@@ -80,33 +83,10 @@
         </div>
     </div>
 
+ 
 </body>
 </html>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 

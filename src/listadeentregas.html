@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Entregas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<style>
+    .logo-container {
+      text-align: center;
+      margin-bottom: 100px;
+  }
+
+  .logo {
+      width: 200px; 
+      height: auto;
+  } 
+</style>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img class="logo" src="../imagenes/logotipo.jpg" alt="Logotipo">
+        </div>
+
+        <div class="content">
+            <div class="form-container">
+                <form>
+                    <div class="form-group">
+                        <label for="id">ID de Entrega</label>
+                        <input type="text" class="form-control" id="id" name="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="provider">Proveedor</label>
+                        <input type="text" class="form-control" id="provider" name="provider">
+                    </div>
+                    <div class="form-group">
+                        <label for="cost">Valor Costo</label>
+                        <input type="text" class="form-control" id="cost" name="cost">
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Cantidad</label>
+                        <input type="text" class="form-control" id="quantity" name="quantity">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Fecha</label>
+                        <input type="date" class="form-control" id="date" name="date">
+                    </div>
+                    <div class="form-group botones d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary">Editar</button>
+                        <button type="button" class="btn btn-danger">Eliminar</button>
+                        <button type="button" class="btn btn-primary">Registrar Entrega</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
