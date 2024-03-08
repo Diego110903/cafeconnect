@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informacion personal</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="contenedor-imagen">
+            <img src="../imagenes/logotipo.jpg" alt="Logotipo">
+        </div>
+        <div class="administrador">
+            <a href="#" class="administrador-link">Administrador</a>
+            <img src="../imagenes/person-circle.svg" alt="Icono de Perfil">
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">Gestión de Usuario</a></li>
+                <li><a href="#">Proveedores</a></li>
+                <li><a href="#">Entregas</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Inventario</a></li>
+                <li><a href="#">Gestión de Venta</a></li>
+                <li><a href="#">Finanzas</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div>
+            <form>
+                <div class="form-group">
+                    <label for="name">Nombre y Apellidos *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                    <div class="form-group">
+                    <label for="dob">Fecha de Nacimiento</label>
+                    <input type="date" id="dob" name="dob">
+                    
+                    <div class="form-group">
+                    <label for="gender">Genero</label>
+                    <select id="gender" name="gender">
+                        <option value="male">Masculino</option>
+                        <option value="female">Femenino</option>
+                    </select>
+                </div>
+                    <div class="form-group">
+                    <label for="cell">Celular</label>
+                    <input type="tel" id="cell" name="cell">
+                </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn">Guardar</button>
+                        <button type="reset" class="btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo de precios</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="contenedor-imagen">
+            <img src="../imagenes/logotipo.jpg" alt="Logotipo">
+        </div>
+        <div class="administrador">
+            <a href="#" class="administrador-link">Administrador</a>
+            <img src="../imagenes/person-circle.svg" alt="Icono de Perfil">
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">Gestión de Usuario</a></li>
+                <li><a href="#">Proveedores</a></li>
+                <li><a href="#">Entregas</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Inventario</a></li>
+                <li><a href="#">Gestión de Venta</a></li>
+                <li><a href="#">Finanzas</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            
+            <form>
+                <label for="search">Búsqueda de Producto por ID o Nombre</label>
+                <input type="text" id="search" placeholder="Ingrese ID o Nombre del Producto">
+            
+                <label for="purchasePrice">Precio de Compra</label>
+                <input type="text" id="purchasePrice" placeholder="Precio de Compra" readonly>
+            
+                <label for="sellingPrice">Precio de Venta</label>
+                <input type="text" id="sellingPrice" placeholder="Precio de Venta" readonly>
+            
+                <button id="editButton">Editar</button>
+                <button id="saveButton">Guardar</button>
+                <button id="cancelButton">Cancelar</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

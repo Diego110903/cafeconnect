@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Venta</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="contenedor-imagen">
+            <img src="../imagenes/logotipo.jpg" alt="Logotipo">
+        </div>
+        <div class="administrador">
+            <a href="#" class="administrador-link">Administrador</a>
+            <img src="../imagenes/person-circle.svg" alt="Icono de Perfil">
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">Gestión de Usuario</a></li>
+                <li><a href="#">Proveedores</a></li>
+                <li><a href="#">Entregas</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Inventario</a></li>
+                <li><a href="#">Gestión de Venta</a></li>
+                <li><a href="#">Finanzas</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <form>
+                <div class="formulario-venta">
+                    <label for="buscarProducto">Campo Buscar Producto ID o Nombre</label>
+                    <input type="text" id="buscarProducto" placeholder="Ingrese ID o Nombre">
+
+                    <label for="amount">Cantidad</label>
+                    <input type="text" id="amount" name="amount">
+            
+                    <label for="unit price">Precio unitario</label>
+                    <input type="text" id="unit price" name="unit price">
+            
+                    <label for="total price">Precio total</label>
+                    <input type="text" id="total price" name="total price">
+                
+                    
+                
+                    <label for="medioPago">Campo Medio de Pago</label>
+                    <select id="medioPago">
+                        <option value="efectivo">Efectivo</option>
+                        <option value="tarjeta">Tarjeta</option>
+                    </select>
+                    <button id="BuscarBtn">Buscar</button>
+                    <button id="eliminar">Eliminar</button>
+                    <button id="agregarProductosBtn">Agregar Productos</button>
+                    <button id="finalizarVentaBtn"> Finalizar Venta</button>
+                    <button id="generarFacturaBtn"> Generar Factura</button>
+                </div> 
+            </form>
+            
+        </div>
+    </div>
+</body>
+</html>

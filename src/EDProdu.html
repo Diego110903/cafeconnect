@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar producto</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="contenedor-imagen">
+            <img src="../imagenes/logotipo.jpg" alt="Logotipo">
+        </div>
+        <div class="administrador">
+            <a href="#" class="administrador-link">Administrador</a>
+            <img src="../imagenes/person-circle.svg" alt="Icono de Perfil">
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">Gestión de Usuario</a></li>
+                <li><a href="#">Proveedores</a></li>
+                <li><a href="#">Entregas</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Inventario</a></li>
+                <li><a href="#">Gestión de Venta</a></li>
+                <li><a href="#">Finanzas</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            
+            <form>
+                <div class="contenedor">
+                   
+                    <div class="busqueda">
+                      <input type="text" id="campoBusqueda" placeholder="Ingrese ID o Nombre">
+                      <button type="button" id="buscar">Buscar</button>
+                    </div>
+                
+                    <div class="edicion">
+                      
+                      <form action="#" method="post">
+                        <label for="nombreProducto">Nombre del Producto</label>
+                        <input type="text" id="nombreProducto" name="nombreProducto" required>
+                
+                        <label for="presentacionProducto">Presentación del Producto</label>
+                        <textarea id="presentacionProducto" name="presentacionProducto" rows="4" required></textarea>
+                
+                        <label for="minimoStock">Mínimo de Stock</label>
+                        <input type="number" id="minimoStock" name="minimoStock" required>
+                
+                        <div class="botones">
+                          <button type="submit" id="guardarCambios">Guardar Cambios</button>
+                          <button type="button" id="cancelar">Cancelar</button>
+                        </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
