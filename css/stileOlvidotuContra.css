@@ -1,0 +1,58 @@
+form {
+    max-width: 300px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input[type="password"] {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+    button[type="button"].cancel {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #666;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"].next {
+    background-color: #4CAF50;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="button"].cancel:hover {
+    background-color: #f0f0f0;
+  }
+  
+  button[type="submit"].next:hover {
+    background-color: #3e8e41;
+  }
