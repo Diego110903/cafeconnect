@@ -5,7 +5,16 @@ function ruta(url){
     location.href=url
 }
 
-$("#btnnuevo").click({
-    //ruta("OlvidotuContrasena.html")
-})
-$(".botoninicio").hide()
+    $("#btnnuevo").on("click",()=>{
+    ruta("OlvidotuContrasena.html")
+    })
+
+    $("#form_login").on("submit",()=>{
+
+    })
+
+    //$(".botoninicio").hide()
+
+    
+       
+    
