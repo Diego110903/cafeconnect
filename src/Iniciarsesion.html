@@ -24,16 +24,17 @@
 	<div class="container login">
 		<form action="" method="" id="" name="">
 			<label for="correo">Iniciar sesion</label>
-			<input type="text" id="correo" name="correo" placeholder="correo electtronico" required>
+			<input type="email" id="correo" name="correo" placeholder="correo electtronico" class="caja" required>
 			<br>
 			<br>
 			<label for="password">Contrasena</label>
-			<input type="password" id="password" name="password" placeholder="contrasena" required>
-			<button type="submit">Iniciar sesión</button>
-			<button onclick="ruta('OlvidotuContrasena.html')" type="button"Olvido tu Contrasena()>Olvido tu Contrasena</button>
+			<input type="password" id="contrasena" name="contrasena" placeholder="contrasena" class="caja" required>
+			<button type="submit" class="btninicio">Iniciar sesión</button>
+			<button id="btnnuevo" name="btnnuevo" onclick="ruta('OlvidotuContrasena.html')" type="button" class="botoninicio">Olvido tu Contrasena</button>
 			
 		</form>
 	</div>
+	<script src="../js/jquery-3.7.1.js"></script>
 	<script src="../js/script.js"></script>
 </body>
 </html>
