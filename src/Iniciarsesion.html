@@ -23,15 +23,17 @@
 	</div>
 
 	<div class="container login">
-		<form action="../control/login.php" method="get" id="form_login" name="form_login">
+		<form action="../control/login.php" method="GET" id="form_login" name="form_login">
 			<div class="div-inicio">iniciar sesion</div><br><br>
 		
-			<input type="email" id="correo" name="correo" placeholder="correo electtronico" class="caja" required="" />
+			<input type="email" id="correo" name="correo" placeholder="correo electtronico" class="caja" required />
 			<br> 
 			<br>
 			<label for="password">Contrasena</label>
-			<input type="password" id="contrasena" name="contrasena" placeholder="contrasena" class="caja" required="" />
-			<button type="button" id="btn-iniciar" name="btn-iniciar"class="btninicio">Iniciar sesión</button>
+			<input type="password" id="contrasena" name="contrasena" placeholder="contrasena" class="caja" required /><br>
+			<div id="div-msg1" class="label contrasena">respuesta # 1</div>
+			<div id="div-msg2" class="label contrasena">respuesta # 2</div>
+			<button type="submit" id="btn-iniciar" name="btn-iniciar"class="btninicio">Iniciar sesión</button>
 			<button id="btnnuevo" name="btnnuevo" type="button" class="botoninicio">Olvido tu Contrasena</button>
 			
 		</form>
