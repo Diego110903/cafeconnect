@@ -1,4 +1,3 @@
-
 //document.getElementsByName("btnnuevo").addEventlistener({})
 
 function ruta(url){
@@ -68,7 +67,7 @@ $("#btn-iniciar").on("click",()=>{
 $(()=>{
     //let  titulo = $(".div-inicio").html()
    // alert(titulo)
-   $("#btn-iniciar").html("ingresar sesion").css({'color':'black', 'font-size':'1.3em'})
+   $("#btn-iniciar").html("iniciar sesion").css({'color':'black', 'font-size':'1.3em'})
    $("#btnnuevo").html("olvido tu contrasena").css({'color':'black', 'font-size':'1.3em'})
 //$("#btn-iniciar").remove().fadeOut(3000)animacion
     //$("#btn-iniciar").slideUp(300).delay(800).fadeIn(400);animacion
