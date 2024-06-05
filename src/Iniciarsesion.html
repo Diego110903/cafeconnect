@@ -24,21 +24,22 @@
 
 	<div class="container login">
 		<form action="../control/login.php" method="GET" id="form_login" name="form_login">
-			<div class="div-inicio">iniciar sesion</div><br><br>
+			<div class="div-inicio">iniciar sesi&oacute;n</div><br><br>
 		
 			<input type="email" id="correo" name="correo" placeholder="correo electtronico" class="caja" required />
 			<br> 
 			<br>
 			<label for="password">Contrasena</label>
-			<input type="password" id="contrasena" name="contrasena" placeholder="contrasena" class="caja" required /><br>
+			<input type="text" id="contrasena" name="contrasena" placeholder="contrasena" class="caja" required /><br>
 			<div id="div-msg1" class="label contrasena">respuesta # 1</div>
 			<div id="div-msg2" class="label contrasena">respuesta # 2</div>
-			<button type="submit" id="btn-iniciar" name="btn-iniciar"class="btninicio">Iniciar sesión</button>
+			<button type="submit" id="btn-iniciar" name="btn-iniciar"class="btninicio">Iniciar sesi&oacute;n</button>
 			<button id="btnnuevo" name="btnnuevo" type="button" class="botoninicio">Olvido tu Contrasena</button>
 			
 		</form>
 	</div>
 	<script src="../js/jquery-3.7.1.js"></script>
+	<script src="../js/md5 (1).js"></script>
 	<script src="../js/main.js"></script>
 </body>
 </html>

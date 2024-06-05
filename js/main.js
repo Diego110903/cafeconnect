@@ -1,4 +1,12 @@
-//document.getElementsByName("btnnuevo").addEventlistener({})
+function ruta(url="",blank = undefined){
+    // if(blank===undefined) {window.location.href = url} // else {window.open(url)}
+     (blank===undefined) ? window.location.href = url : window.open(url)
+}
+
+
+
+
+
 
 function ruta(url){
     location.href=url
@@ -10,9 +18,11 @@ $("#btn-iniciar").on("click",()=>{
 })
 
     $("#btnnuevo").on("click",()=>{
-    ruta("OlvidotuContrasena.html")
+    ruta("olvidotucontraseña.html")
     })
 
+
+    
     $("#form_login").on("submit", (e)=>{
     e.preventDefault();
        // alert("ON submit del formulario");
@@ -20,11 +30,12 @@ $("#btn-iniciar").on("click",()=>{
         let pass_usu=$("#contrasena").val()
         // let data = $("#form_login").serialize()
         if(nom_usu!="" && pass_usu!= ""){
+            $("#contrasena").val(md5(pass_usu))
             let info = {
                 "user":nom_usu,
-                "pass":pass_usu
+                "pass":md5(pass_usu)
             }
-            alert("ok --- inicia ajax")
+            // alert("ok --- inicia ajax")
             // aplicando tecnica ajax
             $.ajax({
                 data: info,
@@ -71,7 +82,7 @@ $(()=>{
    $("#btnnuevo").html("olvido tu contrasena").css({'color':'black', 'font-size':'1.3em'})
 //$("#btn-iniciar").remove().fadeOut(3000)animacion
     //$("#btn-iniciar").slideUp(300).delay(800).fadeIn(400);animacion
-    $(".logo-container").hide(2000).delay(1000).show(2000)
+    // $(".logo-container").hide(2000).delay(1000).show(2000)
     //$(".logo-container").slideUp(300).delay(800).fadeIn(400);animacion
     //$(".logo-container").hide(3000)
 })
