@@ -1,16 +1,17 @@
-function ruta(url="",blank = undefined){
+// function ruta(url="",blank = undefined){
     // if(blank===undefined) {window.location.href = url} // else {window.open(url)}
-     (blank===undefined) ? window.location.href = url : window.open(url)
+    //  (blank===undefined) ? window.location.href = url : window.open(url)
+// }
+
+function cancelar() {
+    location.href = 'Iniciarsesion.html';
 }
 
 
 
 
-
-
-function ruta(url){
-    location.href=url
-}
+function ruta(url)
+    {location.href=url}
 
 $("#btn-iniciar").on("click",()=>{
     //$("#form_login").submit()
@@ -23,7 +24,7 @@ $("#btn-iniciar").on("click",()=>{
 
 
     
-    $("#form_login").on("submit", (e)=>{
+    /*$("#form_login").on("submit", (e)=>{
     e.preventDefault();
        // alert("ON submit del formulario");
         let nom_usu=$("#correo").val()
@@ -49,12 +50,13 @@ $("#btn-iniciar").on("click",()=>{
             })
             // fin ajax
 
-            // aplicando el metodo de fetch
-            const div = document.getElementById("div-msg2")
-            fetch("../control/login.php?user="+nom_usu+"&pass="+pass_usu,info).then((resp)=>{
-                div.innerHTML += resp.text()})
-            // fin fetch
-            // fetch("../control/login.php",info).then((resp)=>resp.jason()).then((dataj)=>{})
+          //Aplicando el metodo de Fetch
+        const div = document.getElementById('div-msg2')
+        fetch("../control/login.php?user="+nom_usu+"&pass="+md5(pass_usu),info).then((resp)=>{div.innerHTML += resp.json()})   
+        //Fin Fetch
+        //fetch("../control/login.php",info).then((resp)=>resp.json()).then((dataj)=>{
+            //div.innerHTML += dataj[0]
+        //})
 
 
             // alert("Datos envia\n\n"+data)
@@ -71,19 +73,19 @@ $("#btn-iniciar").on("click",()=>{
         //alert("ok --- inicia ajax")
         
         //ajax
-})
+})*/
 
 //cuando en js de la pg este listose aplica el siguiente codigo 
 
 $(()=>{
     //let  titulo = $(".div-inicio").html()
    // alert(titulo)
-   $("#btn-iniciar").html("iniciar sesion").css({'color':'black', 'font-size':'1.3em'})
-   $("#btnnuevo").html("olvido tu contrasena").css({'color':'black', 'font-size':'1.3em'})
+//    $("#btn-iniciar").html("iniciar sesion").css({'color':'black', 'font-size':'1.3em'})
+//    $("#btnnuevo").html("olvido tu contrasena").css({'color':'black', 'font-size':'1.3em'})
 //$("#btn-iniciar").remove().fadeOut(3000)animacion
-    //$("#btn-iniciar").slideUp(300).delay(800).fadeIn(400);animacion
-    // $(".logo-container").hide(2000).delay(1000).show(2000)
-    //$(".logo-container").slideUp(300).delay(800).fadeIn(400);animacion
+    // $("#btn-iniciar").slideUp(300).delay(800).fadeIn(400);animacion
+    //  $(".logo-container").hide(2000).delay(1000).show(2000)
+    // $(".logo-container").slideUp(3000).delay(800).fadeIn(400);animacion
     //$(".logo-container").hide(3000)
 })
 
@@ -96,3 +98,24 @@ $(()=>{
     
        
     
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
