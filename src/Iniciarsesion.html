@@ -24,7 +24,7 @@
 
 	<div class="container login">
 		<form id="form_login" name="form_login" class="form-control" action="" method="post">
-		<!-- <form action="../control/login.php" method="GET" id="form_login" name="form_login"> -->
+	    <!-- <form action="../control/login.php" method="GET" id="form_login" name="form_login"> --> 
 			<div class="div-inicio">iniciar sesi&oacute;n</div><br><br>
 		
 			<input type="text" class="form-control" id="user" name="user" placeholder="correo Electr&oacute;nico" required value="">
@@ -36,12 +36,15 @@
 			<!-- <div id="div-msg2" class="label contrasena">respuesta # 2</div> -->
 			<button type="submit" id="btn-iniciar" name="btn-iniciar"class="btninicio">Iniciar sesi&oacute;n</button>
 			<button id="btnnuevo" name="btnnuevo" type="button" class="botoninicio">Olvido tu Contrasena</button>
+			<p class="text-center text-red" id="msgLogin"></p>
 			
 		</form>
 	</div>
+	
     <script src="../js/jquery-3.7.1.js"></script>
     <script src="../js/login.js"></script>
     <script src="../js/main.js"></script> 
+	<script src="../js/md5 (1).js"></script> 
 	
 </body>
 </html>

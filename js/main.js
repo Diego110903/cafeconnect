@@ -40,7 +40,7 @@ $("#btn-iniciar").on("click",()=>{
             // aplicando tecnica ajax
             $.ajax({
                 data: info,
-                url: "../control/login.php?",
+                url: "../control/login.php",
                 type: "GET",
                 beforeSend:()=>{
                     console.log("procesando la peticion...")
