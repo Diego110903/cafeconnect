@@ -20,3 +20,128 @@ console.log(divMsg)
 divMsg.innerHTML =`<b>${info.msg}</b>`
 // alert("estoy aqui... ok")
 }
+
+
+try{
+    $divMsg.innerHTML = `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`
+    let resp = await fetch(url,method),
+        respjson = await resp.json();
+    console.log(resp);    
+         
+    validarLogin(respjson)
+    }catch(e){
+        $divMsg.innerHTML = `<b class='text-danger'>codigo ${e.status}</b>${e.msg}</b>`
+    }
+    $divMsg.innerHTML = ""
+       
+}
+const validarLogin = (info)=>{ 
+    (info.code===200) ? window.location.href="menuprincipal.html" : $divMsg.innerHTML =`<b>${info.msg}</b>`
+}
+
+
+codigo form_login
+let $divMsg = document.querySelector("#msgLogin")
+
+const enviarLogin = async (url="", method = "", param = undefined)=>{
+    // if(param !== undefined && method==="GET") url += "?"+ new URLSearchParams(param)
+    // if (method === "GET") method={method,headers: {'content-type':'application/json'}}
+    if (method === "POST") method={method,headers: {'content-type':'application/json'},body: JSON.stringify(param)}
+    // if (method === "PUT") method={method,headers: {'content-type':'application/json'},body: JSON.stringify(param)}
+    // if (method === "DELETE") method={method,headers: {'content-type':'application/json'},body: JSON.stringify(param)}
+
+
+    $divMsg.innerHTML = `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`
+    fetch(url,method)
+         .then(response =>response.json())
+         .then(data=> validarLogin(data))
+         .catch(e => console.log(e))
+    }
+    const validarLogin = (info)=>{
+        (info.code===200) ? window.location.href="menuprincipal.html" : divMsg.innerHTML =`<b>${info.msg}</b>`
+        
+           
+    }
+
+    let $form = document.getElementById("form_login")
+
+    form.addEventListener('submit', (e)=>{
+        e.preventDefault()
+        let user = document.getElementById("user").value
+        let pass = md5(document.getElementById("pass").value)
+        let param = {user, pass}
+        console.log(param)
+        // console.log(JSON.stringify(param))
+       
+        if(user!=="" && pass!==""){
+            let method = "POST"
+            // fetch('../control/login.php', {method:'POST' ,body: JSON.stringify(param)})
+            // fetch('../control/login.php?'+ new URLSearchParams(param), {method: 'GET'})
+            enviarLogin("../control/login.php",method,param)
+            
+        }
+    })
+
+
+    login.php codigo
+    <?php
+require_once("config.class.php")
+//header('content-type: application/json');
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    try {
+        $_post = json_decode(file_get_contents('php://input'),true);
+        //var_dump($_post);
+        if($_post["user"]!="" && $_post["pass"]!=""){
+        //      echo $_post["user"];
+                $bd = new ConfigDb();
+                $conn = $bd->conexion();
+                /*$sql = "select";
+                $stmt = $conn ->prepare($sql);
+                if($stmt->execute()){
+                    echo "SQL realizada correctamente";
+                }else{
+                    echo "SQL no aplicada";
+                }*/
+
+
+
+            header("HTTP/1.1 200");
+            echo json_encode(['code'=>200,'msg' => 'Consulta finalizada correctamente']);
+            
+        }
+       //exit();
+    } catch (Exception $ex) {
+        header("HTTP/1.1 500");
+        echo json_encode(['code'=>500,'msg' => 'Error interno al procesar su petici&oacute;n', "ERROR"=>$ex->getMessage()]);
+        //echo json_encode(['code'=>500,'msg' => 'Error interno al procesar su peticion'.$ex->getMessage()]);
+    }
+}else {
+    header("HTTP/1.1 400");
+    echo json_encode(['code'=>400,'msg' => 'Error, La peticion no se pudo procesar']);
+
+
+
+}
+
+code login.php 
+$sql = "SELECT * FROM tbusuario WHERE UsuEmail = :user AND UsuContraseña = :pass";
+$stmt = $conn->prepare($sql);
+$stmt->bindParam(':user', $_post["user"]);
+$stmt->bindParam(':pass', $_post["pass"]);
+$stmt->execute();
+
+if ($stmt->rowCount() > 0) {
+    echo json_encode(['code' => 200, 'msg' => 'Login successful']);
+} else {
+    echo json_encode(['code' => 401, 'msg' => 'Invalid credentials']);
+}
+
+
+
+header("HTTP/1.1 200 OK");
+echo json_encode([
+    'code' => 200, 
+    'idUser' => $result[0]["IdUsuarioPK"],
+    'id' => $result[0]["Idrolfk"] . " " . $result[0]
+    ["UsuNombre"],
+    'msg' => "ok"
