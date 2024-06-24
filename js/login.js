@@ -38,13 +38,3 @@ const enviarLogin = async (url="", method = "", param = undefined)=>{
             
         }
     })
-
-    
-
-
-
-
-
-
-
-
