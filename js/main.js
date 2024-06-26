@@ -3,6 +3,22 @@
     //  (blank===undefined) ? window.location.href = url : window.open(url)
 // }
 
+function loguear()
+{
+ let user=document.getElementById("user").value;
+ let pass=document.getElementById("pass").value;
+
+if(user=="damg1312@outlook.com" && pass=="11111")
+
+{ 
+   window.location= "menuprincipal.html";
+}
+else
+ { 
+    alert("datos incorrectos");
+ 
+} }
+
 function cancelar() {
     location.href = 'Iniciarsesion.html';
 }
