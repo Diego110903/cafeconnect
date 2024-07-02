@@ -21,11 +21,20 @@ try {
             if ($stmt->execute()) {
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 if (count($result) > 0) {
+                    // Obtener el ID del usuario y el nombre completo
+                    $idUser = $result[0]["IdUsuarioPK"];
+                    $userNombre = $result[0]["UsuNombre"] . " " . $result[0]["UsuApellidos"];
+                    
+                    // Obtener el token
+                    $idToken = $bd->obtenerToken($idUser, $userNombre);
+
+                    // Enviar la respuesta JSON con el idToken
                     header("HTTP/1.1 200 OK");
                     echo json_encode([
                         'code' => 200,
-                        'idUser' => $result[0]["IdUsuarioPK"],
-                        'Usuario' => $result[0]["UsuNombre"] . " " . $result[0]["UsuApellidos"],
+                        'idUser' => $idUser,
+                        'Usuario' => $userNombre,
+                        'idToken' => $idToken,
                         'msg' => "ok"
                     ]);
                 } else {
@@ -52,7 +61,26 @@ try {
         'error' => $e->getMessage()
     ]);
 }
+
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

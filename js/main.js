@@ -8,7 +8,7 @@ function loguear()
  let user=document.getElementById("user").value;
  let pass=document.getElementById("pass").value;
 
-if(user=="damg1312@outlook.com" && pass=="11111")
+if(user=="damg1312@outlook.com" && pass=="12345")
 
 { 
    window.location= "menuprincipal.html";
@@ -18,6 +18,23 @@ else
     alert("datos incorrectos");
  
 } }
+
+
+function validarToken(){
+    console.log(localStorage);
+    if(localStorage.getItem("token")){
+        alert("ok Token existe")
+    }else{
+        ruta("login.html")
+    }
+
+    // localStorage.clear()
+}
+    
+
+document.addEventListener("DOMContentLoaded", (e)=>{
+    validarToken()
+})
 
 function cancelar() {
     location.href = 'Iniciarsesion.html';
