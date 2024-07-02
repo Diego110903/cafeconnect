@@ -33,7 +33,13 @@ const enviarLogin = async (url = "", method = "", param = undefined) => {
 
 const validarLogin = (info) => {
     if (info.code === 200) {
-        window.location.href = "menuprincipal.html?idUser=" + info.idUser;
+        console.log(info);
+        localStorage.clear();
+        localStorage.setItem("token",info.idToken)
+        localStorage.setItem("iduser",info.idUser)
+        localStorage.setItem("user",info.Usuario)
+        // console.log(localStorage);
+        location.href = "menuprincipal.html?token=" + info.idtoken;
     } else {
         $divMsg.innerHTML = `<b class='text-danger'>${info.msg}</b>`;
     }
@@ -46,13 +52,28 @@ form.addEventListener('submit', (e) => {
     let user = document.getElementById("user").value;
     let pass = md5(document.getElementById("pass").value);
     let param = { user, pass };
+    // console.log(param)
+    // console.log(JSON.stringify(param))
 
     if (user !== "" && pass !== "") {
+        // let method = "POST"
+        // fetch('../control/login.php', {method: 'post',body: JSON.stringify(param)})
+    // fetch('../control/login.php?'+ new URLSearchParams(params), {method: 'GET'})
         enviarLogin("../control/login.php", "POST", param);
     } else {
         $divMsg.innerHTML = `<b class='text-danger'>Usuario y contraseña no pueden estar vacíos</b>`;
     }
 });
+
+
+
+
+
+    
+    
+
+
+
 
 
 

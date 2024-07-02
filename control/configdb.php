@@ -17,5 +17,40 @@ class Configdb {
             throw new Exception("ERROR: ".$e->getMessage());
         }
     }
+    
+
+    public function obtenerToken($iduser, $nombreuser) {
+        if (!is_int($iduser) || empty($nombreuser)) {
+            throw new Exception("Datos de entrada no válidos.");
+        }
+
+        $estado = "ACTIVO";
+        $token = bin2hex(openssl_random_pseudo_bytes(16, $crypto_strong));
+
+        if (!$crypto_strong) {
+            throw new Exception("La generación del token no es criptográficamente segura.");
+        }
+
+        try {
+            $conn = $this->conexion();
+            $sql = "INSERT INTO token_acceso (ID_TOKEN, ID_USUARIO_FK, USUARIO, FECHA_REG, HORA_REG, ESTADO) VALUES (:token, :iduser, :nombreuser, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :estado)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':token', $token);
+            $stmt->bindParam(':iduser', $iduser);
+            $stmt->bindParam(':nombreuser', $nombreuser);
+            $stmt->bindParam(':estado', $estado);
+
+            if ($stmt->execute()) {
+                return $token;
+            } else {
+                throw new Exception("No se pudo insertar el token en la base de datos.");
+            }
+        } catch (PDOException $e) {
+            throw new Exception("ERROR: " . $e->getMessage());
+        }
+    }
 }
 ?>
+
+
+
