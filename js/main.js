@@ -37,21 +37,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-function validarToken(){
-    console.log(localStorage);
-    if(localStorage.getItem("token")){
-        alert("ok Token existe")
-    }else{
-        ruta("login.html")
+document.addEventListener('DOMContentLoaded', function() {
+    function validarToken() {
+        console.log(localStorage);
+        var divInfoUser = document.getElementById("info_user");
+        
+        if (localStorage.getItem("token")) {
+            if (divInfoUser) {
+                divInfoUser.innerHTML = `${localStorage.getItem("user")}`;
+            } else {
+                console.error('El elemento #info_user no existe en el DOM.');
+            }
+        } else {
+            ruta("login.html");
+        }
     }
-
-    // localStorage.clear()
-}
     
-
-document.addEventListener("DOMContentLoaded", (e)=>{
-    validarToken()
-})
+    // Ejecutar la función validarToken después de definirla
+    validarToken();
+});
 
 function cancelar() {
     location.href = 'Iniciarsesion.html';
