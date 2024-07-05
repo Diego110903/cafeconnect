@@ -39,7 +39,7 @@ try {
                     ]);
                 } else {
                     header("HTTP/1.1 203 Non-Authoritative Information");
-                    echo json_encode(['code' => 203, 'msg' => "Las credenciales no son válidas"]);
+                    echo json_encode(['code' => 203, 'msg' => "Las credenciales no son validas"]);
                 }
             } else {
                 header("HTTP/1.1 500 Internal Server Error");
@@ -47,17 +47,17 @@ try {
             }
         } else {
             header("HTTP/1.1 400 Bad Request");
-            echo json_encode(['code' => 400, 'msg' => 'Error, faltan parámetros']);
+            echo json_encode(['code' => 400, 'msg' => 'Error, faltan parametros']);
         }
     } else {
         header("HTTP/1.1 405 Method Not Allowed");
-        echo json_encode(['code' => 405, 'msg' => 'Error, método no permitido']);
+        echo json_encode(['code' => 405, 'msg' => 'Error, metodo no permitido']);
     }
 } catch (Exception $e) {
     header("HTTP/1.1 500 Internal Server Error");
     echo json_encode([
         'code' => 500,
-        'msg' => 'Error interno al procesar su petición',
+        'msg' => 'Error interno al procesar su peticion',
         'error' => $e->getMessage()
     ]);
 }
