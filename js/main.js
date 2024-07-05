@@ -8,7 +8,7 @@ function loguear()
  let user=document.getElementById("user").value;
  let pass=document.getElementById("pass").value;
 
-if(user=="damg1312@outlook.com" && pass=="12345")
+if(user=="damg1312@hotmail.com" && pass=="12345")
 
 { 
    window.location= "menuprincipal.html";
@@ -20,20 +20,17 @@ else
 } }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.getElementById('hamburger');
-    const navList = document.getElementById('nav-list');
+    const hamburger = document.querySelector('.navbar-toggler');
+    const navList = document.querySelector('.navbar-collapse');
 
-    hamburger.addEventListener('click', function() {
-        navList.classList.toggle('show');
-    });
+    if (hamburger && navList) {
+        hamburger.addEventListener('click', function() {
+            navList.classList.toggle('show');
+        });
+    } else {
+        console.error('No se encontraron elementos .navbar-toggler o .navbar-collapse en el DOM.');
+    }
 });
-
-
-
-
-
-
-
 
 
 
