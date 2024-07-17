@@ -5,55 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de roles</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css"> 
 </head>
+<style>
+    .logo-container {
+      text-align: center;
+      margin-bottom: 100px;
+  }
+
+  .logo {
+      width: 200px; 
+      height: auto;
+  } 
+</style>
 <body>
-    <div class="header">
-        <div class="contenedor-imagen">
-            <img src="../imagenes/logotipo.jpg" alt="Logotipo">
-        </div>
-        <div class="administrador">
-            <a href="#" class="administrador-link">Administrador</a>
-            <img src="../imagenes/person-circle.svg" alt="Icono de Perfil">
-        </div>
-    </div>
     <div class="container">
-        <div class="sidebar">
-            <ul>
-                <li><a href="#">Gestión de Usuario</a></li>
-                <li><a href="#">Proveedores</a></li>
-                <li><a href="#">Entregas</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Inventario</a></li>
-                <li><a href="#">Gestión de Venta</a></li>
-                <li><a href="#">Finanzas</a></li>
-            </ul>
+        <div class="logo-container">
+            <img class="logo" src="../imagenes/logotipo.jpg" alt="logotipo">
         </div>
-        <div class="content">
-            <div>
-            <form>
-                <form action="#" method="post">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-        
-                    <label for="rol">Rol:</label>
-                    <select id="rol" name="rol">
+    <div class="content">
+        <div class="form-container">
+            <form action="#" method="post">
+                <div class="mb-3">
+                    <div class="div-Nombre">Nombre</div>
+                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <div class="div-Rol">Rol</div>
+                    <select id="rol" name="rol" class="form-select">
                         <option value="vendedor">Vendedor</option>
                         <option value="administrador">Administrador</option>
                         <option value="creacion_roles">Creación de Roles</option>
                         <option value="editar_roles">Editar Roles</option>
                         <option value="permisos">Permisos</option>
                     </select>
-        
-                    <label for="permisos">Permisos:</label>
-                    <textarea id="permisos" name="permisos" rows="4"></textarea>
-        
-                    <input type="submit" value="Enviar">
+                </div>
+                <div class="mb-3">
+                    <div class="div-Permisos">Permisos</div>
+                    <textarea id="permisos" name="permisos" rows="4" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
         </div>
     </div>
 </body>
 </html>
+
+
 
 
 

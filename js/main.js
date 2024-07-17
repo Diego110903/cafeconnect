@@ -74,7 +74,7 @@ $("#btn-iniciar").on("click",()=>{
 })
 
     $("#btnnuevo").on("click",()=>{
-    ruta("olvidotucontraseña.html")
+    ruta("olvidotucontrasena.html")
     })
 
 

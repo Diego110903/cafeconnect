@@ -1,0 +1,60 @@
+.logo-container {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.logo {
+    width: 200px; 
+    height: auto;
+}
+/* Ajustar el ancho del contenedor personalizado */
+.custom-width {
+    max-width: 100%; /* Cambiado de 600px a 100% */
+    width: 80%; /* Añadido para ajustar el ancho relativo */
+    margin: 0 auto;
+}
+
+/* Estilos personalizados para el formulario */
+.form-custom {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Personalizar el botón de buscar */
+#searchUser + .btn {
+    margin-left: 8px;
+}
+
+/* Estilos para los botones */
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #005cbf;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -8,15 +8,16 @@ require_once("configdb.php");
 
 try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $_post = json_decode(file_get_contents('php://input'), true);
+        // Obtener el cuerpo de la solicitud y decodificarlo desde JSON
+        $_POST = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($_post["user"]) && !empty($_post["pass"])) {
+        if (!empty($_POST["user"]) && !empty($_POST["pass"])) {
             $bd = new Configdb();
             $conn = $bd->conexion();
             $sql = "SELECT `IdUsuarioPK`, `UsuNombre`, `UsuApellidos` FROM `tbusuario` WHERE `UsuEmail`=:user AND `UsuContrasena`=:pass";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':user', $_post["user"]);
-            $stmt->bindParam(':pass', $_post["pass"]);
+            $stmt->bindValue(':user', $_POST["user"], PDO::PARAM_STR);
+            $stmt->bindValue(':pass', $_POST["pass"], PDO::PARAM_STR);
 
             if ($stmt->execute()) {
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -29,7 +30,7 @@ try {
                     $idToken = $bd->obtenerToken($idUser, $userNombre);
 
                     // Enviar la respuesta JSON con el idToken
-                    header("HTTP/1.1 200 OK");
+                    header("Content-Type: application/json");
                     echo json_encode([
                         'code' => 200,
                         'idUser' => $idUser,
@@ -39,25 +40,30 @@ try {
                     ]);
                 } else {
                     header("HTTP/1.1 203 Non-Authoritative Information");
-                    echo json_encode(['code' => 203, 'msg' => "Las credenciales no son validas"]);
+                    header("Content-Type: application/json");
+                    echo json_encode(['code' => 203, 'msg' => "Las credenciales no son válidas"]);
                 }
             } else {
                 header("HTTP/1.1 500 Internal Server Error");
+                header("Content-Type: application/json");
                 echo json_encode(['code' => 500, 'msg' => "Error al ejecutar la consulta"]);
             }
         } else {
             header("HTTP/1.1 400 Bad Request");
-            echo json_encode(['code' => 400, 'msg' => 'Error, faltan parametros']);
+            header("Content-Type: application/json");
+            echo json_encode(['code' => 400, 'msg' => 'Error, faltan parámetros']);
         }
     } else {
         header("HTTP/1.1 405 Method Not Allowed");
-        echo json_encode(['code' => 405, 'msg' => 'Error, metodo no permitido']);
+        header("Content-Type: application/json");
+        echo json_encode(['code' => 405, 'msg' => 'Error, método no permitido']);
     }
 } catch (Exception $e) {
     header("HTTP/1.1 500 Internal Server Error");
+    header("Content-Type: application/json");
     echo json_encode([
         'code' => 500,
-        'msg' => 'Error interno al procesar su peticion',
+        'msg' => 'Error interno al procesar su petición',
         'error' => $e->getMessage()
     ]);
 }

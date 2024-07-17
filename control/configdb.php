@@ -35,10 +35,10 @@ class Configdb {
             $conn = $this->conexion();
             $sql = "INSERT INTO token_acceso (ID_TOKEN, ID_USUARIO_FK, USUARIO, FECHA_REG, HORA_REG, ESTADO) VALUES (:token, :iduser, :nombreuser, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :estado)";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':token', $token);
-            $stmt->bindParam(':iduser', $iduser);
-            $stmt->bindParam(':nombreuser', $nombreuser);
-            $stmt->bindParam(':estado', $estado);
+            $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+            $stmt->bindParam(':iduser', $iduser, PDO::PARAM_INT);
+            $stmt->bindParam(':nombreuser', $nombreuser, PDO::PARAM_STR);
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_INT);
 
             if ($stmt->execute()) {
                 return $token;
