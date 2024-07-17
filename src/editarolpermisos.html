@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar rol permisos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<style>
+    .logo-container {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+}
+
+.content .form-group {
+    margin-bottom: 15px;
+}
+</style>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img class="logo" src="../imagenes/logotipo.jpg" alt="logotipo">
+        </div>
+<body>
+    <div class="content">
+        <form action="#" method="post">
+            <div class="permisos-area">
+                <div class="mb-3">
+                    
+                    <div class="form-group mb-3">
+                        <label for="Editar rol" class="form-label">Editar rol</label>    
+                        <div class="input-group">
+                            <input type="text" id="buscador-rol" name="buscador-rol" class="form-control" placeholder="Ingrese el nombre del rol">
+                            <button type="submit" id="btn-Buscar" name="btn-Buscar" class="btn btn-primary">Buscar</button>
+                        </div>
+ 
+                
+                <div class="mb-3">
+                    <label class="form-label">Permisos</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gestion-ventas-facturacion" name="gestion-ventas-facturacion">
+                    <label class="form-check-label" for="gestion-ventas-facturacion">Gestión de ventas y facturación</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="inventario" name="inventario">
+                    <label class="form-check-label" for="inventario">Inventario</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="productos" name="productos">
+                    <label class="form-check-label" for="productos">Productos</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="proveedores" name="proveedores">
+                    <label class="form-check-label" for="proveedores">Proveedores</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="finanzas" name="finanzas">
+                    <label class="form-check-label" for="finanzas">Finanzas</label>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
