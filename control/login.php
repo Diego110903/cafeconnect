@@ -56,7 +56,7 @@ try {
     } else {
         header("HTTP/1.1 405 Method Not Allowed");
         header("Content-Type: application/json");
-        echo json_encode(['code' => 405, 'msg' => 'Error, método no permitido']);
+        echo json_encode(['code' => 405, 'msg' => 'Error, metodo no permitido']);
     }
 } catch (Exception $e) {
     header("HTTP/1.1 500 Internal Server Error");

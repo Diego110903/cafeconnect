@@ -3,12 +3,88 @@
     //  (blank===undefined) ? window.location.href = url : window.open(url)
 // }
 
+
+
+const peticionFetch = async (info) => {
+    let {url,  method,  param,  fSuccess, fError} = info
+    let options = {
+        method: method,
+        headers: { 'Content-Type': 'application/json' }
+    };
+
+    if (param !== undefined && (method === "POST" || method === "PUT" || method === "DELETE")) {
+        options.body = JSON.stringify(param);
+    }
+
+    try {
+        fError = `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`;
+        let resp = await fetch(url, options);
+
+        // Manejar errores HTTP
+        if (!resp.ok) {
+            throw new Error(`HTTP error! status: ${resp.status}`);
+        }
+
+        let respJSON = await resp.json();
+        fSuccess(respJSON);
+    } catch (e) {
+        $divMsg.innerHTML = `<b class='text-danger'>Error: ${e.message}</b>`;
+    } finally {
+        // Remove spinner regardless of success or failure
+        setTimeout(() => {
+            $divMsg.innerHTML = ''; // Clear spinner after a brief delay
+        }, 3000);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    function validarToken() {
+        // console.log(localStorage);
+        var divInfoUser = document.getElementById("info_user");
+        
+        if (localStorage.getItem("token")) {
+            if (divInfoUser) {
+                divInfoUser.innerHTML = `${localStorage.getItem("user")}`;
+            } else {
+                // console.error('El elemento #info_user no existe en el DOM.');
+            }
+        } else {
+            salida();
+        }
+    }
+
+    const salida = ()=>{
+        peticionFetch({
+            url: "",
+            method: "",
+            fSuccess: ()=>{},
+            fError: ()=>{}
+        })
+        // localStorage.clear()
+        // requestAnimationFrame("login.html")
+    }
+    
+    // Ejecutar la función validarToken después de definirla
+    document.addEventListener("DOMContentLoaded", (e)=>{
+        validarToken();
+    })
+    
+});
+
+document.addEventListener("click",(e)=>{
+    if(e.target.matches("#salir")) salida()
+})
+
+ /*function cancelar() {
+    location.href = 'Iniciarsesion.html';
+}*/
+
 function loguear()
 {
  let user=document.getElementById("user").value;
  let pass=document.getElementById("pass").value;
 
-if(user=="damg1312@hotmail.com" && pass=="12345")
+if(user=="damg1312@hotmail.com" && pass=="cafDB1109")
 
 { 
    window.location= "menuprincipal.html";
@@ -31,38 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // console.error('No se encontraron elementos .navbar-toggler o .navbar-collapse en el DOM.');
     }
 });
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    function validarToken() {
-        console.log(localStorage);
-        var divInfoUser = document.getElementById("info_user");
-        
-        if (localStorage.getItem("token")) {
-            if (divInfoUser) {
-                divInfoUser.innerHTML = `${localStorage.getItem("user")}`;
-            } else {
-                // console.error('El elemento #info_user no existe en el DOM.');
-            }
-        } else {
-            salir("login.html");
-        }
-    }
-
-    const salir = (url)=>{
-        
-    }
-    
-    // Ejecutar la función validarToken después de definirla
-    validarToken();
-});
-
-function cancelar() {
-    location.href = 'Iniciarsesion.html';
-}
-
-
 
 
 function ruta(url)
