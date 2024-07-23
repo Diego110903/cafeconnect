@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>editar datos proveedor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<style>
+    .logo-container {
+    text-align: center;
+    margin-bottom: 150px;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+
+.content .form-group {
+    margin-bottom: 15px;
+}
+</style>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img class="logo" src="../imagenes/logotipo.jpg" alt="Logotipo">
+        </div>
+        <div class="content">
+            <div class="form-container">
+                <form>
+                    <div class="form-group">
+                        <label for="buscarProveedor">ID o Nombre del Proveedor:</label>
+                        <input type="text" class="form-control" id="buscarProveedor" name="buscarProveedor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="identificacion">Número de Identificación</label>
+                        <input type="text" class="form-control" id="identificacion" name="identificacion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreApellido">Nombre y Apellidos</label>
+                        <input type="text" class="form-control" id="nombreApellido" name="nombreApellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="celular">Celular</label>
+                        <input type="tel" class="form-control" id="celular" name="celular" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="numCuenta">Número de Cuenta Bancaria</label>
+                        <input type="text" class="form-control" id="numCuenta" name="numCuenta" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoCuenta">Tipo de Cuenta</label>
+                        <select class="form-control" id="tipoCuenta" name="tipoCuenta" required>
+                            <option value="corriente">Corriente</option>
+                            <option value="ahorro">Ahorro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreBanco">Nombre del Banco</label>
+                        <input type="text" class="form-control" id="nombreBanco" name="nombreBanco" required>
+                    </div>
+                    <div class="form-group botones d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
