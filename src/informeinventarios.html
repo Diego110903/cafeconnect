@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lista Inventarios</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="contenedor-imagen">
+            <img src="../imagenes/logotipo.jpg" alt="Logotipo">
+        </div>
+        <div class="administrador">
+            <a href="#" class="administrador-link">Administrador</a>
+            <img src="../imagenes/person-circle.svg" alt="Icono de Perfil">
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">Gestión de Usuario</a></li>
+                <li><a href="#">Proveedores</a></li>
+                <li><a href="#">Entregas</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Inventario</a></li>
+                <li><a href="#">Gestión de Venta</a></li>
+                <li><a href="#">Finanzas</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            
+            <form>
+                <label for="startDate">Fecha Desde</label>
+                <input type="date" id="startDate">
+            
+                <label for="endDate">Fecha Hasta</label>
+                <input type="date" id="endDate">
+            
+                <label for="searchProduct">Buscar Producto</label>
+                <input type="text" id="searchProduct" placeholder="Ingrese el nombre del producto">
+            
+               
+            
+                <div class="export-icons">
+                  <button id="printIcon">Imprimir</button>
+                  <button id="pdfIcon">Exportar a PDF</button>
+                  <button id="wordIcon">Exportar a Word</button>
+                </div>
+ 
+            </form>
+        </div>
+    </div>
+</body>
+</html>
