@@ -72,7 +72,7 @@ function loguear() {
     let pass = document.getElementById("pass").value;
 
     if (user === "damg1312@hotmail.com" && pass === "cafDB1109") {
-        window.location = "menuprincipal.html";
+        window.location = "principal.html";
     } else {
         alert("datos incorrectos");
     }

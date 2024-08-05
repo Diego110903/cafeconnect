@@ -1,0 +1,27 @@
+/* Estilos personalizados */
+
+/* Ajustes para el dropdown del administrador */
+.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+/* Estilo para el contenedor del formulario */
+.form-container {
+    margin-top: 20px; /* Espacio entre el menú y el formulario */
+}
+
+/* Ajustes adicionales, si son necesarios */
+.header .contenedor-imagen img {
+    max-height: 50px;
+}
+
+.header .administrador {
+    display: flex;
+    align-items: center;
+}
+
+.header .administrador svg {
+    margin-right: 10px;
+}
+
