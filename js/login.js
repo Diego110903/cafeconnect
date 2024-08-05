@@ -22,7 +22,7 @@ const validarLogin = (info) => {
         localStorage.setItem("token", info.idToken);
         localStorage.setItem("iduser", info.idUser);
         localStorage.setItem("user", info.Usuario);
-        location.href = "menuprincipal.html?token=" + info.idToken;
+        location.href = "principal.html?token=" + info.idToken;
     } else {
         $divMsg.innerHTML = `<b class='text-danger'>${info.msg}</b>`;
         setTimeout(() => {

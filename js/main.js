@@ -49,8 +49,18 @@ const salida = () => {
     });
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    validarToken();
+const mostrarMenu = async ()=>{
+    let $divmenu = document.getElementById("navbarNav");
+    let url = "../control/menu.php"
+    let resp = await fetch(url);
+    let respText = await resp.text();
+    // console.log(respJson);
+    $divmenu.innerHTML=respText;
+    validarToken
+}
+
+document.addEventListener("DOMContentLoaded", (e) => {
+    mostrarMenu();
 });
 
 document.addEventListener("click", (e) => {
