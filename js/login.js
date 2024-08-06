@@ -46,6 +46,13 @@ form.addEventListener('submit', (e) => {
     }
 });
 
+function consultarToken(){
+    if(localStorage.getItem("token")){location.href="principal.html?token="+localStorage.getItem("token")}
+}
+
+document.addEventListener("DOMContentLoaded", (e)=>{
+    consultarToken()
+})
 
 
 
