@@ -49,6 +49,29 @@ const salida = () => {
     });
 };
 
+function Rol(){
+    let $divRol = document.getElementById("drol");
+    $divRol.innerHTML= `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`;
+    //console.log($divRol)
+    Ajax({
+       url: "../control/rol.php",
+       method: "GET", 
+       param: undefined, 
+       fSuccess:(Resp)=>{
+          //console.log(Resp)
+          if(Resp.code==200){            
+             let opc=``;
+             //console.log(Resp.data)
+             Resp.data.map((el) => {
+                opc+=`<option value="${el.IdRolPK}">${el.RolNombre}</option>`;               
+                //console.log(el)
+             });
+             $divRol.innerHTML=  `<label for="rol" >Rol</label><select class="form-select" name="rol" id="rol" required><option value="">Seleccione una</option>${opc}</select>`;
+          }                     
+       }
+    })
+ }
+
 const mostrarMenu = async ()=>{
     let $divmenu = document.getElementById("navbarNav");
     let url = "../control/menu.php"
@@ -57,6 +80,9 @@ const mostrarMenu = async ()=>{
     // console.log(respJson);
     $divmenu.innerHTML=respText;
     validarToken
+
+    // funciones del registrar usuario
+    Rol();
 }
 
 document.addEventListener("DOMContentLoaded", (e) => {
