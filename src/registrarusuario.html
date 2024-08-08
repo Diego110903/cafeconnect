@@ -60,10 +60,10 @@
                 <div class="card">
                     <h3 class="card-header text-center">REGISTRAR USUARIO</h3>
                     <div class="card-body">
-                        <form class="form-control" action="" method="post">
+                        <form class="form-control" action="" method="post" id="form-usuario" name="form-usuario">
                             <div class="mb-3">
                                 <label for="name">Nombre y Apellidos</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="text" class="form-control" id="name" name="name" required alt="campo obligatorio">
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email</label>
@@ -71,11 +71,9 @@
                             </div>
                             <div class="mb-3" id="drol">
                                 <label for="rol">Rol</label>
-                                <select class="form-select" name="rol" id="rol">
+                                <select class="form-select" name="rol" id="rol" required>
                                     <option value="Seleccione uno">Seleccione uno</option>
-                                    <option value="Administrador">Administrador</option>
-                                    <option value="Usuario">Usuario</option>
-                                    <option value="Vendedor">Vendedor</option>
+                                    
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -87,8 +85,8 @@
                                 <input type="text" class="form-control" id="confirmar" name="confirmar" required>
                             </div>
                             <div>
-                                <button name="btnguardar" id="btnguardar" onclick="clicbtn()" type="submit" class="btn btn-primary">GUARDAR</button>
-                                <button name="btncancelar" id="btncancelar" onclick="clicbtn()" type="submit" class="btn btn-danger">CANCELAR</button>
+                                <button name="btnguardar" id="btnguardar"  type="submit" class="btn btn-primary">GUARDAR</button>
+                                <button name="btncancelar" id="btncancelar"  type="submit" class="btn btn-danger">CANCELAR</button>
                             </div>
                         </form>
                     </div>    
@@ -102,6 +100,22 @@
     <script src="../js/main.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+      
 
 
 
