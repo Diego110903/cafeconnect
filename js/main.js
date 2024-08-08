@@ -27,6 +27,8 @@ function validarToken() {
         } else {
             // console.error('Elemento #info-user no encontrado.');
         }
+        // funciones del registrar usuario
+        Rol();
     } else {
         salida();
     }
@@ -72,6 +74,10 @@ function Rol(){
     })
  }
 
+ function guardarUsuario(){
+    
+ }
+
 const mostrarMenu = async ()=>{
     let $divmenu = document.getElementById("navbarNav");
     let url = "../control/menu.php"
@@ -91,6 +97,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 document.addEventListener("click", (e) => {
     if (e.target.matches("#salir")) salida();
+    if (e.target.matches("btnguardar")){
+        e.preventDefault();
+        guardarUsuario()
+    }
 });
 
 function loguear() {
@@ -128,6 +138,42 @@ $("#btnnuevo").on("click", () => {
 $(document).ready(() => {
     // Tu código jQuery aquí, si usas jQuery
 });
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
 
 
     

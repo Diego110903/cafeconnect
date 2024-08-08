@@ -20,8 +20,8 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
                 header("HTTP/1.1 203 OK");
                 echo json_encode(['code'=>203,'msg' => "Las credenciales no son validas"]);
             }
-            // $stmt = null;
-            // $conn = null;
+            $stmt = null;
+            $conn = null;
         }
         //exit();
     } catch (Exception $ex) {
