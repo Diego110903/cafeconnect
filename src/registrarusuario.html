@@ -60,35 +60,41 @@
                 <div class="card">
                     <h3 class="card-header text-center">REGISTRAR USUARIO</h3>
                     <div class="card-body">
-                        <form class="form-control" action="" method="post" id="form-usuario" name="form-usuario">
+                        <form class="form-control" action="" method="post" id="form-usuario" name="form-usuario" onsubmit="guardarusuario(); return false;">
                             <div class="mb-3">
-                                <label for="name">Nombre y Apellidos</label>
-                                <input type="text" class="form-control" id="name" name="name" required alt="campo obligatorio">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="apellidos">Apellidos</label>
+                                <input type="text" class="form-control" id="apellidos" name="apellidos" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="mb-3" id="drol">
                                 <label for="rol">Rol</label>
                                 <select class="form-select" name="rol" id="rol" required>
-                                    <option value="Seleccione uno">Seleccione uno</option>
-                                    
+                                    <option value="">Seleccione uno</option>
+                                    <!-- Las opciones se llenarán dinámicamente -->
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="password">password</label>
-                                <input type="text" class="form-control" id="password" name="password" required>
+                                <label for="password">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                             <div class="mb-3">
-                                <label for="confirmar">confirmar password</label>
-                                <input type="text" class="form-control" id="confirmar" name="confirmar" required>
+                                <label for="confirmar">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="confirmar" name="confirmar" required>
                             </div>
                             <div>
-                                <button name="btnguardar" id="btnguardar"  type="submit" class="btn btn-primary">GUARDAR</button>
-                                <button name="btncancelar" id="btncancelar"  type="submit" class="btn btn-danger">CANCELAR</button>
+                                <button name="btnguardar" id="btnguardar" type="submit" class="btn btn-primary">GUARDAR</button>
+                                <button name="btncancelar" id="btncancelar" type="button" class="btn btn-danger">CANCELAR</button>
                             </div>
                         </form>
+                        
+                        
                     </div>    
                 </div>
             </div>
