@@ -1,21 +1,27 @@
-function ruta(url, blank = undefined) {
-    (blank === undefined) ? window.location.href = url : window.open(url);
+function ruta(url = "", blank = undefined) {
+    blank === undefined ? window.location.href = url : window.open(url);
 }
 
 const Ajax = async (info) => {
     let { url, method, param, fSuccess } = info;
-    if (param !== undefined && method === "GET") url += "?" + new URLSearchParams(param);
-    if (method === "GET") method = { method, headers: { 'Content-Type': 'application/json' } };
-    if (method === "POST" || method === "PUT" || method === "DELETE") 
-        method = { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(param) };
+
+    if (param !== undefined && method === "GET") {
+        url += "?" + new URLSearchParams(param);
+    }
+
+    let options = { method, headers: { 'Content-Type': 'application/json' } };
+
+    if (method !== "GET") {
+        options.body = JSON.stringify(param);
+    }
 
     try {
-        let resp = await fetch(url, method);
+        let resp = await fetch(url, options);
         if (!resp.ok) throw { status: resp.status, msg: resp.statusText };
         let respJSON = await resp.json();
         fSuccess(respJSON);
     } catch (e) {
-        fSuccess({ code: e.status, msg: e.msg });
+        fSuccess({ code: e.status || 500, msg: e.msg || "Error desconocido" });
     }
 };
 
@@ -51,45 +57,67 @@ const salida = () => {
     });
 };
 
-function Rol(){
+function Rol() {
     let $divRol = document.getElementById("drol");
-    $divRol.innerHTML= `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`;
-    //console.log($divRol)
-    Ajax({
-       url: "../control/rol.php",
-       method: "GET", 
-       param: undefined, 
-       fSuccess:(Resp)=>{
-          //console.log(Resp)
-          if(Resp.code==200){            
-             let opc=``;
-             //console.log(Resp.data)
-             Resp.data.map((el) => {
-                opc+=`<option value="${el.IdRolPK}">${el.RolNombre}</option>`;               
-                //console.log(el)
-             });
-             $divRol.innerHTML=  `<label for="rol" >Rol</label><select class="form-select" name="rol" id="rol" required><option value="">Seleccione una</option>${opc}</select>`;
-          }                     
-       }
-    })
- }
-
- function guardarUsuario(){
+    $divRol.innerHTML = `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`;
     
- }
+    Ajax({
+        url: "../control/rol.php",
+        method: "GET",
+        param: undefined,
+        fSuccess: (Resp) => {
+            if (Resp.code == 200) {
+                let opc = ``;
+                Resp.data.forEach((el) => {
+                    opc += `<option value="${el.IdRolPK}">${el.RolNombre}</option>`;
+                });
+                $divRol.innerHTML = `<label for="rol">Rol</label><select class="form-select" name="rol" id="rol" required><option value="">Seleccione una</option>${opc}</select>`;
+            }
+        }
+    });
+}
 
-const mostrarMenu = async ()=>{
+function guardarusuario() {
+    let datos = {
+        nombre: document.getElementById("nombre").value,
+        apellidos: document.getElementById("apellidos").value,
+        email: document.getElementById("email").value,
+        rol: document.getElementById("rol").value,
+        password: document.getElementById("password").value,
+        confirmar: document.getElementById("confirmar").value,
+    };
+
+    // Envía los datos al servidor
+    Ajax({
+        url: "../control/usuario.php",
+        method: "POST",
+        param: datos,
+        fSuccess: (resp) => {
+            console.log(resp);
+            if (resp.code == 200) {
+                alert("El registro fue guardado correctamente");
+            } else {
+                alert("Error en el registro. " + resp.msg);
+            }
+        }
+    });
+}
+
+
+
+
+
+const mostrarMenu = async () => {
     let $divmenu = document.getElementById("navbarNav");
-    let url = "../control/menu.php"
+    let url = "../control/menu.php";
     let resp = await fetch(url);
     let respText = await resp.text();
-    // console.log(respJson);
-    $divmenu.innerHTML=respText;
-    validarToken
+    $divmenu.innerHTML = respText;
+    validarToken(); // Se agregó la llamada correcta a validarToken
 
     // funciones del registrar usuario
     Rol();
-}
+};
 
 document.addEventListener("DOMContentLoaded", (e) => {
     mostrarMenu();
@@ -97,9 +125,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 document.addEventListener("click", (e) => {
     if (e.target.matches("#salir")) salida();
-    if (e.target.matches("btnguardar")){
-        e.preventDefault();
-        guardarUsuario()
+    if (e.target.matches("#btnguardar")) {
+        // e.preventDefault();
+        guardarusuario();
     }
 });
 
@@ -110,7 +138,7 @@ function loguear() {
     if (user === "damg1312@hotmail.com" && pass === "cafDB1109") {
         window.location = "principal.html";
     } else {
-        alert("datos incorrectos");
+        alert("Datos incorrectos");
     }
 }
 
@@ -138,6 +166,7 @@ $("#btnnuevo").on("click", () => {
 $(document).ready(() => {
     // Tu código jQuery aquí, si usas jQuery
 });
+
 
 
 
