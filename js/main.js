@@ -33,8 +33,15 @@ function validarToken() {
         } else {
             // console.error('Elemento #info-user no encontrado.');
         }
-        // funciones del registrar usuario
+        // funciones de registrar usuario
+        if(location.pathname.includes("registrarusuario")){
         Rol();
+    }
+    // funciones de lista usuario
+    if(location.pathname.includes("listausuario")){
+    ListaUsuario()
+    }
+
     } else {
         salida();
     }
@@ -166,6 +173,77 @@ $("#btnnuevo").on("click", () => {
 $(document).ready(() => {
     // Tu código jQuery aquí, si usas jQuery
 });
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
 
 
 

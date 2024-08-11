@@ -5,6 +5,8 @@
                                 Gestión de Usuario
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="listausuario.html">Listado Usuario</a></li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="registrarusuario.html">registrar usuario</a></li>
                                 <li><a class="dropdown-item" href="editarusuario.html">editar usuario</a></li>
                                 <li><a class="dropdown-item" href="listaderol.html">lista de rol</a></li>
@@ -70,8 +72,7 @@
                             </ul>
                         
                         
-              
-                            
+                                 
                             
                         
                         
