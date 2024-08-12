@@ -100,36 +100,66 @@ function guardarusuario() {
             if (resp.code == 200) {
                 alert("El registro fue guardado correctamente");
                 ruta("listausuario.html");
-            } else {
-                alert("Error en el registro. " + resp.msg);
-            }
+            } else alert("Error en el registro. " + resp.msg);
+            
         }
     });
 }
 
 function listausuario() {
+    localStorage.removeItem("id_usuario");
     let $tinfo = document.getElementById("tinfo"), item = "";
-    
+    $tinfo.innerHTML= `<tr><td colspan='6' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
     Ajax({
-        url: "../control/usuario.php", 
-        method: "GET", 
+        url: "../control/usuario.php",
+        method: "GET",
         param: undefined,
         fSuccess: (resp) => {
             if (resp.code == 200) {
                 resp.data.forEach((el) => {
-                    item += `<tr><th scope='row'>${el.id}</th>
-                             <td>${el.rol}</td>
-                             <td>${el.nombre}</td>
-                             <td>${el.apellidos}</td>
-                             <td>${el.email}</td></tr>
-                             <td></td></tr>`
-                });          
+                    item += `<tr>
+                              <th scope='row'>${el.id}</th>
+                              <td>${el.rol}</td>
+                              <td>${el.nombre}</td>
+                              <td>${el.apellidos}</td>
+                              <td>${el.email}</td>
+                              <td> 
+                                <div class="btn-group" role="group">
+                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_usuario" title='Editar' data-id='${el.id}'></button>
+                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_usuario" title='Eliminar' data-id='${el.id}'></button>
+                                </div>
+                              </td>
+                            </tr>`;
+                });
                 $tinfo.innerHTML = item;
             } else {
-                $tinfo.innerHTML = `<tr><td colspan='5' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
+                $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
             }
-       }
+        }
     });
+}
+
+function editarusuario(id) {
+    console.log("clic en editar el registro id=" + id);
+    // Implementa la lógica para editar el usuario
+}
+
+function eliminarusuario(id) {
+    let resp = confirm(`¿Desea eliminar el registro del usuario (#${id})?`);
+    if (resp) {
+        Ajax({
+            url: "../control/usuario.php",
+            method: "DELETE",
+            param: { id },
+            fSuccess: (resp) => {
+                if (resp.code == 200) {
+                    listausuario();
+                } else {
+                    alert("Error en la petición\n" + resp.msg);
+                }
+            }
+        });
+    }
 }
 
 const mostrarMenu = async () => {
@@ -151,9 +181,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("click", (e) => {
     if (e.target.matches("#salir")) salida();
-    if (e.target.matches("#btnguardar")) {
-        guardarusuario();
-    }
+    if (e.target.matches(".u_usuario")) editarusuario(e.target.dataset.id);
+    if (e.target.matches(".d_usuario")) eliminarusuario(e.target.dataset.id);
+    if (e.target.matches("#btnguardar")) guardarusuario();
 });
 
 function loguear() {
@@ -178,17 +208,301 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-$("#btn-iniciar").on("click", () => {
-    // Código para el botón iniciar
-});
 
-$("#btnnuevo").on("click", () => {
-    ruta("olvidotucontrasena.html");
-});
 
-$(document).ready(() => {
-    // Tu código jQuery aquí, si usas jQuery
-});
+
+
+
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    
+       
+    
+
+    
+       
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
 
 
 

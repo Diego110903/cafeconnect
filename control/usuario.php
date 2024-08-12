@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("HTTP/1.1 400 Bad Request");
         echo json_encode(['code' => 400, 'msg' => $ex->getMessage()]);
     }
-    
+
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
     try {
         $bd = new Configdb();
@@ -52,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "SELECT T1.IdUsuarioPK as 'id', T2.RolNombre as 'rol', T1.UsuNombre as 'nombre', T1.UsuApellidos as 'apellidos', T1.UsuEmail as 'email' 
                 FROM tbusuario T1 
                 INNER JOIN tbrol T2 ON T1.IdRolFK = T2.IdRolPK";
+
         if (isset($_GET["id"])) {
             $sql = "SELECT T1.IdUsuarioPK as 'id', T2.RolNombre as 'rol', T1.UsuNombre as 'nombre', T1.UsuApellidos as 'apellidos', T1.UsuEmail as 'email', T1.IdUsuarioPK as 'idusu', T1.IdRolFK as 'idrol' 
                     FROM tbusuario T1 
@@ -77,8 +78,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("HTTP/1.1 500 Internal Server Error");
         echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
     }
+
+} else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
+    try {
+        $post = json_decode(file_get_contents('php://input'), true);
+        
+        if (!empty($post["id"])) {
+            $bd = new Configdb();
+            $conn = $bd->conexion();
+
+            $sql = "DELETE FROM tbusuario WHERE IdUsuarioPK = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $post["id"], PDO::PARAM_INT);
+
+            if ($stmt->execute()) {                
+                header("HTTP/1.1 200 OK");
+                echo json_encode(['code' => 200, 'msg' => "OK"]);
+            } else {
+                header("HTTP/1.1 400 Bad Request");
+                echo json_encode(['code' => 400, 'msg' => "Inconvenientes al gestionar la consulta"]);
+            }
+            $stmt = null;
+            $conn = null;
+        } else {
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(['code' => 400, 'msg' => "ID del usuario requerido"]);
+        }
+    } catch (PDOException $ex) {
+        header("HTTP/1.1 500 Internal Server Error");
+        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
+    }
 }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
