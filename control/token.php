@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"]=="PUT"){
         
         if($post["iduser"]!="" && $post["token"]!=""){
             //echo $_post["user"]; 
-            $bd = new ConfigDb();
+            $bd = new Configdb();
             $conn = $bd->conexion();
             $sql = "UPDATE `token_acceso` SET `ESTADO`='INACTIVO' WHERE `ID_TOKEN`= ?";
             $stmt = $conn ->prepare($sql);
