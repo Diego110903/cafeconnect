@@ -21,26 +21,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindValue(':NOMBRE', $post["nombre"], PDO::PARAM_STR);
             $stmt->bindValue(':APELLIDOS', $post["apellidos"], PDO::PARAM_STR);
             $stmt->bindValue(':EMAIL', $post["email"], PDO::PARAM_STR);
-            $stmt->bindValue(':CONTRASENA', md5($post["password"]), PDO::PARAM_STR);
+            $stmt->bindValue(':CONTRASENA', password_hash($post["password"], PASSWORD_BCRYPT), PDO::PARAM_STR);
 
-            if ($stmt->execute()) {
+            if ($stmt->execute()) {                
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => "Usuario registrado correctamente"]);
+                echo json_encode(['code' => 200, 'msg' => "OK"]);
             } else {
-                throw new Exception("No se pudo ejecutar la consulta");
+                header("HTTP/1.1 400 Bad Request");
+                echo json_encode(['code' => 400, 'msg' => "Inconvenientes al gestionar la consulta"]);
             }
+            $stmt = null;
+            $conn = null;
         } else {
-            throw new Exception("Faltan campos por completar");
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(['code' => 400, 'msg' => "Datos incompletos"]);
+        }
+    } catch (PDOException $ex) {
+        header("HTTP/1.1 500 Internal Server Error");
+        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
+    } catch (Exception $ex) {
+        header("HTTP/1.1 400 Bad Request");
+        echo json_encode(['code' => 400, 'msg' => $ex->getMessage()]);
+    }
+    
+} else if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    try {
+        $bd = new Configdb();
+        $conn = $bd->conexion();
+            
+        $sql = "SELECT T1.IdUsuarioPK as 'id', T2.RolNombre as 'rol', T1.UsuNombre as 'nombre', T1.UsuApellidos as 'apellidos', T1.UsuEmail as 'email' 
+                FROM tbusuario T1 
+                INNER JOIN tbrol T2 ON T1.IdRolFK = T2.IdRolPK";
+        if (isset($_GET["id"])) {
+            $sql = "SELECT T1.IdUsuarioPK as 'id', T2.RolNombre as 'rol', T1.UsuNombre as 'nombre', T1.UsuApellidos as 'apellidos', T1.UsuEmail as 'email', T1.IdUsuarioPK as 'idusu', T1.IdRolFK as 'idrol' 
+                    FROM tbusuario T1 
+                    INNER JOIN tbrol T2 ON T1.IdRolFK = T2.IdRolPK 
+                    WHERE T1.IdUsuarioPK = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', trim($_GET["id"]), PDO::PARAM_INT);
+        } else {
+            $stmt = $conn->prepare($sql);
         }
 
-    } catch (Exception $ex) {
+        if ($stmt->execute()) {                
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            header("HTTP/1.1 200 OK");
+            echo json_encode(['code' => 200, 'data' => $result, 'msg' => "OK"]); 
+        } else {
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(['code' => 400, 'msg' => 'Error, La petición no se pudo procesar']);
+        }
+        $stmt = null;
+        $conn = null;
+    } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
-        echo json_encode(['code' => 500, 'msg' => $ex->getMessage()]);
+        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
     }
 }
 ?>
 
-?>
+
+
 
 
 

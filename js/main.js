@@ -27,20 +27,18 @@ const Ajax = async (info) => {
 
 function validarToken() {
     if (localStorage.getItem("token")) {
-        const div_info_user = document.getElementById("info-user");
+        const div_info_user = document.getElementById("info_user");
         if (div_info_user) {
             div_info_user.innerHTML = `${localStorage.getItem("user")}`;
-        } else {
-            // console.error('Elemento #info-user no encontrado.');
         }
-        // funciones de registrar usuario
-        if(location.pathname.includes("registrarusuario")){
-        Rol();
-    }
-    // funciones de lista usuario
-    if(location.pathname.includes("listausuario")){
-    ListaUsuario()
-    }
+
+        if (location.pathname.includes("registrarusuario")) {
+            Rol();
+        }
+
+        if (location.pathname.includes("listausuario")) {
+            listausuario();
+        }
 
     } else {
         salida();
@@ -94,15 +92,14 @@ function guardarusuario() {
         confirmar: document.getElementById("confirmar").value,
     };
 
-    // Envía los datos al servidor
     Ajax({
-        url: "../control/usuario.php",
-        method: "POST",
-        param: datos,
+        url: "../control/usuario.php", 
+        method: "POST", 
+        param: datos, 
         fSuccess: (resp) => {
-            console.log(resp);
             if (resp.code == 200) {
                 alert("El registro fue guardado correctamente");
+                ruta("listausuario.html");
             } else {
                 alert("Error en el registro. " + resp.msg);
             }
@@ -110,9 +107,30 @@ function guardarusuario() {
     });
 }
 
-
-
-
+function listausuario() {
+    let $tinfo = document.getElementById("tinfo"), item = "";
+    
+    Ajax({
+        url: "../control/usuario.php", 
+        method: "GET", 
+        param: undefined,
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                resp.data.forEach((el) => {
+                    item += `<tr><th scope='row'>${el.id}</th>
+                             <td>${el.rol}</td>
+                             <td>${el.nombre}</td>
+                             <td>${el.apellidos}</td>
+                             <td>${el.email}</td></tr>
+                             <td></td></tr>`
+                });          
+                $tinfo.innerHTML = item;
+            } else {
+                $tinfo.innerHTML = `<tr><td colspan='5' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
+            }
+       }
+    });
+}
 
 const mostrarMenu = async () => {
     let $divmenu = document.getElementById("navbarNav");
@@ -120,20 +138,20 @@ const mostrarMenu = async () => {
     let resp = await fetch(url);
     let respText = await resp.text();
     $divmenu.innerHTML = respText;
-    validarToken(); // Se agregó la llamada correcta a validarToken
+    validarToken();
 
-    // funciones del registrar usuario
-    Rol();
+    if (location.pathname.includes("registrarusuario")) {
+        Rol();
+    }
 };
 
-document.addEventListener("DOMContentLoaded", (e) => {
+document.addEventListener("DOMContentLoaded", () => {
     mostrarMenu();
 });
 
 document.addEventListener("click", (e) => {
     if (e.target.matches("#salir")) salida();
     if (e.target.matches("#btnguardar")) {
-        // e.preventDefault();
         guardarusuario();
     }
 });
@@ -157,8 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.addEventListener('click', () => {
             navList.classList.toggle('show');
         });
-    } else {
-        // console.error('No se encontraron elementos .navbar-toggler o .navbar-collapse en el DOM.');
     }
 });
 
@@ -173,6 +189,8 @@ $("#btnnuevo").on("click", () => {
 $(document).ready(() => {
     // Tu código jQuery aquí, si usas jQuery
 });
+
+
 
 
 

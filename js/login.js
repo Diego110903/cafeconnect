@@ -27,7 +27,7 @@ const validarLogin = (info) => {
         $divMsg.innerHTML = `<b class='text-danger'>${info.msg}</b>`;
         setTimeout(() => {
             $divMsg.innerHTML = "";
-        }, 4000);
+        }, 2000);
     }
 };
 
