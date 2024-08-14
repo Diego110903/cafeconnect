@@ -32,18 +32,31 @@ function validarToken() {
             div_info_user.innerHTML = `${localStorage.getItem("user")}`;
         }
 
-        if (location.pathname.includes("registrarusuario")) {
+        if (location.pathname.includes("registrarusuario") | location.pathname.includes("actualizarusuario")) {
             Rol();
-        }
-
-        if (location.pathname.includes("listausuario")) {
-            listausuario();
-        }
-
-    } else {
-        salida();
+            if (location.pathname.includes("actualizarusuario")) {
+                setTimeout(() => {
+                    let $form = document.getElementById("form-act_usuario");
+                    buscarusuario(localStorage.getItem("id_usuario"), (resp) => {
+                        resp.forEach((el) => {
+                            $form.id_usuario.value = el.id;
+                            $form.nombre.value = el.nombre;
+                            $form.apellidos.value = el.apellidos;
+                            $form.email.value = el.email;
+                            $form.rol.value = el.rol;
+                       })
+                    })
+                 },100)
+              }
+           }
+        }   
     }
+
+if (location.pathname.includes("listausuario")) {
+    listausuario();
 }
+
+
 
 const salida = () => {
     Ajax({
@@ -82,26 +95,27 @@ function Rol() {
     });
 }
 
-function guardarusuario() {
+function guardarusuario(m) {
     let datos = {
         nombre: document.getElementById("nombre").value,
         apellidos: document.getElementById("apellidos").value,
         email: document.getElementById("email").value,
         rol: document.getElementById("rol").value,
-        password: document.getElementById("password").value,
-        confirmar: document.getElementById("confirmar").value,
+        password: document.getElementById("password") ? document.getElementById("password").value : "",
+        confirmar: document.getElementById("confirmar") ? document.getElementById("confirmar").value : "",
+        id_usuario: localStorage.getItem("id_usuario"),
     };
 
     Ajax({
         url: "../control/usuario.php", 
-        method: "POST", 
+        method: m, 
         param: datos, 
         fSuccess: (resp) => {
             if (resp.code == 200) {
                 alert("El registro fue guardado correctamente");
                 ruta("listausuario.html");
             } else alert("Error en el registro. " + resp.msg);
-            
+
         }
     });
 }
@@ -109,7 +123,7 @@ function guardarusuario() {
 function listausuario() {
     localStorage.removeItem("id_usuario");
     let $tinfo = document.getElementById("tinfo"), item = "";
-    $tinfo.innerHTML= `<tr><td colspan='6' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
     Ajax({
         url: "../control/usuario.php",
         method: "GET",
@@ -139,9 +153,24 @@ function listausuario() {
     });
 }
 
+function buscarusuario(id, send) {
+    Ajax({
+        url: "../control/usuario.php",
+        method: "GET",
+        param: { id },
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                send(resp.data);
+            } else {
+                alert("Error en la petición\n" + resp.msg);
+            }
+        }
+    });
+}
+
 function editarusuario(id) {
-    console.log("clic en editar el registro id=" + id);
-    // Implementa la lógica para editar el usuario
+    localStorage.setItem("id_usuario", id);
+    ruta("actualizarusuario.html?id=" + id);
 }
 
 function eliminarusuario(id) {
@@ -186,6 +215,12 @@ document.addEventListener("click", (e) => {
     if (e.target.matches("#btnguardar")) guardarusuario();
 });
 
+document.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (e.target.matches("#form-usuario")) guardarusuario("POST");
+    if (e.target.matches("#form-act_usuario")) guardarusuario("PUT");
+});
+
 function loguear() {
     let user = document.getElementById("user").value;
     let pass = document.getElementById("pass").value;
@@ -206,445 +241,5 @@ document.addEventListener('DOMContentLoaded', () => {
             navList.classList.toggle('show');
         });
     }
-});
-
-
-
-
-
-
-
-
-
-
+})
     
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-    
-       
-    
-
-    
-       
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
