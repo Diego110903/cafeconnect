@@ -19,8 +19,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listaproveedores.html">lista proveedores </a></li>
-                                <li><a class="dropdown-item" href="nuevoproveedor.html">nuevo proveedor </a></li>
-                                <li><a class="dropdown-item" href="editardatosProveedor.html">editar dat Proveedor </a></li>            
+                                <li><a class="dropdown-item" href="registrarproveedor.html">Registrar</a></li>
+                                <li><a class="dropdown-item" href="actualizarproveedor.html">Actualizar</a></li>            
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,8 +28,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listaproveedores.html">lista entregas </a></li>
-                                <li><a class="dropdown-item" href="nuevoproveedor.html">registrar entregas </a></li>
-                                <li><a class="dropdown-item" href="editardatosProveedor.html">editar entregas </a></li>            
+                                <li><a class="dropdown-item" href="registrarentregas.html">registrar</a></li>
+                                <li><a class="dropdown-item" href="actualizarentregas.html">Actualizar </a></li>            
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
