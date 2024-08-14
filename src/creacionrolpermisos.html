@@ -1,78 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creación permisos a nuevo rol</title>
+    <title>Creación rol permisos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            overflow-y: auto;
+            height: 120vh;
+            margin: 0;
+            background-size: cover;
+        }
+
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+
+        .custom-form-width {
+            max-width: 700px;
+            margin: auto;
+        }
+    </style>
 </head>
-<style>
-    .logo-container {
-    text-align: center;
-    margin-bottom: 100px;
-}
 
-.logo {
-    width: 200px;
-    height: auto;
-}
-
-.content .form-group {
-    margin-bottom: 15px;
-}
-</style>
 <body>
-    <div class="container">
-        <div class="logo-container">
-            <img class="logo" src="../imagenes/logotipo.jpg" alt="logotipo">
+    <div class="header">
+        <div class="contenedor-imagen">
+            <img src="../imagenes/logotipo.jpg" alt="Logotipo">
         </div>
-<body>
-    <div class="content">
-        <form action="#" method="post">
-            <div class="permisos-area">
-                <div class="mb-3">
-                    <label for="Creacion de rol" class="form-label">Creacion de rol</label>
-                    <input type="text" id="buscador-rol" name="buscador-rol" class="form-control" placeholder="Ingrese el nombre del rol">
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label">Permisos</label>
-                </div>
+        <div class="administrador dropdown">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+            </svg>
+            <a href="#" id="info_user" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Diego Andres Mora</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#"><button id="salir" name="salir" class="btn btn-danger">Salir</button></a></li>
+            </ul>
+        </div>
+    </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gestion-ventas-facturacion" name="gestion-ventas-facturacion">
-                    <label class="form-check-label" for="gestion-ventas-facturacion">Gestión de ventas y facturación</label>
-                </div>
+    <header class="header">
+        <nav class="navbar navbar-expand-md bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav"></div>
+            </div>
+        </nav>
+    </header>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="inventario" name="inventario">
-                    <label class="form-check-label" for="inventario">Inventario</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="productos" name="productos">
-                    <label class="form-check-label" for="productos">Productos</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="proveedores" name="proveedores">
-                    <label class="form-check-label" for="proveedores">Proveedores</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="finanzas" name="finanzas">
-                    <label class="form-check-label" for="finanzas">Finanzas</label>
-                </div>
-
-                <div class="form-group mt-3">
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                    <button type="button" class="btn btn-secondary">Cancelar</button>
+    <div class="container">
+        <div class="m-5 row d-flex align-items-center justify-content-center">
+            <div class="col-md-50 custom-form-width">
+                <div class="card">
+                    <h3 class="card-header text-center">CREACIÓN DE ROL</h3>
+                    <div class="card-body">
+                        <div class="content">
+                            <form action="#" method="post">
+                                <div class="permisos-area">
+                                    <div class="mb-3">
+                                        <label for="buscador-rol" class="form-label">Creación de rol permisos</label>
+                                        <input type="text" id="buscador-rol" name="buscador-rol" class="form-control" placeholder="Ingrese el nombre del rol">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Permisos</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gestion-ventas-facturacion" name="gestion-ventas-facturacion">
+                                        <label class="form-check-label" for="gestion-ventas-facturacion">Gestión de ventas y facturación</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="inventario" name="inventario">
+                                        <label class="form-check-label" for="inventario">Inventario</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="productos" name="productos">
+                                        <label class="form-check-label" for="productos">Productos</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="proveedores" name="proveedores">
+                                        <label class="form-check-label" for="proveedores">Proveedores</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="finanzas" name="finanzas">
+                                        <label class="form-check-label" for="finanzas">Finanzas</label>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                        <button type="button" class="btn btn-danger">Cancelar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/main.js"></script>
 </body>
+
 </html>
+
 

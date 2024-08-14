@@ -7,11 +7,11 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listausuario.html">Listado Usuario</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="registrarusuario.html">registrar </a></li>
+                                <li><a class="dropdown-item" href="registrarusuario.html">Registrar </a></li>
                                 <li><a class="dropdown-item" href="actualizarusuario.html"> Actualizar</a></li>
-                                <li><a class="dropdown-item" href="listaderol.html">lista de rol</a></li>
-                                <li><a class="dropdown-item" href="creacionrolpermisos.html">creacion rol permisos</a></li>
-                                <li><a class="dropdown-item" href="editarolpermisos.html">editar rol permisos</a></li>
+                                <li><a class="dropdown-item" href="listaderol.html">Lista de rol</a></li>
+                                <li><a class="dropdown-item" href="creacionrolpermisos.html">Crear permisos</a></li>
+                                <li><a class="dropdown-item" href="editarolpermisos.html">Editar permisos</a></li>
                             </ul> 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
