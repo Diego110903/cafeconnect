@@ -27,19 +27,19 @@
                                     entregas 
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="listaproveedores.html">lista entregas </a></li>
-                                <li><a class="dropdown-item" href="registrarentregas.html">registrar</a></li>
-                                <li><a class="dropdown-item" href="actualizarentregas.html">Actualizar </a></li>            
+                                <li><a class="dropdown-item" href="listaproveedores.html">Lista entregas </a></li>
+                                <li><a class="dropdown-item" href="registrarentregas.html">Registrar</a></li>
+                                <li><a class="dropdown-item" href="actualizarentregas.html">Actualizar</a></li>            
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     productos 
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="listaproveedores.html">lista producto </a></li>
-                                <li><a class="dropdown-item" href="nuevoproveedor.html">registrar producto </a></li>
-                                <li><a class="dropdown-item" href="editardatosProveedor.html">editar producto </a></li>
-                                <li><a class="dropdown-item" href="editardatosProveedor.html">modulo de precios </a></li>             
+                                <li><a class="dropdown-item" href="listaproveedores.html">Lista producto </a></li>
+                                <li><a class="dropdown-item" href="registrarproducto.html">Registrar</a></li>
+                                <li><a class="dropdown-item" href="actualizarproducto.html">Actualizar</a></li>
+                                <li><a class="dropdown-item" href="moduloprecios.html">Modulo</a></li>             
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,17 +59,12 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listaproveedores.html">lista venta y factura </a></li>
                                 <li><a class="dropdown-item" href="nuevoproveedor.html">registro de venta </a></li>
-                                            
-                            </ul>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Finanzas 
-                            </a>
-                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listaproveedores.html">lista medio pago </a></li>
                                 <li><a class="dropdown-item" href="nuevoproveedor.html">registro de medio pago </a></li>
-                                            
                             </ul>
+                           
+                          
+                            
                         
                         
                                  
