@@ -108,8 +108,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("HTTP/1.1 500 Internal Server Error");
         echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
     }
+} else if ($_SERVER["REQUEST_METHOD"] == "PUT") {
+    try {
+        $post = json_decode(file_get_contents('php://input'), true);
+
+        if (!empty($post["id_usuario"]) && !empty($post["nombre"]) && !empty($post["apellidos"]) && !empty($post["email"]) && !empty($post["rol"])) {
+            $bd = new Configdb();
+            $conn = $bd->conexion();
+            
+            $sql = "UPDATE tbusuario 
+                    SET IdRolFK = :ROL, UsuNombre = :NOMBRE, UsuApellidos = :APELLIDOS, UsuEmail = :EMAIL 
+                    WHERE IdUsuarioPK = :USUARIO";
+            
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(":USUARIO", $post["id_usuario"], PDO::PARAM_INT);
+            $stmt->bindValue(":ROL", $post["rol"], PDO::PARAM_INT);
+            $stmt->bindValue(":NOMBRE", $post["nombre"], PDO::PARAM_STR);
+            $stmt->bindValue(":APELLIDOS", $post["apellidos"], PDO::PARAM_STR);
+            $stmt->bindValue(":EMAIL", $post["email"], PDO::PARAM_STR);
+
+            if ($stmt->execute()) {                
+                header("HTTP/1.1 200 OK");
+                echo json_encode(['code' => 200, 'msg' => "OK"]);
+            } else {
+                header("HTTP/1.1 400 Bad Request");
+                echo json_encode(['code' => 400, 'msg' => "Inconvenientes al gestionar la consulta"]);
+            }
+            $stmt = null;
+            $conn = null;
+        } else {
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(['code' => 400, 'msg' => "Datos incompletos"]);
+        }
+    } catch (PDOException $ex) {
+        header("HTTP/1.1 500 Internal Server Error");
+        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
+    }
+} else {
+    header("HTTP/1.1 400 Bad Request");
+    echo json_encode(['code' => 400, 'msg' => 'Error, La petición no se pudo procesar']);
 }
 ?>
+
+
 
 
 
