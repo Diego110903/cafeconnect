@@ -60,10 +60,10 @@
                                     Gestion de venta 
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="listaproveedores.html">lista venta y factura </a></li>
-                                <li><a class="dropdown-item" href="nuevoproveedor.html">registro de venta </a></li>
+                                <li><a class="dropdown-item" href="listaventafactura.html">listado de venta </a></li>
+                                <li><a class="dropdown-item" href="registrodeventa.html">registro de venta </a></li>
                                 <li><a class="dropdown-item" href="listaproveedores.html">lista medio pago </a></li>
-                                <li><a class="dropdown-item" href="nuevoproveedor.html">registro de medio pago </a></li>
+                                <li><a class="dropdown-item" href="registromediopago.html">medio pago</a></li>
                             </ul>
                            
                           
