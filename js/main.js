@@ -277,4 +277,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     mostrarMenu();
 })
+
+if (location.pathname.includes("listausuario")) listausuario()
+
+if (location.pathname.includes("listaproveedores")) listaProveedores()
+
+if (location.pathname.includes("editarolpermisos")) {
+    Rol()
+    setTimeout(() => {
+        let $form = document.getElementById("datos_user"), info="", rol="";
+        buscarusuario(localStorage.getItem("id_usuario"), (resp) => {
+            resp.forEach((el) => {
+                info=`
+                <blockquote class="blockquote mb-0">
+                <p>${el.nombre} ${el.apellidos}</p>
+                <footer class="blockquote-footer">${el.email}</footer>
+                </blockquote>
+                `;                
+                document.getElementById("rol").value=el.idrol
+            })
+            $form.innerHTML=info;
+        })
+        },100)
+    }
     
