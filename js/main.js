@@ -135,6 +135,7 @@ function listausuario() {
                                 <div class="btn-group" role="group">
                                   <button type="button" class="btn btn-outline-primary fa fa-edit u_usuario" title='Editar' data-id='${el.id}'></button>
                                   <button type="button" class="btn btn-outline-danger fa fa-trash d_usuario" title='Eliminar' data-id='${el.id}'></button>
+                                  <button type="button" class="btn btn-outline-success fa fa-code-branch p_usuario" title='Permisos' data-id='${el.id}'></button>
                                 </div>
                               </td>
                             </tr>`;
@@ -222,6 +223,11 @@ function eliminarusuario(id) {
     }
 }
 
+function relacionarRol(id) {
+    localStorage.setItem("id_usuario", id);
+    ruta("editarolpermisos.html?id=" + id);
+}
+
 const mostrarMenu = async () => {
     let $divmenu = document.getElementById("navbarNav");
     let url = "../control/menu.php";
@@ -239,6 +245,7 @@ document.addEventListener("click", (e) => {
     if (e.target.matches("#salir")) salida();
     if (e.target.matches(".u_usuario")) editarusuario(e.target.dataset.id);
     if (e.target.matches(".d_usuario")) eliminarusuario(e.target.dataset.id);
+    if (e.target.matches(".p_usuario")) relacionarRol(e.target.dataset.id);
     if (e.target.matches("#btnguardar")) guardarusuario();
 });
 
@@ -274,4 +281,23 @@ document.addEventListener('DOMContentLoaded', () => {
 if (location.pathname.includes("listausuario")) listausuario()
 
 if (location.pathname.includes("listaproveedores")) listaProveedores()
+
+if (location.pathname.includes("editarolpermisos")) {
+    Rol()
+    setTimeout(() => {
+        let $form = document.getElementById("datos_user"), info="", rol="";
+        buscarusuario(localStorage.getItem("id_usuario"), (resp) => {
+            resp.forEach((el) => {
+                info=`
+                <blockquote class="blockquote mb-0">
+                <p>${el.nombre} ${el.apellidos}</p>
+                <footer class="blockquote-footer">${el.email}</footer>
+                </blockquote>
+                `;                
+                document.getElementById("rol").value=el.idrol
+            })
+            $form.innerHTML=info;
+        })
+        },100)
+    }
     
