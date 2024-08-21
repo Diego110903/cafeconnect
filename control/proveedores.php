@@ -49,15 +49,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bd = new Configdb();
         $conn = $bd->conexion();
             
-        $sql = "SELECT T1.IdUsuarioPK as 'id', T2.RolNombre as 'rol', T1.UsuNombre as 'nombre', T1.UsuApellidos as 'apellidos', T1.UsuEmail as 'email' 
-                FROM tbusuario T1 
-                INNER JOIN tbrol T2 ON T1.IdRolFK = T2.IdRolPK";
+        $sql = "SELECT p.`IdProvedorPK`, p.`ProvIdentificacion`, p.`ProvNombre`, p.`ProvEmail`, p.`ProvCelular`, p.`ProvNcuenta`, p.`ProvTipoCuenta`, p.`IdBancoFK`, b.`BanNombre` FROM `tbproovedores` p INNER JOIN `tbbanco` b ON(p.`IdBancoFK`=`b`.`IdBancoPK`)";
 
         if (isset($_GET["id"])) {
-            $sql = "SELECT T1.IdUsuarioPK as 'id', T2.RolNombre as 'rol', T1.UsuNombre as 'nombre', T1.UsuApellidos as 'apellidos', T1.UsuEmail as 'email', T1.IdUsuarioPK as 'idusu', T1.IdRolFK as 'idrol' 
-                    FROM tbusuario T1 
-                    INNER JOIN tbrol T2 ON T1.IdRolFK = T2.IdRolPK 
-                    WHERE T1.IdUsuarioPK = :id";
+            $sql = "SELECT p.`IdProvedorPK`, p.`ProvIdentificacion`, p.`ProvNombre`, p.`ProvEmail`, p.`ProvCelular`, p.`ProvNcuenta`, p.`ProvTipoCuenta`, p.`IdBancoFK`, b.`BanNombre` FROM `tbproovedores` p INNER JOIN `tbbanco` b ON(p.`IdBancoFK`=`b`.`IdBancoPK`) WHERE p.`IdProvedorPK` = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':id', trim($_GET["id"]), PDO::PARAM_INT);
         } else {
@@ -149,90 +144,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo json_encode(['code' => 400, 'msg' => 'Error, La petición no se pudo procesar']);
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

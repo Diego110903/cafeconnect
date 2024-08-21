@@ -8,24 +8,22 @@
                                 <li><a class="dropdown-item" href="listausuario.html">Listado Usuario</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="registrarusuario.html">Registrar </a></li>
-                                <li><a class="dropdown-item" href="actualizarusuario.html"> Actualizar</a></li>
-                                <li><a class="dropdown-item" href="listaderol.html">Lista de rol</a></li>
-                                <li><a class="dropdown-item" href="creacionrolpermisos.html">Crear permisos</a></li>
-                                <li><a class="dropdown-item" href="editarolpermisos.html">Editar permisos</a></li>
+                                <li><a class="dropdown-item" href="editarolpermisos.html">Editar </a></li>
+                                <li><a class="dropdown-item" href="listadoderol.html">Listado de rol</a></li>
                             </ul> 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Proveedores 
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="listaproveedores.html">Listado proveedor</a></li>
+                                <li><a class="dropdown-item" href="listaproveedores.html">Listado Proveedores</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="registrarproveedor.html">Registrar</a></li>
                                 <li><a class="dropdown-item" href="actualizarproveedor.html">Actualizar</a></li>            
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    entregas 
+                                    Entregas 
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listadeentregas.html">Listado entregas</a></li>
@@ -35,7 +33,7 @@
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    productos 
+                                    Productos 
                             </a>
                             <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="listaproducto.html">Listado producto</a></li>
@@ -65,6 +63,24 @@
                                 <li><a class="dropdown-item" href="listaproveedores.html">lista medio pago </a></li>
                                 <li><a class="dropdown-item" href="registromediopago.html">medio pago</a></li>
                             </ul>
+                           
+                          
+                            
+                        
+                        
+                                 
+                            
+                        
+                        
+              
+                        
+                        
+              
+                            
+                            
+                        
+                        
+              
                            
                           
                             
