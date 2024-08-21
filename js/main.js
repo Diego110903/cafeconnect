@@ -52,12 +52,6 @@ function validarToken() {
         }   
     }
 
-if (location.pathname.includes("listausuario")) {
-    listausuario();
-}
-
-
-
 const salida = () => {
     Ajax({
         url: "../control/token.php",
@@ -153,6 +147,43 @@ function listausuario() {
     });
 }
 
+function listaProveedores(){
+    localStorage.removeItem("id_usuario");
+    let $tinfo = document.getElementById("tinfo"), item = "";
+    $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    Ajax({
+        url: "../control/proveedores.php",
+        method: "GET",
+        param: undefined,
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                resp.data.forEach((el) => {
+                    item += `<tr>
+                              <th scope='row'>${el. IdProvedorPK}</th>
+                              <td>${el.ProvIdentificacion}</td>
+                              <td>${el.ProvNombre}</td>
+                              <td>${el.ProvEmail}</td>
+                              <td>${el.ProvCelular}</td>
+                              <td>
+                                ${el.ProvNcuenta}
+                                <br><small class='text-primary'>${el.ProvTipoCuenta}</small> / <small class='text-success'>${el.BanNombre}</small>
+                              </td>
+                              <td> 
+                                <div class="btn-group" role="group">
+                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_usuario" title='Editar' data-id='${el.id}'></button>
+                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_usuario" title='Eliminar' data-id='${el.id}'></button>
+                                </div>
+                              </td>
+                            </tr>`;
+                });
+                $tinfo.innerHTML = item;
+            } else {
+                $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
+            }
+        }
+    });
+}
+
 function buscarusuario(id, send) {
     Ajax({
         url: "../control/usuario.php",
@@ -204,10 +235,6 @@ const mostrarMenu = async () => {
     }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    mostrarMenu();
-});
-
 document.addEventListener("click", (e) => {
     if (e.target.matches("#salir")) salida();
     if (e.target.matches(".u_usuario")) editarusuario(e.target.dataset.id);
@@ -241,5 +268,10 @@ document.addEventListener('DOMContentLoaded', () => {
             navList.classList.toggle('show');
         });
     }
+    mostrarMenu();
 })
+
+if (location.pathname.includes("listausuario")) listausuario()
+
+if (location.pathname.includes("listaproveedores")) listaProveedores()
     

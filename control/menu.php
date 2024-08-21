@@ -25,7 +25,7 @@
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    entregas 
+                                    Entregas 
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listadeentregas.html">Listado entregas</a></li>
@@ -35,7 +35,7 @@
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    productos 
+                                    Productos 
                             </a>
                             <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="listaproducto.html">Listado producto</a></li>
