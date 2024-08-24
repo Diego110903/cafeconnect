@@ -58,35 +58,37 @@
             <div class="card">
                 <h3 class="card-header text-center">ACTUALIZAR PROVEEDOR</h3>
                     <div class="card-body">
-                        <form class="form-control" action="" method="post">
+                        <form class="form-control" action="" method="post" id="form-act_proveedor" name="form-act_proveedor">
                             <div class="mb-3">
-                                <label for="identificacion">Número de identificación</label>
-                                <input type="text" class="form-control" id="identificacion" name="identificacion" required>
+                                <label for="nit">Nit</label>
+                                <input type="text" class="form-control" id="nit" name="Nit" required>
                             </div>
                             <div class="mb-3">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                <input type="text" class="form-control" id="nombre" name="Nombre" required>
                             </div>
                             <div class="mb-3">
                                 <label for="apellidos">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                                <input type="text" class="form-control" id="apellidos" name="Apellidos" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="Email" required>
                             </div>
                             <div class="mb-3">
                                 <label for="celular">celular</label>
-                                <input type="email" class="form-control" id="celular" name="celular" required>
+                                <input type="celular" class="form-control" id="celular" name="Celular" required>
                             </div>
                             <div class="mb-3">
                                 <label for="numCuenta">numCuenta</label>
-                                <input type="numCuenta" class="form-control" id="numCuenta" name="numCuenta" required>
+                                <input type="numCuenta" class="form-control" id="numCuenta" name="NumCuenta" required>
                             </div>
                             <div class="mb-3" id="tipoCuenta">
                                 <label for="tipoCuenta">tipoCuenta</label>
-                                <select class="form-select" name="tipoCuental" id="tipoCuenta" required>
+                                <select class="form-select" name="TipoCuenta" id="tipoCuenta" required>
                                     <option value="">Seleccione uno</option>
+                                    <option value="corriente">Corriente</option>
+                                    <option value="ahorro">Ahorro</option>
                                 </select>
                             </div>
                             <div class="mb-3">

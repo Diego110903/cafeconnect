@@ -60,40 +60,40 @@
                     <div class="card-body">
                         <form class="form-control" action="" method="post" id="form-proveedor" name="form-proveedor" onsubmit="guardarproveedor(); return false;">
                             <div class="mb-3">
-                                <label for="identificacion">Número de identificación</label>
-                                <input type="text" class="form-control" id="identificacion" name="identificacion" required>
+                                <label for="nit">Nit</label>
+                                <input type="text" class="form-control" id="nit" name="Nit" required>
                             </div>
                             <div class="mb-3">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                <input type="text" class="form-control" id="nombre" name="Nombre" required>
                             </div>
                             <div class="mb-3">
                                 <label for="apellidos">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                                <input type="text" class="form-control" id="apellidos" name="Apellidos" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="text" class="form-control" id="email" name="Email" required>
                             </div>
                             <div class="mb-3">
                                 <label for="celular">celular</label>
-                                <input type="email" class="form-control" id="celular" name="celular" required>
+                                <input type="text" class="form-control" id="celular" name="Celular" required>
                             </div>
                             <div class="mb-3">
                                 <label for="numCuenta">numCuenta</label>
-                                <input type="numCuenta" class="form-control" id="numCuenta" name="numCuenta" required>
+                                <input type="text" class="form-control" id="ncuenta" name="NumCuenta" required>
                             </div>
-                            <div class="mb-3" id="tipoCuenta">
-                                <label for="tipoCuenta">tipoCuenta</label>
-                                <select class="form-select" name="tipoCuenta" id="tipoCuenta" required>
+                            <div class="mb-3" id="divTipoCuenta">
+                                <label for="TipoCuenta">tipoCuenta</label>
+                                <select class="form-select" id="tipoCuenta" name="TipoCuenta" required>
                                     <option value="">Seleccione uno</option>
                                     <option value="corriente">Corriente</option>
                                     <option value="ahorro">Ahorro</option>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="nombreBanco">nombreBanco</label>
-                                <input type="nombreBanco" class="form-control" id="nombreBanco" name="nombreBanco" required>
+                                <label for="nombreBanco">Banco</label>
+                                <input type="text" class="form-control" id="banco" name="Banco" required>
                             </div>
                             <div>
                                 <button name="btnguardar" id="btnguardar" type="submit" class="btn btn-primary">GUARDAR</button>
@@ -106,8 +106,8 @@
         </div>
     </div>  
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="../js/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
     <script src="../js/main.js"></script>
 </body>
 </html>

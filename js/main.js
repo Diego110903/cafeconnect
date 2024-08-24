@@ -1,29 +1,24 @@
-function ruta(url = "", blank = undefined) {
-    blank === undefined ? window.location.href = url : window.open(url);
-}
-
-const Ajax = async (info) => {
-    let { url, method, param, fSuccess } = info;
-
-    if (param !== undefined && method === "GET") {
-        url += "?" + new URLSearchParams(param);
+function ruta(url="",blank = undefined){
+    //if(blank===undefined) {window.location.href = url} else {window.open(url)}
+    (blank===undefined) ? window.location.href = url : window.open(url)
+ }
+ 
+ const Ajax = async (info)=>{
+    let {url, method, param, fSuccess} = info
+    if(param !== undefined && method==="GET") url += "?"+ new URLSearchParams(param)
+    if (method === "GET") method={method,headers: {'Content-Type':'application/json'}}    
+    if (method === "POST" || method === "PUT" || method === "DELETE") method={method,headers: {'Content-Type':'application/json'},body: JSON.stringify(param)}
+    
+    try{
+        //console.log(url,method)
+        let resp = await fetch(url,method);
+        if(!resp.ok) throw {status: resp.status, msg: resp.statusText};
+        let respJson =  await resp.json();  
+        fSuccess(respJson)
+    }catch(e){
+       fSuccess({code: e.status, msg: e.msg})
     }
-
-    let options = { method, headers: { 'Content-Type': 'application/json' } };
-
-    if (method !== "GET") {
-        options.body = JSON.stringify(param);
-    }
-
-    try {
-        let resp = await fetch(url, options);
-        if (!resp.ok) throw { status: resp.status, msg: resp.statusText };
-        let respJSON = await resp.json();
-        fSuccess(respJSON);
-    } catch (e) {
-        fSuccess({ code: e.status || 500, msg: e.msg || "Error desconocido" });
-    }
-};
+ }
 
 function validarToken() {
     if (localStorage.getItem("token")) {
@@ -44,6 +39,28 @@ function validarToken() {
                             $form.apellidos.value = el.apellidos;
                             $form.email.value = el.email;
                             $form.rol.value = el.rol;
+                       })
+                    })
+                 },100)
+              }
+           }
+
+           if (location.pathname.includes("registrarproveedor") | location.pathname.includes("actualizarproveedor")) {
+            
+            if (location.pathname.includes("actualizarproveedor")) {
+                setTimeout(() => {
+                    let $form = document.getElementById("form-act_proveedor");
+                    buscarproveedor(localStorage.getItem("id_proveedor"), (resp) => {
+                        resp.forEach((el) => {
+                            $form.id_proveedor.value = el.proveedor;
+                            $form.nit.value = el.nit;
+                            $form.nombre.value = el.nombre;
+                            $form.apellidos.value = el.apellidos;
+                            $form.email.value = el.email;
+                            $form.celular.value = el.celular;
+                            $form.numCuenta.value = el.numCuenta;
+                            $form.tipoCuenta.value = el.tipoCuenta;
+                            $form.Banco.value = el.Banco;
                        })
                     })
                  },100)
@@ -148,10 +165,40 @@ function listausuario() {
     });
 }
 
-function listaProveedores(){
-    localStorage.removeItem("id_usuario");
+function guardarproveedor(m) {
+    let datos = {
+        
+        nit: document.getElementById("nit").value,
+        nombre: document.getElementById("nombre").value,
+        apellidos: document.getElementById("apellidos").value,
+        email: document.getElementById("email").value,
+        celular: document.getElementById("celular").value,
+        ncuenta: document.getElementById("ncuenta").value, // Ajusta el nombre del campo si es necesario
+        tipocuenta: document.getElementById("tipoCuenta").value, 
+        banco: document.getElementById("banco").value, 
+        id_proveedor: localStorage.getItem("id_proveedor"),
+    };
+
+    Ajax({
+        url: "../control/proveedores.php",
+        method: m,
+        param: datos,
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                alert("El registro fue guardado correctamente");
+                ruta("listaproveedores.html");
+            } else {
+                alert("Error en el registro. " + resp.msg);
+            }
+        }
+    });
+}
+
+
+function listaProveedores() {
+    localStorage.removeItem("id_proveedor");
     let $tinfo = document.getElementById("tinfo"), item = "";
-    $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    $tinfo.innerHTML = `<tr><td colspan='7' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
     Ajax({
         url: "../control/proveedores.php",
         method: "GET",
@@ -160,8 +207,8 @@ function listaProveedores(){
             if (resp.code == 200) {
                 resp.data.forEach((el) => {
                     item += `<tr>
-                              <th scope='row'>${el. IdProvedorPK}</th>
-                              <td>${el.ProvIdentificacion}</td>
+                              <th scope='row'>${el.IdProvedorPK}</th>
+                              <td>${el.ProvNit}</td>
                               <td>${el.ProvNombre}</td>
                               <td>${el.ProvEmail}</td>
                               <td>${el.ProvCelular}</td>
@@ -171,19 +218,21 @@ function listaProveedores(){
                               </td>
                               <td> 
                                 <div class="btn-group" role="group">
-                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_usuario" title='Editar' data-id='${el.id}'></button>
-                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_usuario" title='Eliminar' data-id='${el.id}'></button>
+                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_proveedor" title='Editar' data-id='${el.IdProvedorPK}'></button>
+                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_proveedor" title='Eliminar' data-id='${el.IdProvedorPK}'></button>
                                 </div>
                               </td>
                             </tr>`;
                 });
                 $tinfo.innerHTML = item;
             } else {
-                $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
+                $tinfo.innerHTML = `<tr><td colspan='7' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
             }
         }
     });
 }
+
+
 
 function buscarusuario(id, send) {
     Ajax({
@@ -201,6 +250,7 @@ function buscarusuario(id, send) {
 }
 
 function editarusuario(id) {
+     //console.log("Clic en Editar el registro id="+id)
     localStorage.setItem("id_usuario", id);
     ruta("actualizarusuario.html?id=" + id);
 }
@@ -223,6 +273,46 @@ function eliminarusuario(id) {
     }
 }
 
+function buscarproveedor(id, send) {
+    Ajax({
+        url: "../control/proveedores.php",
+        method: "GET",
+        param: { id },
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                send(resp.data);
+            } else {
+                alert("Error en la petición\n" + resp.msg);
+            }
+        }
+    });
+}
+
+function editarproveedor(id) {
+    localStorage.setItem("id_proveedor", id);
+    ruta("actualizarproveedor.html?id=" + id);
+}
+
+function eliminarproveedor(id) {
+    let resp = confirm(`¿Desea eliminar el registro del proveedor (#${id})?`);
+    if (resp) {
+        Ajax({
+            url: "../control/proveedores.php",
+            method: "DELETE",
+            param: { id },
+            fSuccess: (resp) => {
+                if (resp.code == 200) {
+                    listaProveedores();
+                } else {
+                    alert("Error en la petición\n" + resp.msg);
+                }
+            }
+        });
+    }
+}
+
+
+
 function relacionarRol(id) {
     localStorage.setItem("id_usuario", id);
     ruta("editarolpermisos.html?id=" + id);
@@ -241,19 +331,39 @@ const mostrarMenu = async () => {
     }
 };
 
-document.addEventListener("click", (e) => {
-    if (e.target.matches("#salir")) salida();
-    if (e.target.matches(".u_usuario")) editarusuario(e.target.dataset.id);
-    if (e.target.matches(".d_usuario")) eliminarusuario(e.target.dataset.id);
-    if (e.target.matches(".p_usuario")) relacionarRol(e.target.dataset.id);
-    if (e.target.matches("#btnguardar")) guardarusuario();
-});
+
 
 document.addEventListener("submit", (e) => {
     e.preventDefault();
     if (e.target.matches("#form-usuario")) guardarusuario("POST");
     if (e.target.matches("#form-act_usuario")) guardarusuario("PUT");
 });
+
+
+document.addEventListener("click", (e) => {
+    if (e.target.matches("#salir")) salida();
+    if (e.target.matches(".u_usuario")) editarusuario(e.target.dataset.id);
+    if (e.target.matches(".d_usuario")) eliminarusuario(e.target.dataset.id);
+    if (e.target.matches(".p_usuario")) relacionarRol(e.target.dataset.id);
+    if (e.target.matches(".u_proveedor")) editarproveedor(e.target.dataset.id);
+    if (e.target.matches(".d_proveedor")) eliminarproveedor(e.target.dataset.id);
+    if (e.target.matches("#btnguardar")) {
+        if (location.pathname.includes("registrarusuario") || location.pathname.includes("actualizarusuario")) {
+            guardarusuario();
+        } else if (location.pathname.includes("registrarproveedor") || location.pathname.includes("actualizarproveedor")) {
+            guardarproveedor();
+        }
+    }
+});
+
+document.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (e.target.matches("#form-usuario")) guardarusuario("POST");
+    if (e.target.matches("#form-act_usuario")) guardarusuario("PUT");
+    if (e.target.matches("#form-proveedor")) guardarproveedor("POST");
+    if (e.target.matches("#form-act_proveedor")) guardarproveedor("PUT");
+});
+
 
 function loguear() {
     let user = document.getElementById("user").value;
@@ -301,3 +411,4 @@ if (location.pathname.includes("editarolpermisos")) {
         },100)
     }
     
+
