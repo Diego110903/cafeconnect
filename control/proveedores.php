@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "INSERT INTO tbproovedores (`IdProvedorPK`, `ProvNit`, `ProvNombre`, `ProvApellidos`, `ProvEmail`, `ProvCelular`, `ProvNcuenta`, `ProvTipoCuenta`, `IdBancoFK`)
+            $sql = "INSERT INTO tbproveedores (`IdProvedorPK`, `ProvNit`, `ProvNombre`, `ProvApellidos`, `ProvEmail`, `ProvCelular`, `ProvNcuenta`, `ProvTipoCuenta`, `IdBancoFK`)
                     VALUES (:PROVEEDOR, :NIT, :NOMBRE, :APELLIDOS, :EMAIL, :CELULAR, :NCUENTA, :TIPOCUENTA, :IDBANCO)";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':PROVEEDOR', $post["proveedor"], PDO::PARAM_INT);
