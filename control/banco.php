@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
             $info = array();
             $bd = new ConfigDb();
             $conn = $bd->conexion();
-            $sql = "SELECT `IdBancoFK`, `BanNombre` FROM `tbBanco` ORDER BY `BancoNombre` ASC";
+            $sql = "SELECT `IdBancoPK`, `BanNombre` FROM `tbbanco` ORDER BY `BanNombre` ASC";
             $stmt = $conn ->prepare($sql);
             if($stmt->execute()){                
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -5,17 +5,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $post = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($post["proveedor"]) && !empty($post["nit"]) && !empty($post["nombre"]) && 
-            !empty($post["apellidos"]) && !empty($post["email"]) && !empty($post["celular"]) && 
-            !empty($post["ncuenta"]) && !empty($post["tipocuenta"]) && !empty($post["banco"])) {
+        if (!empty($post["nit"]) && !empty($post["nombre"]) && !empty($post["apellidos"]) && !empty($post["email"]) && 
+        !empty($post["celular"]) && !empty($post["ncuenta"]) && !empty($post["tipocuenta"]) && !empty($post["banco"])) {
 
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "INSERT INTO tbproveedores (`IdProvedorPK`, `ProvNit`, `ProvNombre`, `ProvApellidos`, `ProvEmail`, `ProvCelular`, `ProvNcuenta`, `ProvTipoCuenta`, `IdBancoFK`)
-                    VALUES (:PROVEEDOR, :NIT, :NOMBRE, :APELLIDOS, :EMAIL, :CELULAR, :NCUENTA, :TIPOCUENTA, :IDBANCO)";
+            $sql = "INSERT INTO tbproovedores (`ProvNit`, `ProvNombre`, `ProvApellidos`, `ProvEmail`, `ProvCelular`, `ProvNcuenta`, `ProvTipoCuenta`, `IdBancoFK`)
+                    VALUES (:NIT, :NOMBRE, :APELLIDOS, :EMAIL, :CELULAR, :NCUENTA, :TIPOCUENTA, :IDBANCO)";
             $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':PROVEEDOR', $post["proveedor"], PDO::PARAM_INT);
             $stmt->bindValue(':NIT', $post["nit"], PDO::PARAM_STR);
             $stmt->bindValue(':NOMBRE', $post["nombre"], PDO::PARAM_STR);
             $stmt->bindValue(':APELLIDOS', $post["apellidos"], PDO::PARAM_STR);

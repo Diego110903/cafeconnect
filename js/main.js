@@ -46,7 +46,7 @@ function validarToken() {
            }
 
            if (location.pathname.includes("registrarproveedor") | location.pathname.includes("actualizarproveedor")) {
-            
+            banco();
             if (location.pathname.includes("actualizarproveedor")) {
                 setTimeout(() => {
                     let $form = document.getElementById("form-act_proveedor");
@@ -101,6 +101,26 @@ function Rol() {
                     opc += `<option value="${el.IdRolPK}">${el.RolNombre}</option>`;
                 });
                 $divRol.innerHTML = `<label for="rol">Rol</label><select class="form-select" name="rol" id="rol" required><option value="">Seleccione una</option>${opc}</select>`;
+            }
+        }
+    });
+}
+
+function banco() {
+    let $div = document.getElementById("dBanco");
+    $div.innerHTML = `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`;
+    
+    Ajax({
+        url: "../control/banco.php",
+        method: "GET",
+        param: undefined,
+        fSuccess: (Resp) => {
+            if (Resp.code == 200) {
+                let opc = ``;
+                Resp.data.forEach((el) => {
+                    opc += `<option value="${el.IdBancoPK}">${el.BanNombre}</option>`;
+                });
+                $div.innerHTML = `<label for="banco">Banco</label><select class="form-select" name="banco" id="banco" required><option value="">Seleccione uno</option>${opc}</select>`;
             }
         }
     });
@@ -331,15 +351,6 @@ const mostrarMenu = async () => {
     }
 };
 
-
-
-document.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (e.target.matches("#form-usuario")) guardarusuario("POST");
-    if (e.target.matches("#form-act_usuario")) guardarusuario("PUT");
-});
-
-
 document.addEventListener("click", (e) => {
     if (e.target.matches("#salir")) salida();
     if (e.target.matches(".u_usuario")) editarusuario(e.target.dataset.id);
@@ -347,13 +358,6 @@ document.addEventListener("click", (e) => {
     if (e.target.matches(".p_usuario")) relacionarRol(e.target.dataset.id);
     if (e.target.matches(".u_proveedor")) editarproveedor(e.target.dataset.id);
     if (e.target.matches(".d_proveedor")) eliminarproveedor(e.target.dataset.id);
-    if (e.target.matches("#btnguardar")) {
-        if (location.pathname.includes("registrarusuario") || location.pathname.includes("actualizarusuario")) {
-            guardarusuario();
-        } else if (location.pathname.includes("registrarproveedor") || location.pathname.includes("actualizarproveedor")) {
-            guardarproveedor();
-        }
-    }
 });
 
 document.addEventListener("submit", (e) => {

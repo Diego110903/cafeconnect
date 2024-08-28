@@ -15,13 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn = $bd->conexion();
 
             $sql = "INSERT INTO tbusuario (IdRolFK, UsuNombre, UsuApellidos, UsuEmail, UsuContrasena) 
-                    VALUES (:ROL, :NOMBRE, :APELLIDOS, :EMAIL, :CONTRASENA)";
+                    VALUES (:ROL, :NOMBRE, :APELLIDOS, :EMAIL, MD5(:CONTRASENA))";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':ROL', $post["rol"], PDO::PARAM_INT);
             $stmt->bindValue(':NOMBRE', $post["nombre"], PDO::PARAM_STR);
             $stmt->bindValue(':APELLIDOS', $post["apellidos"], PDO::PARAM_STR);
             $stmt->bindValue(':EMAIL', $post["email"], PDO::PARAM_STR);
-            $stmt->bindValue(':CONTRASENA', password_hash($post["password"], PASSWORD_BCRYPT), PDO::PARAM_STR);
+            $stmt->bindValue(':CONTRASENA', $post["password"], PDO::PARAM_STR);
 
             if ($stmt->execute()) {                
                 header("HTTP/1.1 200 OK");
