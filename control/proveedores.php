@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "INSERT INTO tbproovedores (`ProvNit`, `ProvNombre`, `ProvApellidos`, `ProvEmail`, `ProvCelular`, `ProvNcuenta`, `ProvTipoCuenta`, `IdBancoFK`)
+            $sql = "INSERT INTO `tbproovedores`(`IdProveedorPK`, `ProvNit`, `ProvNombre`, `ProvApellidos`, `ProvEmail`, `ProvCelular`, `ProvNcuenta`, `ProvTipoCuenta`, `IdBancoFK`)
                     VALUES (:NIT, :NOMBRE, :APELLIDOS, :EMAIL, :CELULAR, :NCUENTA, :TIPOCUENTA, :IDBANCO)";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':NIT', $post["nit"], PDO::PARAM_STR);
@@ -48,15 +48,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bd = new Configdb();
         $conn = $bd->conexion();
             
-        $sql = "SELECT p.`IdProvedorPK`, p.`ProvNit`, p.`ProvNombre`, p.`ProvEmail`, p.`ProvCelular`, p.`ProvNcuenta`, p.`ProvTipoCuenta`, p.`IdBancoFK`, b.`BanNombre` 
+        $sql = "SELECT p.`IdProveedorPK`, p.`ProvNit`, p.`ProvNombre`, p.`ProvApellidos`,p.`ProvEmail`, p.`ProvCelular`, p.`ProvNcuenta`, p.`ProvTipoCuenta`, p.`IdBancoFK`, b.`BanNombre` 
                 FROM `tbproovedores` p 
                 INNER JOIN `tbbanco` b ON(p.`IdBancoFK`=`b`.`IdBancoPK`)";
 
         if (isset($_GET["id"])) {
-            $sql = "SELECT p.`IdProvedorPK`, p.`ProvNit`, p.`ProvNombre`, p.`ProvEmail`, p.`ProvCelular`, p.`ProvNcuenta`, p.`ProvTipoCuenta`, p.`IdBancoFK`, b.`BanNombre` 
+            $sql = "SELECT p.`IdProveedorPK`, p.`ProvNit`, p.`ProvNombre`, p.`ProvApellidos` ,p.`ProvEmail`, p.`ProvCelular`, p.`ProvNcuenta`, p.`ProvTipoCuenta`, p.`IdBancoFK`, b.`BanNombre` 
                     FROM `tbproovedores` p 
                     INNER JOIN `tbbanco` b ON(p.`IdBancoFK`=`b`.`IdBancoPK`) 
-                    WHERE p.`IdProvedorPK` = :id";
+                    WHERE p.`IdProveedorPK` = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':id', trim($_GET["id"]), PDO::PARAM_INT);
         } else {
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "DELETE FROM tbproovedores WHERE IdProvedorPK = :id";
+            $sql = "DELETE FROM tbproovedores WHERE IdProveedorPK = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $post["id"], PDO::PARAM_INT);
 
@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             $sql = "UPDATE tbproovedores 
                     SET IdBancoFK = :BANCO, ProvNit = :NIT, ProvNombre = :NOMBRE, ProvApellidos = :APELLIDOS, ProvEmail = :EMAIL, ProvCelular = :CELULAR, ProvNcuenta = :NCUENTA, ProvTipoCuenta = :TIPOCUENTA
-                    WHERE IdProvedorPK = :PROVEEDOR";
+                    WHERE IdProveedorPK = :PROVEEDOR";
             
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':PROVEEDOR', $post["proveedor"], PDO::PARAM_INT);

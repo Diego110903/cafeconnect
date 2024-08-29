@@ -227,9 +227,10 @@ function listaProveedores() {
             if (resp.code == 200) {
                 resp.data.forEach((el) => {
                     item += `<tr>
-                              <th scope='row'>${el.IdProvedorPK}</th>
+                              <th scope='row'>${el.IdProveedorPK}</th>
                               <td>${el.ProvNit}</td>
                               <td>${el.ProvNombre}</td>
+                              <td>${el.ProvApellidos}</td>
                               <td>${el.ProvEmail}</td>
                               <td>${el.ProvCelular}</td>
                               <td>
@@ -238,8 +239,8 @@ function listaProveedores() {
                               </td>
                               <td> 
                                 <div class="btn-group" role="group">
-                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_proveedor" title='Editar' data-id='${el.IdProvedorPK}'></button>
-                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_proveedor" title='Eliminar' data-id='${el.IdProvedorPK}'></button>
+                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_proveedor" title='Editar' data-id='${el.IdProveedorPK}'></button>
+                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_proveedor" title='Eliminar' data-id='${el.IdProveedorPK}'></button>
                                 </div>
                               </td>
                             </tr>`;
@@ -251,6 +252,7 @@ function listaProveedores() {
         }
     });
 }
+
 
 
 
@@ -414,6 +416,9 @@ if (location.pathname.includes("editarolpermisos")) {
         })
         },100)
     }
+    
+
+
     
 
 

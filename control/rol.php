@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"]=="GET"){
     try {
         //if($_GET["id"]!=""){}
             $info = array();
-            $bd = new ConfigDb();
+            $bd = new Configdb();
             $conn = $bd->conexion();
             $sql = "SELECT `IdRolPK`, `RolNombre` FROM `tbrol` ORDER BY `RolNombre` ASC";
             $stmt = $conn ->prepare($sql);

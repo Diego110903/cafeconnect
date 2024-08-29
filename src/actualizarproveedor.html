@@ -58,7 +58,7 @@
             <div class="card">
                 <h3 class="card-header text-center">ACTUALIZAR PROVEEDOR</h3>
                     <div class="card-body">
-                        <form class="form-control" action="" method="post" id="form-act_proveedor" name="form-act_proveedor">
+                        <form class="form-control" action="" method="post" id="form-act_proveedor" name="Form-act_proveedor">
                             <div class="mb-3">
                                 <label for="nit">Nit</label>
                                 <input type="text" class="form-control" id="nit" name="Nit" required>
@@ -83,17 +83,20 @@
                                 <label for="ncuenta">numCuenta</label>
                                 <input type="ncuenta" class="form-control" id="ncuenta" name="NCuenta" required>
                             </div>
-                            <div class="mb-3" id="tipoCuenta">
-                                <label for="tipoCuenta">tipoCuenta</label>
-                                <select class="form-select" name="TipoCuenta" id="tipoCuenta" required>
+                            <div class="mb-3" id="divTipoCuenta">
+                                <label for="TipoCuenta">tipoCuenta</label>
+                                <select class="form-select" id="tipoCuenta" name="TipoCuenta" required>
                                     <option value="">Seleccione uno</option>
                                     <option value="corriente">Corriente</option>
                                     <option value="ahorro">Ahorro</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <label for="nombreBanco">nombreBanco</label>
-                                <input type="nombreBanco" class="form-control" id="nombreBanco" name="nombreBanco" required>
+                            <div class="mb-3" id="dBanco">
+                                <label for="rol">Banco</label>
+                                <select class="form-select" name="banco" id="banco" required>
+                                    <option value="">Seleccione uno</option>
+                                    <!-- Las opciones se llenarán dinámicamente -->
+                                </select>
                             </div>
                             <div>
                                 <button name="btnguardar" id="btnguardar" type="submit" class="btn btn-primary">ACTUALIZAR</button>
