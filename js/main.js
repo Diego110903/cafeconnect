@@ -58,9 +58,9 @@ function validarToken() {
                             $form.apellidos.value = el.apellidos;
                             $form.email.value = el.email;
                             $form.celular.value = el.celular;
-                            $form.numCuenta.value = el.numCuenta;
+                            $form.ncuenta.value = el.Ncuenta;
                             $form.tipoCuenta.value = el.tipoCuenta;
-                            $form.Banco.value = el.Banco;
+                            $form.banco.value = el.banco;
                        })
                     })
                  },100)
@@ -218,7 +218,7 @@ function guardarproveedor(m) {
 function listaProveedores() {
     localStorage.removeItem("id_proveedor");
     let $tinfo = document.getElementById("tinfo"), item = "";
-    $tinfo.innerHTML = `<tr><td colspan='7' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    $tinfo.innerHTML = `<tr><td colspan='8' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
     Ajax({
         url: "../control/proveedores.php",
         method: "GET",
@@ -247,7 +247,7 @@ function listaProveedores() {
                 });
                 $tinfo.innerHTML = item;
             } else {
-                $tinfo.innerHTML = `<tr><td colspan='7' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
+                $tinfo.innerHTML = `<tr><td colspan='8' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
             }
         }
     });
@@ -311,6 +311,7 @@ function buscarproveedor(id, send) {
 }
 
 function editarproveedor(id) {
+    
     localStorage.setItem("id_proveedor", id);
     ruta("actualizarproveedor.html?id=" + id);
 }
