@@ -59,7 +59,7 @@ function validarToken() {
                             $form.email.value = el.email;
                             $form.celular.value = el.celular;
                             $form.ncuenta.value = el.Ncuenta;
-                            $form.tipoCuenta.value = el.tipoCuenta;
+                            $form.tipoCuenta.value = el.tipocuenta;
                             $form.banco.value = el.banco;
                        })
                     })
@@ -194,7 +194,7 @@ function guardarproveedor(m) {
         email: document.getElementById("email").value,
         celular: document.getElementById("celular").value,
         ncuenta: document.getElementById("ncuenta").value, // Ajusta el nombre del campo si es necesario
-        tipocuenta: document.getElementById("tipoCuenta").value, 
+        tipocuenta: document.getElementById("tipocuenta").value, 
         banco: document.getElementById("banco").value, 
         id_proveedor: localStorage.getItem("id_proveedor"),
     };
@@ -219,28 +219,31 @@ function listaProveedores() {
     localStorage.removeItem("id_proveedor");
     let $tinfo = document.getElementById("tinfo"), item = "";
     $tinfo.innerHTML = `<tr><td colspan='8' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    
     Ajax({
         url: "../control/proveedores.php",
         method: "GET",
         param: undefined,
         fSuccess: (resp) => {
+            console.log(resp); // Añade este log para ver la respuesta
+
             if (resp.code == 200) {
                 resp.data.forEach((el) => {
                     item += `<tr>
-                              <th scope='row'>${el.IdProveedorPK}</th>
-                              <td>${el.ProvNit}</td>
-                              <td>${el.ProvNombre}</td>
-                              <td>${el.ProvApellidos}</td>
-                              <td>${el.ProvEmail}</td>
-                              <td>${el.ProvCelular}</td>
+                              <th scope='row'>${el.id}</th>
+                              <td>${el.nit}</td>
+                              <td>${el.nombre}</td>
+                              <td>${el.apellidos}</td>
+                              <td>${el.email}</td>
+                              <td>${el.celular}</td>
                               <td>
-                                ${el.ProvNcuenta}
-                                <br><small class='text-primary'>${el.ProvTipoCuenta}</small> / <small class='text-success'>${el.BanNombre}</small>
+                                ${el.ncuenta}
+                                <br><small class='text-primary'>${el.tipocuenta}</small> / <small class='text-success'>${el.banco}</small>
                               </td>
                               <td> 
                                 <div class="btn-group" role="group">
-                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_proveedor" title='Editar' data-id='${el.IdProveedorPK}'></button>
-                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_proveedor" title='Eliminar' data-id='${el.IdProveedorPK}'></button>
+                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_proveedor" title='Editar' data-id='${el.id}'></button>
+                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_proveedor" title='Eliminar' data-id='${el.id}'></button>
                                 </div>
                               </td>
                             </tr>`;
@@ -252,6 +255,8 @@ function listaProveedores() {
         }
     });
 }
+
+
 
 
 
@@ -417,6 +422,12 @@ if (location.pathname.includes("editarolpermisos")) {
         })
         },100)
     }
+    
+
+
+    
+
+
     
 
 

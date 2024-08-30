@@ -59,6 +59,7 @@
                 <h3 class="card-header text-center">ACTUALIZAR PROVEEDOR</h3>
                     <div class="card-body">
                         <form class="form-control" action="" method="post" id="form-act_proveedor" name="Form-act_proveedor">
+                            <input type="hidden" id="id_proveedor" name="Id_proveedor" value="">
                             <div class="mb-3">
                                 <label for="nit">Nit</label>
                                 <input type="text" class="form-control" id="nit" name="Nit" required>
@@ -85,7 +86,7 @@
                             </div>
                             <div class="mb-3" id="divTipoCuenta">
                                 <label for="TipoCuenta">tipoCuenta</label>
-                                <select class="form-select" id="tipoCuenta" name="TipoCuenta" required>
+                                <select class="form-select" id="tipocuenta" name="TipoCuenta" required>
                                     <option value="">Seleccione uno</option>
                                     <option value="corriente">Corriente</option>
                                     <option value="ahorro">Ahorro</option>
