@@ -58,7 +58,7 @@ function validarToken() {
                             $form.apellidos.value = el.apellidos;
                             $form.email.value = el.email;
                             $form.celular.value = el.celular;
-                            $form.ncuenta.value = el.Ncuenta;
+                            $form.ncuenta.value = el.ncuenta;
                             $form.tipoCuenta.value = el.tipocuenta;
                             $form.banco.value = el.banco;
                        })

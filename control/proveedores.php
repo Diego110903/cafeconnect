@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "UPDATE tbproveedores
+            $sql = "UPDATE tbproovedores
                     SET ProvNit = :NIT, ProvNombre = :NOMBRE, ProvApellidos = :APELLIDOS, ProvEmail = :EMAIL, ProvCelular = :CELULAR, ProvNcuenta = :NCUENTA, ProvTipoCuenta = :TIPOCUENTA, IdBancoFK = :BANCO
                     WHERE IdProveedorPK = :PROVEEDOR";
 
