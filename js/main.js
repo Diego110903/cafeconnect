@@ -45,6 +45,24 @@ function validarToken() {
               }
            }
 
+           if (location.pathname.includes("registrarentregas") | location.pathname.includes("actualizarentregas")) {
+            Rol();
+            if (location.pathname.includes("actualizarentregas")) {
+                setTimeout(() => {
+                    let $form = document.getElementById("form-act_entregas");
+                    buscarusuario(localStorage.getItem("id_entregas"), (resp) => {
+                        resp.forEach((el) => {
+                            $form.entregas.value = el.identregas;
+                            $form.proveedor.value = el.idproveedor
+                            $form.valorcosto.value = el.valorcosto;
+                            $form.cantidad.value = el.cantidad;
+                            $form.fn.value = el.fn;
+                       })
+                    })
+                 },100)
+              }
+           }
+
            if (location.pathname.includes("registrarproveedor") | location.pathname.includes("actualizarproveedor")) {
             banco();
             if (location.pathname.includes("actualizarproveedor")) {
@@ -185,6 +203,45 @@ function listausuario() {
     });
 }
 
+function buscarusuario(id, send) {
+    Ajax({
+        url: "../control/usuario.php",
+        method: "GET",
+        param: { id },
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                send(resp.data);
+            } else {
+                alert("Error en la petición\n" + resp.msg);
+            }
+        }
+    });
+}
+
+function editarusuario(id) {
+     //console.log("Clic en Editar el registro id="+id)
+    localStorage.setItem("id_usuario", id);
+    ruta("actualizarusuario.html?id=" + id);
+}
+
+function eliminarusuario(id) {
+    let resp = confirm(`¿Desea eliminar el registro del usuario (#${id})?`);
+    if (resp) {
+        Ajax({
+            url: "../control/usuario.php",
+            method: "DELETE",
+            param: { id },
+            fSuccess: (resp) => {
+                if (resp.code == 200) {
+                    listausuario();
+                } else {
+                    alert("Error en la petición\n" + resp.msg);
+                }
+            }
+        });
+    }
+}
+
 function guardarproveedor(m) {
     let datos = {
         
@@ -258,48 +315,6 @@ function listaProveedores() {
 
 
 
-
-
-
-function buscarusuario(id, send) {
-    Ajax({
-        url: "../control/usuario.php",
-        method: "GET",
-        param: { id },
-        fSuccess: (resp) => {
-            if (resp.code == 200) {
-                send(resp.data);
-            } else {
-                alert("Error en la petición\n" + resp.msg);
-            }
-        }
-    });
-}
-
-function editarusuario(id) {
-     //console.log("Clic en Editar el registro id="+id)
-    localStorage.setItem("id_usuario", id);
-    ruta("actualizarusuario.html?id=" + id);
-}
-
-function eliminarusuario(id) {
-    let resp = confirm(`¿Desea eliminar el registro del usuario (#${id})?`);
-    if (resp) {
-        Ajax({
-            url: "../control/usuario.php",
-            method: "DELETE",
-            param: { id },
-            fSuccess: (resp) => {
-                if (resp.code == 200) {
-                    listausuario();
-                } else {
-                    alert("Error en la petición\n" + resp.msg);
-                }
-            }
-        });
-    }
-}
-
 function buscarproveedor(id, send) {
     Ajax({
         url: "../control/proveedores.php",
@@ -339,6 +354,104 @@ function eliminarproveedor(id) {
     }
 }
 
+function guardarentregas(m) {
+    let datos = {
+        entregas: document.getElementById("entregas").value,
+        proveedor: document.getElementById("proveedor").value,
+        valorcosto: document.getElementById("valorcosto").value,
+        cantidad: document.getElementById("cantidad").value,
+        fn: document.getElementById("fn").value,
+        id_usuario: localStorage.getItem("id_entregas"),
+    };
+
+    Ajax({
+        url: "../control/entregas.php", 
+        method: m, 
+        param: datos, 
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                alert("El registro fue guardado correctamente");
+                ruta("listadeentregas.html");
+            } else alert("Error en el registro. " + resp.msg);
+
+        }
+    });
+}
+
+function listadeentregas() {
+    localStorage.removeItem("id_entregas");
+    let $tinfo = document.getElementById("tinfo"), item = "";
+    $tinfo.innerHTML = `<tr><td colspan='7' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    Ajax({
+        url: "../control/entregas.php",
+        method: "GET",
+        param: undefined,
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                resp.data.forEach((el) => {
+                    item += `<tr>
+                              <th scope='row'>${el.id}</th>
+                              <td>${el.Entregas}</td>
+                              <td>${el.Proveedor}</td>
+                              <td>${el.ValorCosto}</td>
+                              <td>${el.Cantidad}</td>
+                              <td>${el.Fecha}</td>
+                              <td>${el.Acciones}</td>
+                              <td> 
+                                <div class="btn-group" role="group">
+                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_entregas" title='Editar' data-id='${el.id}'></button>
+                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_entregas" title='Eliminar' data-id='${el.id}'></button>
+                                  </div>
+                              </td>
+                            </tr>`;
+                });
+                $tinfo.innerHTML = item;
+            } else {
+                $tinfo.innerHTML = `<tr><td colspan='7' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
+            }
+        }
+    });
+}
+
+function buscarentregas(id, send) {
+    Ajax({
+        url: "../control/entregas.php",
+        method: "GET",
+        param: { id },
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                send(resp.data);
+            } else {
+                alert("Error en la petición\n" + resp.msg);
+            }
+        }
+    });
+}
+
+function editarentregas(id) {
+     //console.log("Clic en Editar el registro id="+id)
+    localStorage.setItem("id_entregas", id);
+    ruta("actualizarentregas.html?id=" + id);
+}
+
+function eliminarentregas(id) {
+    let resp = confirm(`¿Desea eliminar el registro del entregas (#${id})?`);
+    if (resp) {
+        Ajax({
+            url: "../control/entregas.php",
+            method: "DELETE",
+            param: { id },
+            fSuccess: (resp) => {
+                if (resp.code == 200) {
+                    listadeentregas();
+                } else {
+                    alert("Error en la petición\n" + resp.msg);
+                }
+            }
+        });
+    }
+}
+
 
 
 function relacionarRol(id) {
@@ -366,6 +479,8 @@ document.addEventListener("click", (e) => {
     if (e.target.matches(".p_usuario")) relacionarRol(e.target.dataset.id);
     if (e.target.matches(".u_proveedor")) editarproveedor(e.target.dataset.id);
     if (e.target.matches(".d_proveedor")) eliminarproveedor(e.target.dataset.id);
+    if (e.target.matches(".u_entregas")) editarentregas(e.target.dataset.id);
+    if (e.target.matches(".d_entregas")) eliminarentregas(e.target.dataset.id);
 });
 
 document.addEventListener("submit", (e) => {
@@ -374,6 +489,8 @@ document.addEventListener("submit", (e) => {
     if (e.target.matches("#form-act_usuario")) guardarusuario("PUT");
     if (e.target.matches("#form-proveedor")) guardarproveedor("POST");
     if (e.target.matches("#form-act_proveedor")) guardarproveedor("PUT");
+    if (e.target.matches("#form-entregas")) guardarentregas("POST");
+    if (e.target.matches("#form-act_entregas")) guardarentregas("PUT");
 });
 
 
@@ -403,6 +520,8 @@ document.addEventListener('DOMContentLoaded', () => {
 if (location.pathname.includes("listausuario")) listausuario()
 
 if (location.pathname.includes("listaproveedores")) listaProveedores()
+
+if (location.pathname.includes("listadeentregas")) listadeentregas()
 
 if (location.pathname.includes("editarolpermisos")) {
     Rol()
