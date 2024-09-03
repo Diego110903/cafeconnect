@@ -20,6 +20,7 @@ function ruta(url="",blank = undefined){
     }
  }
 
+
 function validarToken() {
     if (localStorage.getItem("token")) {
         const div_info_user = document.getElementById("info_user");
@@ -45,23 +46,24 @@ function validarToken() {
               }
            }
 
-           if (location.pathname.includes("registrarentregas") | location.pathname.includes("actualizarentregas")) {
-            Rol();
+        if (location.pathname.includes("registrarentregas") | location.pathname.includes("actualizarentregas")) {
+            
             if (location.pathname.includes("actualizarentregas")) {
                 setTimeout(() => {
                     let $form = document.getElementById("form-act_entregas");
-                    buscarusuario(localStorage.getItem("id_entregas"), (resp) => {
+                    buscarentregas(localStorage.getItem("id_entregas"), (resp) => {
                         resp.forEach((el) => {
                             $form.entregas.value = el.identregas;
                             $form.proveedor.value = el.idproveedor
                             $form.valorcosto.value = el.valorcosto;
                             $form.cantidad.value = el.cantidad;
-                            $form.fn.value = el.fn;
+                            $form.fecha.value = el.fecha;
                        })
                     })
                  },100)
               }
            }
+        
 
            if (location.pathname.includes("registrarproveedor") | location.pathname.includes("actualizarproveedor")) {
             banco();
@@ -143,6 +145,7 @@ function banco() {
         }
     });
 }
+
 
 function guardarusuario(m) {
     let datos = {
@@ -265,7 +268,7 @@ function guardarproveedor(m) {
                 alert("El registro fue guardado correctamente");
                 ruta("listaproveedores.html");
             } else {
-                alert("Error en el registro. " + resp.msg);
+                // alert("Error en el registro. " + resp.msg);
             }
         }
     });
@@ -324,7 +327,7 @@ function buscarproveedor(id, send) {
             if (resp.code == 200) {
                 send(resp.data);
             } else {
-                alert("Error en la petición\n" + resp.msg);
+                // alert("Error en la petición\n" + resp.msg);
             }
         }
     });
@@ -354,13 +357,38 @@ function eliminarproveedor(id) {
     }
 }
 
+function cargarProveedores() {
+    Ajax({
+        url: "../control/proveedores.php",
+        method: "GET",
+        param: undefined,
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                let select = document.getElementById("proveedor");
+                select.innerHTML = "<option value=''>Seleccione uno</option>";
+                resp.data.forEach((proveedor) => {
+                    let option = document.createElement("option");
+                    option.value = proveedor.id;
+                    option.textContent = proveedor.nombre;
+                    select.appendChild(option);
+                });
+            } else {
+                alert("Error al cargar los proveedores: " + resp.msg);
+            }
+        },
+        fError: (err) => {
+            alert("Error al cargar los proveedores");
+        }
+    });
+}
+
+
 function guardarentregas(m) {
     let datos = {
-        entregas: document.getElementById("entregas").value,
         proveedor: document.getElementById("proveedor").value,
         valorcosto: document.getElementById("valorcosto").value,
         cantidad: document.getElementById("cantidad").value,
-        fn: document.getElementById("fn").value,
+        fecha: document.getElementById("fecha").value,
         id_usuario: localStorage.getItem("id_entregas"),
     };
 
@@ -378,41 +406,46 @@ function guardarentregas(m) {
     });
 }
 
+
+
+
 function listadeentregas() {
     localStorage.removeItem("id_entregas");
     let $tinfo = document.getElementById("tinfo"), item = "";
-    $tinfo.innerHTML = `<tr><td colspan='7' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only">Cargando...</span></div><br>Procesando...</td></tr>`;
     Ajax({
         url: "../control/entregas.php",
         method: "GET",
         param: undefined,
         fSuccess: (resp) => {
             if (resp.code == 200) {
-                resp.data.forEach((el) => {
+                let data = resp.data;
+                item = "";
+                data.forEach((el) => {
                     item += `<tr>
                               <th scope='row'>${el.id}</th>
-                              <td>${el.Entregas}</td>
-                              <td>${el.Proveedor}</td>
-                              <td>${el.ValorCosto}</td>
-                              <td>${el.Cantidad}</td>
-                              <td>${el.Fecha}</td>
-                              <td>${el.Acciones}</td>
-                              <td> 
+                              <td>${el.nombre}</td>
+                              <td>${el.valorcosto}</td>
+                              <td>${el.cantidad}</td>
+                              <td>${el.fecha}</td>
+                              <td>
                                 <div class="btn-group" role="group">
-                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_entregas" title='Editar' data-id='${el.id}'></button>
-                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_entregas" title='Eliminar' data-id='${el.id}'></button>
-                                  </div>
+                                <button type="button" class="btn btn-outline-primary fa fa-edit u_entregas" title='Editar' data-id='7'></button>
+                                <button type="button" class="btn btn-outline-danger fa fa-trash d_entregas" title='Eliminar' data-id='${el.id}'></button>
+                                </div>
                               </td>
                             </tr>`;
                 });
                 $tinfo.innerHTML = item;
             } else {
-                $tinfo.innerHTML = `<tr><td colspan='7' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
+                $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
             }
+        },
+        fError: (err) => {
+            $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'>Error al cargar los datos</td></tr>`;
         }
     });
 }
-
 function buscarentregas(id, send) {
     Ajax({
         url: "../control/entregas.php",
@@ -429,13 +462,12 @@ function buscarentregas(id, send) {
 }
 
 function editarentregas(id) {
-     //console.log("Clic en Editar el registro id="+id)
     localStorage.setItem("id_entregas", id);
     ruta("actualizarentregas.html?id=" + id);
 }
 
 function eliminarentregas(id) {
-    let resp = confirm(`¿Desea eliminar el registro del entregas (#${id})?`);
+    let resp = confirm(`¿Desea eliminar el registro de la entrega (#${id})?`);
     if (resp) {
         Ajax({
             url: "../control/entregas.php",
@@ -492,7 +524,13 @@ document.addEventListener("submit", (e) => {
     if (e.target.matches("#form-entregas")) guardarentregas("POST");
     if (e.target.matches("#form-act_entregas")) guardarentregas("PUT");
 });
-
+    
+window.onload = function() {
+    if (document.getElementById("form-entregas")) {
+        cargarProveedores();
+    }
+   
+};
 
 function loguear() {
     let user = document.getElementById("user").value;
@@ -541,6 +579,35 @@ if (location.pathname.includes("editarolpermisos")) {
         })
         },100)
     }
+
+
+    
+
+
+
+
+  
+    
+   
+    
+   
+    
+   
+    
+
+    
+
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
     
 
 

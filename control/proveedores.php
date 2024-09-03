@@ -170,3 +170,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("HTTP/1.1 400 Bad Request");
     echo json_encode(['code' => 400, 'msg' => 'Error, La petición no se pudo procesar']);
 }
+
+?>
