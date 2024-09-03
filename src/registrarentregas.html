@@ -58,29 +58,35 @@
                 <div class="card">
                     <h3 class="card-header text-center">REGISTRAR ENTREGAS</h3>
                     <div class="card-body">
-                        <form class="form-control" action="" method="post" id="form-entregas" name="Form-entregas">
-                            <div class="mb-3">
-                                <label for="Valor de Costo">Valor de Costo</label>
-                                <input type="text" class="form-control" id="Valor de Costo" name="Valor de Costo" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="Cantidad">Cantidad</label>
-                                <input type="Cantidad" class="form-control" id="Cantidad" name="Cantidad" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="Fecha de Entrega">Fecha de Entrega</label>
-                                <input type="date" class="form-control" id="Fecha de Entrega" name="Fecha de Entrega" required>
-                            </div>
-                            <div class="mb-3" id="dproveedor">
-                                <label for="rol">proveedor</label>
-                                <select class="form-select" id="proveedor" name="Proveedor" required>
-                                    <option value="">Seleccione uno</option>
-                                    <!-- Las opciones se llenarán dinámicamente -->
-                                </select>
-                                <button name="btnguardar" id="btnguardar" type="submit" class="btn btn-primary">GUARDAR</button>
-                                <button name="btncancelar" id="btncancelar" type="button" class="btn btn-danger">CANCELAR</button>
-                            </div>
-                        </form>
+                        <div class="mb-3">
+                            <form class="form-control" action="" method="post" id="form-entregas" name="Form-entregas">
+                               
+                                <div class="mb-3">
+                                    <label for="valorcosto">Valor de Costo</label>
+                                    <input type="text" class="form-control" id="valorcosto" name="ValorCosto" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cantidad">Cantidad</label>
+                                    <input type="number" class="form-control" id="cantidad" name="Cantidad" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="Fecha">Fecha de Entrega</label>
+                                    <input type="date" class="form-control" id="fecha" name="Fecha" required>
+                                </div>
+                                <div class="mb-3" id="droveedor">
+                                    <label for="proveedor">proveedores</label>
+                                    <select class="form-select" name="proveedor" id="proveedor" required>
+                                        <option value="">Seleccione uno</option>
+                                        <!-- Las opciones se llenarán dinámicamente -->
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <button name="btnguardar" id="btnguardar" type="submit" class="btn btn-primary">GUARDAR</button>
+                                    <button name="btncancelar" id="btncancelar" type="button" class="btn btn-danger">CANCELAR</button>
+                                </div>
+                            </form>
+                            
+                        
                     </div>    
                 </div>
             </div>
@@ -92,4 +98,5 @@
     <script src="../js/main.js"></script>
 </body>
 </html>
+
 
