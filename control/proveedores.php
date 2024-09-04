@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bd = new Configdb();
         $conn = $bd->conexion();
 
-        $sql = "SELECT t1.IdProvedorPK as 'id', 
+        $sql = "SELECT t1.IdProveedorPK as 'id', 
                        T2.BanNombre as 'banco', 
                        t1.ProvNit as 'nit', 
                        t1.ProvNombre as 'nombre', 
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 INNER JOIN tbbanco t2 ON t1.IdBancoFK = t2.IdBancoPK";
 
         if (isset($_GET["id"])) {
-            $sql .= " WHERE t1.IdProvedorPK = :id";
+            $sql .= " WHERE t1.IdProveedorPK = :id";
         }
 
         $stmt = $conn->prepare($sql);

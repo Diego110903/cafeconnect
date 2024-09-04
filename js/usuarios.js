@@ -1,4 +1,4 @@
-import {Ajax, ruta} from "./auxiliares.js"
+import { Ajax, ruta } from "./auxiliares.js";
 
 export function guardarUsuario(m) {
     let datos = {
@@ -19,8 +19,9 @@ export function guardarUsuario(m) {
             if (resp.code == 200) {
                 alert("El registro fue guardado correctamente");
                 ruta("listausuario.html");
-            } else alert("Error en el registro. " + resp.msg);
-
+            } else {
+                alert("Error en el registro. " + resp.msg);
+            }
         }
     });
 }
@@ -69,29 +70,35 @@ export function buscarusuario(id, send) {
             } else {
                 alert("Error en la petición\n" + resp.msg);
             }
+        },
+        fError: (err) => {
+            alert("Error al buscar el usuario");
         }
     });
 }
+
 export function editarusuario(id) {
-      //console.log("Clic en Editar el registro id="+id)
-     localStorage.setItem("id_usuario", id);
-     ruta("actualizarusuario.html?id=" + id);
- }
- 
- export function eliminarusuario(id) {
-   let resp = confirm(`¿Desea eliminar el registro del usuario (#${id})?`);
-   if (resp) {
-       Ajax({
-           url: "../control/usuario.php",
-           method: "DELETE",
-           param: { id },
-           fSuccess: (resp) => {
-               if (resp.code == 200) {
-                   listaUsuario();
-               } else {
-                   alert("Error en la petición\n" + resp.msg);
-               }
-           }
-       });
-   }
+    localStorage.setItem("id_usuario", id);
+    ruta("actualizarusuario.html?id=" + id);
+}
+
+export function eliminarusuario(id) {
+    let resp = confirm(`¿Desea eliminar el registro del usuario (#${id})?`);
+    if (resp) {
+        Ajax({
+            url: "../control/usuario.php",
+            method: "DELETE",
+            param: { id },
+            fSuccess: (resp) => {
+                if (resp.code == 200) {
+                    listaUsuario();
+                } else {
+                    alert("Error en la petición\n" + resp.msg);
+                }
+            },
+            fError: (err) => {
+                alert("Error al eliminar el usuario");
+            }
+        });
+    }
 }
