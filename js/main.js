@@ -58,11 +58,11 @@ function validarToken() {
                     let $form = document.getElementById("form-act_entregas");
                     if ($form) {
                         resp.forEach((el) => {
-                            $form.entregas.value = el.identregas;
-                            $form.proveedor.value = el.idproveedor;
+                            $form.id_entregas.value = el.identregas;
                             $form.valorcosto.value = el.valorcosto;
                             $form.cantidad.value = el.cantidad;
                             $form.fecha.value = el.fecha;
+                            $form.proveedor.value = el.proveedor;
                         });
                     }
                 });
@@ -176,6 +176,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     mostrarMenu();
 });
+
+    
+   
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+    
+
+
+    
+
+
+    
+
+
+    
+
+
 
     
    
