@@ -28,7 +28,7 @@
                                 <li><a class="dropdown-item" href="listadeentregas.html">Listado entregas</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="registrarentregas.html">Registrar</a></li>
-                                <li><a class="dropdown-item" href="actualizarentregas.html">Actualizar</a></li>            
+                                            
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,7 +38,6 @@
                             <li><a class="dropdown-item" href="listaproducto.html">Listado producto</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="registrarproducto.html">Registrar</a></li>
-                                <li><a class="dropdown-item" href="actualizarproducto.html">Actualizar</a></li>
                                 <li><a class="dropdown-item" href="moduloprecios.html">Modulo</a></li>             
                             </ul>
                             <li class="nav-item dropdown">

@@ -2,6 +2,7 @@ import { Ajax, Rol, banco, ruta } from "./auxiliares.js";
 import { guardarUsuario, buscarusuario, editarusuario, listaUsuario, eliminarusuario } from "./usuarios.js";
 import { buscarproveedor, cargarProveedores, editarproveedor, eliminarproveedor, guardarproveedor, listaProveedores } from "./proveedores.js";
 import { guardarentregas, buscarentregas, editarentregas, listadeentregas, eliminarentregas } from "./entregas.js";
+import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, listaproducto } from "./productos.js";
 
 function validarToken() {
     if (localStorage.getItem("token")) {
@@ -31,6 +32,7 @@ function validarToken() {
         if (location.pathname.includes("listausuario")) listaUsuario();
         if (location.pathname.includes("listaproveedores")) listaProveedores();
         if (location.pathname.includes("listadeentregas")) listadeentregas();
+        if (location.pathname.includes("listaproducto")) listaproducto();
         if (location.pathname.includes("editarolpermisos")) {
             Rol();
             buscarusuario(localStorage.getItem("id_usuario"), (resp) => {
@@ -63,6 +65,24 @@ function validarToken() {
                             $form.cantidad.value = el.cantidad;
                             $form.fecha.value = el.fecha;
                             $form.proveedor.value = el.proveedor;
+                        });
+                    }
+                });
+            }
+        }
+
+        if (location.pathname.includes("registrarproducto") || location.pathname.includes("actualizarproducto")) {
+            
+            if (location.pathname.includes("actualizarproducto")) {
+                buscarproducto(localStorage.getItem("id_producto"), (resp) => {
+                    let $form = document.getElementById("form-act_producto");
+                    if ($form) {
+                        resp.forEach((el) => {
+                            $form.id_producto.value = el.idproducto;
+                            $form.nombre.value = el.nombre;
+                            $form.presentacion.value = el.presentacion;
+                            $form.minimostock.value = el.minimostock;
+                            
                         });
                     }
                 });
@@ -133,6 +153,8 @@ const mostrarMenu = async () => {
     validarToken();
 };
 
+
+
 document.addEventListener("click", (e) => {
     if (e.target.matches("#salir")) salida();
     if (e.target.matches(".u_usuario")) editarusuario(e.target.dataset.id);
@@ -142,6 +164,11 @@ document.addEventListener("click", (e) => {
     if (e.target.matches(".d_proveedor")) eliminarproveedor(e.target.dataset.id);
     if (e.target.matches(".u_entregas")) editarentregas(e.target.dataset.id);
     if (e.target.matches(".d_entregas")) eliminarentregas(e.target.dataset.id);
+    if (e.target.matches(".u_producto")) editarproducto(e.target.dataset.id);
+    if (e.target.matches(".d_producto")) eliminarproducto(e.target.dataset.id);
+    if (e.target.matches("#btncancelar")) {
+        window.location.href = "principal.html";
+    }
 });
 
 document.addEventListener("submit", (e) => {
@@ -152,7 +179,12 @@ document.addEventListener("submit", (e) => {
     if (e.target.matches("#form-act_proveedor")) guardarproveedor("PUT");
     if (e.target.matches("#form-entregas")) guardarentregas("POST");
     if (e.target.matches("#form-act_entregas")) guardarentregas("PUT");
+    if (e.target.matches("#form-producto")) guardarproducto("POST");
+    if (e.target.matches("#form-act_producto")) guardarproducto("PUT");
 });
+
+
+
 
 function loguear() {
     let user = document.getElementById("user").value;
