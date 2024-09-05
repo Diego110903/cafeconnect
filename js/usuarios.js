@@ -20,7 +20,7 @@ export function guardarUsuario(m) {
                 alert("El registro fue guardado correctamente");
                 ruta("listausuario.html");
             } else {
-                alert("Error en el registro. " + resp.msg);
+                // alert("Error en el registro. " + resp.msg);
             }
         }
     });
@@ -72,7 +72,7 @@ export function buscarusuario(id, send) {
             }
         },
         fError: (err) => {
-            alert("Error al buscar el usuario");
+            // alert("Error al buscar el usuario");
         }
     });
 }
@@ -93,11 +93,11 @@ export function eliminarusuario(id) {
                 if (resp.code == 200) {
                     listaUsuario();
                 } else {
-                    alert("Error en la petición\n" + resp.msg);
+                    // alert("Error en la petición\n" + resp.msg);
                 }
             },
             fError: (err) => {
-                alert("Error al eliminar el usuario");
+                // alert("Error al eliminar el usuario");
             }
         });
     }

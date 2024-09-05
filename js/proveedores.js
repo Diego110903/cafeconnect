@@ -39,7 +39,7 @@ export function listaProveedores() {
         method: "GET",
         param: undefined,
         fSuccess: (resp) => {
-            console.log(resp); // Añade este log para ver la respuesta
+            // console.log(resp); // Añade este log para ver la respuesta
 
             if (resp.code == 200) {
                 resp.data.forEach((el) => {
@@ -66,6 +66,31 @@ export function listaProveedores() {
             } else {
                 $tinfo.innerHTML = `<tr><td colspan='8' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
             }
+        }
+    });
+}
+
+export function cargarProveedores() {
+    Ajax({
+        url: "../control/proveedores.php",
+        method: "GET",
+        param: undefined,
+        fSuccess: (resp) => {
+            if (resp.code == 200) {
+                let select = document.getElementById("proveedor");
+                select.innerHTML = "<option value=''>Seleccione uno</option>";
+                resp.data.forEach((proveedor) => {
+                    let option = document.createElement("option");
+                    option.value = proveedor.id;
+                    option.textContent = proveedor.nombre;
+                    select.appendChild(option);
+                });
+            } else {
+                alert("Error al cargar los proveedores: " + resp.msg);
+            }
+        },
+        fError: (err) => {
+            alert("Error al cargar los proveedores");
         }
     });
 }
@@ -109,27 +134,3 @@ export function eliminarproveedor(id) {
     }
 }
 
-export function cargarProveedores() {
-    Ajax({
-        url: "../control/proveedores.php",
-        method: "GET",
-        param: undefined,
-        fSuccess: (resp) => {
-            if (resp.code == 200) {
-                let select = document.getElementById("proveedor");
-                select.innerHTML = "<option value=''>Seleccione uno</option>";
-                resp.data.forEach((proveedor) => {
-                    let option = document.createElement("option");
-                    option.value = proveedor.id;
-                    option.textContent = proveedor.nombre;
-                    select.appendChild(option);
-                });
-            } else {
-                alert("Error al cargar los proveedores: " + resp.msg);
-            }
-        },
-        fError: (err) => {
-            alert("Error al cargar los proveedores");
-        }
-    });
-}

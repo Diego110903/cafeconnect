@@ -3,11 +3,12 @@ import { Ajax, ruta } from "./auxiliares.js";
 // Función para guardar o actualizar entregas
 export function guardarentregas(m) {
     let datos = {
-        proveedor: document.getElementById("proveedor").value,
+        
         valorcosto: document.getElementById("valorcosto").value,
         cantidad: document.getElementById("cantidad").value,
         fecha: document.getElementById("fecha").value,
-        id_usuario: localStorage.getItem("id_entregas"),
+        proveedor: document.getElementById("proveedor").value,
+        id_entregas: localStorage.getItem("id_entregas"),
     };
 
     Ajax({
@@ -28,7 +29,7 @@ export function guardarentregas(m) {
 // Función para listar entregas
 export function listadeentregas() {
     localStorage.removeItem("id_entregas");
-    let $tinfo = document.getElementById("tinfo");
+    let $tinfo = document.getElementById("tinfo"), item = "";
     $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only">Cargando...</span></div><br>Procesando...</td></tr>`;
     
     Ajax({
@@ -36,10 +37,8 @@ export function listadeentregas() {
         method: "GET",
         param: undefined,
         fSuccess: (resp) => {
-            if (resp.code === 200) {
-                let data = resp.data;
-                let item = "";
-                data.forEach((el) => {
+            if (resp.code == 200) {
+                resp.data.forEach((el) => {
                     item += `<tr>
                               <th scope='row'>${el.id}</th>
                               <td>${el.nombre}</td>
@@ -75,11 +74,8 @@ export function buscarentregas(id, send) {
             if (resp.code == 200) {
                 send(resp.data);
             } else {
-                console.error("Error en la petición: " + resp.msg);
+                // alert("Error en la petición\n" + resp.msg);
             }
-        },
-        fError: (err) => {
-            console.error("Error en la solicitud: " + err);
         }
     });
 }
@@ -109,4 +105,5 @@ export function eliminarentregas(id) {
         });
     }
 }
+
 
