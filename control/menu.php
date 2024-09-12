@@ -38,8 +38,7 @@
                             <li><a class="dropdown-item" href="listaproducto.html">Listado producto</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="registrarproducto.html">Registrar</a></li>
-                                <li><a class="dropdown-item" href="moduloprecios.html">Modulo</a></li>             
-                            </ul>
+                                </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Inventario 
@@ -47,10 +46,8 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listainventario.html">Listado inventario</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="agregarinventario.html">Agregar</a></li>
-                                <li><a class="dropdown-item" href="actualizarinventario.html">Actualizar</a></li>
-                                <li><a class="dropdown-item" href="informeinventario.html">Informe</a></li>
-                            </ul>
+                                <li><a class="dropdown-item" href="registrarinventario.html">Registrar</a></li>
+                                </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Gestion de venta 
