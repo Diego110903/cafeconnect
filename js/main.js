@@ -3,6 +3,7 @@ import { guardarUsuario, buscarusuario, editarusuario, listaUsuario, eliminarusu
 import { buscarproveedor, cargarProveedores, editarproveedor, eliminarproveedor, guardarproveedor, listaProveedores } from "./proveedores.js";
 import { guardarentregas, buscarentregas, editarentregas, listadeentregas, eliminarentregas } from "./entregas.js";
 import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, listaproducto } from "./productos.js";
+import { cargarEntregas, cargarProveedores, editarinventario, eliminarinventario, guardarinventario, buscarinventario, listainventario } from "./inventario.js";
 
 function validarToken() {
     if (localStorage.getItem("token")) {
@@ -113,6 +114,33 @@ function validarToken() {
     }
 }
 
+if (location.pathname.includes("registrarinventario") || location.pathname.includes("actualizarinventario")) {
+    cargarProveedores();
+    cargarEntregas();
+
+    if (location.pathname.includes("actualizarinventario")) {
+        // Obtener ambos IDs desde localStorage
+        let idProductoFK = localStorage.getItem("idProductoFK");
+        let idEntregasFK = localStorage.getItem("idEntregasFK");
+
+        if (idProductoFK && idEntregasFK) {
+            buscarinventario(idProductoFK, idEntregasFK, (resp) => {
+                let $form = document.getElementById("form-act_inventario");
+                if ($form) {
+                    // Asignar los valores al formulario
+                    $form.producto.value = resp.producto; // Asume que resp es un objeto
+                    $form.entregas.value = resp.entregas;
+                    $form.valorventa.value = resp.valorventa;
+                    $form.stock.value = resp.stock;
+                }
+            });
+        } else {
+            console.error("No se encontraron los IDs en localStorage.");
+        }
+    }
+}
+
+
 const salida = () => {
     Ajax({
         url: "../control/token.php",
@@ -166,6 +194,8 @@ document.addEventListener("click", (e) => {
     if (e.target.matches(".d_entregas")) eliminarentregas(e.target.dataset.id);
     if (e.target.matches(".u_producto")) editarproducto(e.target.dataset.id);
     if (e.target.matches(".d_producto")) eliminarproducto(e.target.dataset.id);
+    if (e.target.matches(".u_inventario")) editarproducto(e.target.dataset.id);
+    if (e.target.matches(".d_inventario")) eliminarproducto(e.target.dataset.id);
     if (e.target.matches("#btncancelar")) {
         window.location.href = "principal.html";
     }
@@ -181,6 +211,8 @@ document.addEventListener("submit", (e) => {
     if (e.target.matches("#form-act_entregas")) guardarentregas("PUT");
     if (e.target.matches("#form-producto")) guardarproducto("POST");
     if (e.target.matches("#form-act_producto")) guardarproducto("PUT");
+    if (e.target.matches("#form-inventariio")) guardarinventario("POST");
+    if (e.target.matches("#form-act_inventario")) guardarinventario("PUT");
 });
 
 
