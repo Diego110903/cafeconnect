@@ -7,8 +7,8 @@ export function guardarinventario(m) {
         stock: document.getElementById("stock").value,
         producto: document.getElementById("producto").value,
         entregas: document.getElementById("entregas").value, // Obtener el valor de entregas correctamente
-        idProductoFK: document.getElementById("producto").dataset.id || "", // Asume que el ID está en un data attribute
-        idEntregasFK: document.getElementById("entregas").dataset.id || "" // Asume que el ID está en un data attribute
+        idProductoFK: document.getElementById("producto").dataset.id || "", // Asumi que el ID está en un data attribute
+        idEntregasFK: document.getElementById("entregas").dataset.id || "" // Asumi que el ID está en un data attribute
     };  
 
     Ajax({
