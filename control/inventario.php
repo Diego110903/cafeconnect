@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bd = new Configdb();
             $conn = $bd->conexion();
         
-            $sql = "INSERT INTO tbinventario ( InveValorVenta, InveStock, IdProductoFK, IdEnttregasFK ) 
+            $sql = "INSERT INTO tbinventario (InveValorVenta, InveStock, IdProductoFK, IdEntregasFK) 
                     VALUES (:VALORVENTA, :STOCK, :IDPRODUCTO, :IDENTREGA)";
         
             $stmt = $conn->prepare($sql);
@@ -25,10 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => " registrado exitosamente"]);
+                echo json_encode(['code' => 200, 'msg' => "Registro exitoso"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
-                echo json_encode(['code' => 400, 'msg' => "Error al registrar "]);
+                echo json_encode(['code' => 400, 'msg' => "Error al registrar"]);
             }
             $stmt = null;
             $conn = null;
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
-        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
+        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar la petición', "error" => $ex->getMessage()]);
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
     try {
@@ -46,18 +46,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn = $bd->conexion();
 
         $sql = "SELECT t1.IdProductoFK as 'idProducto', 
-                       t1.IdEnttregasFK as 'idEntrega', 
+                       t1.IdEntregasFK as 'idEntrega', 
                        t1.InveValorVenta as 'valorVenta', 
                        t1.InveStock as 'stock', 
                        t2.ProvNombre as 'nombreProveedor', 
                        t3.EntreValorCosto as 'valorCosto'
                 FROM tbinventario t1
-                INNER JOIN tbproovedores t2 ON t1.IdProductoFK = t2.IdProveedorPK
-                INNER JOIN tbentregas t3 ON t1.IdEnttregasFK = t3.IdEntregasPK";
-
+                INNER JOIN tbproveedores t2 ON t1.IdProductoFK = t2.IdProveedorPK
+                INNER JOIN tbentregas t3 ON t1.IdEntregasFK = t3.IdEntregasPK";
 
         if (isset($_GET["id"])) {
-            $sql .= " WHERE IdProductoPK = :id";
+            $sql .= " WHERE IdProductoFK = :id";
         }
 
         $stmt = $conn->prepare($sql);
@@ -79,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn = null;
     } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
-        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', 'error' => $ex->getMessage()]);
+        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar la petición', 'error' => $ex->getMessage()]);
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
     try {
@@ -88,17 +87,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!empty($post["idProducto"]) && !empty($post["idEntrega"])) {
             $bd = new Configdb();
             $conn = $bd->conexion();
-            $sql = "DELETE FROM tbinventario WHERE IdProductoFK = :idProducto AND IdEnttregasFK = :idEntrega";
+            $sql = "DELETE FROM tbinventario WHERE IdProductoFK = :idProducto AND IdEntregasFK = :idEntrega";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':idProducto', $post["idProducto"], PDO::PARAM_INT);
             $stmt->bindValue(':idEntrega', $post["idEntrega"], PDO::PARAM_INT);
 
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => " eliminado con éxito"]);
+                echo json_encode(['code' => 200, 'msg' => "Eliminado con éxito"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
-                echo json_encode(['code' => 400, 'msg' => "Error al eliminar "]);
+                echo json_encode(['code' => 400, 'msg' => "Error al eliminar"]);
             }
             $stmt = null;
             $conn = null;
@@ -108,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
-        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', 'error' => $ex->getMessage()]);
+        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar la petición', 'error' => $ex->getMessage()]);
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "PUT") {
     try {
@@ -120,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
             $sql = "UPDATE tbinventario   
                     SET InveValorVenta = :valorVenta, InveStock = :stock 
-                    WHERE IdProductoFK = :idProducto AND IdEnttregasFK = :idEntrega";
+                    WHERE IdProductoFK = :idProducto AND IdEntregasFK = :idEntrega";
         
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':valorVenta', $post["valorVenta"], PDO::PARAM_STR);
@@ -133,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode(['code' => 200, 'msg' => "Producto actualizado con éxito"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
-                echo json_encode(['code' => 400, 'msg' => "Inconvenientes al gestionar la consulta"]);
+                echo json_encode(['code' => 400, 'msg' => "Error al gestionar la consulta"]);
             }
             $stmt = null;
             $conn = null;
@@ -143,10 +142,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
-        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
+        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar la petición', "error" => $ex->getMessage()]);
     }
 } else {
     header("HTTP/1.1 400 Bad Request");
-    echo json_encode(['code' => 400, 'msg' => 'Error, la petición no se pudo procesar']);
+    echo json_encode(['code' => 400, 'msg' => 'Petición no válida']);
 }
 ?>
