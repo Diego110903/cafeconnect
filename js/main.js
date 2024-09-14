@@ -3,7 +3,7 @@ import { guardarUsuario, buscarusuario, editarusuario, listaUsuario, eliminarusu
 import { buscarproveedor, cargarProveedores, editarproveedor, eliminarproveedor, guardarproveedor, listaProveedores } from "./proveedores.js";
 import { guardarentregas, buscarentregas, editarentregas, listadeentregas, eliminarentregas } from "./entregas.js";
 import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, listaproducto } from "./productos.js";
-import { cargarEntregas, cargarProveedores, editarinventario, eliminarinventario, guardarinventario, buscarinventario, listainventario } from "./inventario.js";
+import { cargarEntregas, guardarinventario, buscarinventario } from "./inventario.js";
 
 function validarToken() {
     if (localStorage.getItem("token")) {
@@ -178,7 +178,7 @@ const mostrarMenu = async () => {
             alert("Error al cargar el menú");
         }
     }
-    validarToken();
+    //validarToken();
 };
 
 
@@ -215,19 +215,6 @@ document.addEventListener("submit", (e) => {
     if (e.target.matches("#form-act_inventario")) guardarinventario("PUT");
 });
 
-
-
-
-function loguear() {
-    let user = document.getElementById("user").value;
-    let pass = document.getElementById("pass").value;
-
-    if (user === "damg1312@hotmail.com" && pass === "cafDB1109") {
-        window.location = "principal.html";
-    } else {
-        alert("Datos incorrectos");
-    }
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.navbar-toggler');

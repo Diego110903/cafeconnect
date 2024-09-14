@@ -88,9 +88,6 @@ export function cargarProveedores() {
             } else {
                 alert("Error al cargar los proveedores: " + resp.msg);
             }
-        },
-        fError: (err) => {
-            alert("Error al cargar los proveedores");
         }
     });
 }

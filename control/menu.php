@@ -32,22 +32,13 @@
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Productos 
+                                    Inventario 
                             </a>
                             <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="listaproducto.html">Listado producto</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="registrarproducto.html">Registrar</a></li>
-                                </ul>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Inventario 
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="listainventario.html">Listado inventario</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="registrarinventario.html">Registrar</a></li>
-                                </ul>
+                            </ul>                            
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Gestion de venta 
@@ -55,8 +46,6 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listaventafactura.html">listado de venta </a></li>
                                 <li><a class="dropdown-item" href="registrodeventa.html">registro de venta </a></li>
-                                <li><a class="dropdown-item" href="listaproveedores.html">lista medio pago </a></li>
-                                <li><a class="dropdown-item" href="registromediopago.html">medio pago</a></li>
                             </ul>
                             
                         

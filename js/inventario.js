@@ -59,32 +59,6 @@ export function listainventario() {
     });
 }
 
-// Función para cargar proveedores
-export function cargarProveedores() {
-    Ajax({
-        url: "../control/proveedores.php",
-        method: "GET",
-        param: undefined,
-        fSuccess: (resp) => {
-            if (resp.code == 200) {
-                let select = document.getElementById("proveedor");
-                select.innerHTML = "<option value=''>Seleccione uno</option>";
-                resp.data.forEach((proveedor) => {
-                    let option = document.createElement("option");
-                    option.value = proveedor.id;
-                    option.textContent = proveedor.nombre;
-                    select.appendChild(option);
-                });
-            } else {
-                alert("Error al cargar los proveedores: " + resp.msg);
-            }
-        },
-        fError: (err) => {
-            alert("Error al cargar los proveedores");
-        }
-    });
-}
-
 // Función para cargar entregas
 export function cargarEntregas() {
     Ajax({
