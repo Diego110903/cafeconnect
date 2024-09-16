@@ -5,6 +5,9 @@ import { guardarentregas, buscarentregas, editarentregas, listadeentregas, elimi
 import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, listaproducto } from "./productos.js";
 
 
+
+
+
 function validarToken() {
     if (localStorage.getItem("token")) {
         const div_info_user = document.getElementById("info_user");
@@ -150,7 +153,7 @@ const mostrarMenu = async () => {
             alert("Error al cargar el menú");
         }
     }
-    validarToken();
+    //validarToken();
 };
 
 
@@ -186,19 +189,6 @@ document.addEventListener("submit", (e) => {
    
 });
 
-
-
-
-function loguear() {
-    let user = document.getElementById("user").value;
-    let pass = document.getElementById("pass").value;
-
-    if (user === "damg1312@hotmail.com" && pass === "cafDB1109") {
-        window.location = "principal.html";
-    } else {
-        alert("Datos incorrectos");
-    }
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.navbar-toggler');
