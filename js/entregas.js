@@ -64,6 +64,9 @@ export function listadeentregas() {
     });
 }
 
+
+
+
 // Función para buscar entregas por id
 export function buscarentregas(id, send) {
     Ajax({
