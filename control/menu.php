@@ -45,7 +45,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listaventafactura.html">listado de venta </a></li>
-                                <li><a class="dropdown-item" href="registrodeventa.html">registro de venta </a></li>
+                                <li><a class="dropdown-item" href="registrodeventas.html">registro de venta </a></li>
                             </ul>
                             
                         

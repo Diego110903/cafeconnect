@@ -6,8 +6,6 @@ import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, list
 
 
 
-
-
 function validarToken() {
     if (localStorage.getItem("token")) {
         const div_info_user = document.getElementById("info_user");
@@ -153,7 +151,7 @@ const mostrarMenu = async () => {
             alert("Error al cargar el menú");
         }
     }
-    //validarToken();
+    validarToken();
 };
 
 
