@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            overflow-y: auto; 
+            height: 120vh; 
+            margin: 0; 
+            background-size: cover;
+        }
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+        .custom-form-width {
+            max-width: 700px; 
+            margin: auto; 
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="contenedor-imagen">
+            <img src="../imagenes/logotipo.jpg" alt="Logotipo">
+        </div>
+        <div class="administrador dropdown">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
+            <a href="#" id="info_user" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Diego Andres Mora</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#"><button id="salir" name="salir" class="btn btn-danger">Salir</button></a></li>
+            </ul>
+        </div>
+    </div>
+    <header class="header">
+        <nav class="navbar navbar-expand-md bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav"></div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="m-5 row d-flex align-items-center justify-content-center">
+            <div class="col-md-50 custom-form-padding">
+                <div class="card">
+                    <h3 class="card-header text-center">REGISTRAR ventas</h3>
+                    <div class="card-body">
+                        <form class="form-control" action="" method="post" id="form-producto" name="form-producto">
+                            <div class="mb-">
+                                <label for="nombreProducto">Nombre del Producto</label>
+                                <input type="text" class="form-control" id="nombre" name="Nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="presentacionProducto">presentacion del Producto</label>
+                                <input type="text" class="form-control" id="presentacion" name="Presentacion" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="minimoStock">Valor Unitario</label>
+                                <input type="text" class="form-control" id="valorunitario" name="ValorUnitario" required>
+                                <div>
+                            <div class="mb-3">
+                                <label for="minimoStock">Mínimo de Stock</label>
+                                <input type="number" class="form-control" id="minimostock" name="minimoStock" required>
+                                <div>
+                                    <button name="btnguardar" id="btnguardar" type="submit" class="btn btn-primary">GUARDAR</button>
+                                    <button name="btncancelar" id="btncancelar" type="button" class="btn btn-danger">CANCELAR</button>
+                                </div>
+                        </form>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/main.js" type="module"></script>
+</body>
+</html>
