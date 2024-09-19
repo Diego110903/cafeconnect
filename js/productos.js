@@ -6,6 +6,7 @@ export function guardarproducto(m) {
         
         nombre: document.getElementById("nombre").value,
         presentacion: document.getElementById("presentacion").value,
+        valorunitario: document.getElementById("valorunitario").value,
         minimostock: document.getElementById("minimostock").value,
         id_producto: localStorage.getItem("id_producto"),
     };
@@ -28,7 +29,7 @@ export function guardarproducto(m) {
 // Función para lista producto
 export function listaproducto() {
     let $tinfo = document.getElementById("tinfo"), item = "";
-    $tinfo.innerHTML = `<tr><td colspan='5' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
     Ajax({
         url: "../control/productos.php",
         method: "GET",
@@ -40,6 +41,7 @@ export function listaproducto() {
                               <th scope='row'>${el.id}</th>
                               <td>${el.nombre}</td>
                               <td>${el.presentacion}</td>
+                              <td>${el.valorunitario}</td>
                               <td>${el.minimostock}</td>
                               <td> 
                                 <div class="btn-group" role="group">
@@ -52,7 +54,7 @@ export function listaproducto() {
                 });
                 $tinfo.innerHTML = item;
             } else {
-                $tinfo.innerHTML = `<tr><td colspan='5' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
+                $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
             }
         }
     });

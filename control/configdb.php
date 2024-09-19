@@ -3,8 +3,8 @@
 class Configdb {
     private $db_host = "localhost"; // Lugar o IP donde está el servidor de Base de datos
     private $db_port = "3306"; // Puerto de Base de datos MySQL
-    private $db_user = "root"; // dbDiego Nombre del Usuario para conectarnos a la Base de Datos
-    private $db_pass = ""; // cafDB1109 Contraseña del Usuario de la Base de datos
+    private $db_user = "dbDiego"; // dbDiego Nombre del Usuario para conectarnos a la Base de Datos
+    private $db_pass = "cafDB1109"; // cafDB1109 Contraseña del Usuario de la Base de datos
     private $db_name = "bd cafeconnect"; // Nombre de la Base de Datos
     
     public function conexion() {

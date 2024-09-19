@@ -9,16 +9,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $post = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($post["nombre"]) && !empty($post["presentacion"]) && !empty($post["minimostock"])) {
+        if (!empty($post["nombre"]) && !empty($post["presentacion"]) && !empty($post["valorunitario"]) && !empty($post["minimostock"])) {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "INSERT INTO tbproducto (ProNombre, ProPresentacion, ProMinimoStock) 
-                    VALUES (:NOMBRE, :PRESENTACION, :MINIMOSTOCK)";
+            $sql = "INSERT INTO tbproducto (ProNombre, ProPresentacion, ProValorUnitario, ProMinimoStock) 
+                    VALUES (:NOMBRE, :PRESENTACION, :VALORUNITARIO, :MINIMOSTOCK)";
             $stmt = $conn->prepare($sql);
 
             $stmt->bindValue(':NOMBRE', $post["nombre"], PDO::PARAM_STR);
             $stmt->bindValue(':PRESENTACION', $post["presentacion"], PDO::PARAM_STR);
+            $stmt->bindValue(':VALORUNITARIO', $post["valorunitario"], PDO::PARAM_STR);
             $stmt->bindValue(':MINIMOSTOCK', $post["minimostock"], PDO::PARAM_INT);
 
             if ($stmt->execute()) {
@@ -43,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bd = new Configdb();
         $conn = $bd->conexion();
 
-        $sql = "SELECT IdProductoPK as 'id', ProNombre as 'nombre', ProPresentacion as 'presentacion', ProMinimoStock as 'minimostock' 
+        $sql = "SELECT IdProductoPK as 'id', ProNombre as 'nombre', ProPresentacion as 'presentacion', ProValorUnitario as 'valorunitario', ProMinimoStock as 'minimostock' 
                 FROM tbproducto";
 
         if (isset($_GET["id"])) {
@@ -104,18 +105,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $post = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($post["id_producto"]) && !empty($post["nombre"]) && !empty($post["presentacion"]) && !empty($post["minimostock"])) {
+        if (!empty($post["id_producto"]) && !empty($post["nombre"]) && !empty($post["presentacion"]) && !empty($post["valorunitario"]) && !empty($post["minimostock"])) {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
             $sql = "UPDATE tbproducto   
-                    SET ProNombre = :nombre, ProPresentacion = :presentacion, ProMinimoStock = :minimostock
+                    SET ProNombre = :nombre, ProPresentacion = :presentacion, ProValorUnitario = :valorunitario, ProMinimoStock = :minimostock
                     WHERE IdProductoPK = :id_producto";
 
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':id_producto', $post["id_producto"], PDO::PARAM_INT);
             $stmt->bindValue(':nombre', $post["nombre"], PDO::PARAM_STR);
             $stmt->bindValue(':presentacion', $post["presentacion"], PDO::PARAM_STR);
+            $stmt->bindValue(':valorunitario', $post["valorunitario"], PDO::PARAM_STR);
             $stmt->bindValue(':minimostock', $post["minimostock"], PDO::PARAM_INT);
 
             if ($stmt->execute()) {
@@ -140,3 +142,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo json_encode(['code' => 400, 'msg' => 'Error, la petición no se pudo procesar']);
 }
 ?>
+

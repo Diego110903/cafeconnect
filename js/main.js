@@ -6,8 +6,6 @@ import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, list
 
 
 
-
-
 function validarToken() {
     if (localStorage.getItem("token")) {
         const div_info_user = document.getElementById("info_user");
@@ -85,6 +83,7 @@ function validarToken() {
                             $form.id_producto.value = el.idproducto;
                             $form.nombre.value = el.nombre;
                             $form.presentacion.value = el.presentacion;
+                            $form.valorunitario.value = el.valorunitario;
                             $form.minimostock.value = el.minimostock;
                             
                         });
@@ -153,7 +152,7 @@ const mostrarMenu = async () => {
             alert("Error al cargar el menú");
         }
     }
-    //validarToken();
+    validarToken();
 };
 
 
@@ -201,6 +200,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     mostrarMenu();
 });
+
+    
+   
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+    
+
+
+    
+
+
+    
+
+
+    
+
+
+
+    
+   
+    
+   
+    
+
+    
+
+
+    
+
+    
+
+    
+    
+    
+    
+
+    
+    
+
+
+    
+
+
+    
+
+
+    
+
 
     
    
