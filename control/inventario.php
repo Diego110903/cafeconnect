@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $post = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($post["nombre"]) && !empty($post["presentacion"]) && !empty($post["valorunitario"]) && !empty($post["minimostock"])) {
+        if (!empty($post["id_producto"]) && !empty($post["id_entregas"]) && !empty($post["valorunitario"]) && !empty($post["stock"])) {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
@@ -23,22 +23,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 return;
             }
 
-            // Consulta para insertar en tbproducto
-            $sql = "INSERT INTO tbproducto (ProNombre, ProPresentacion, ProValorUnitario, ProMinimoStock) 
-                    VALUES (:NOMBRE, :PRESENTACION, :VALORUNITARIO, :MINIMOSTOCK)";
+            // Consulta para insertar en tbinventario
+            $sql = "INSERT INTO tbinventario (IdProductoFK, IdEnttregasFK, InveValorUnitario, InveStock) 
+                    VALUES (:id_producto, :id_entregas, :valorunitario, :stock)";
             $stmt = $conn->prepare($sql);
 
-            $stmt->bindValue(':NOMBRE', $post["nombre"], PDO::PARAM_STR);
-            $stmt->bindValue(':PRESENTACION', $post["presentacion"], PDO::PARAM_STR);
-            $stmt->bindValue(':VALORUNITARIO', $valorunitario, PDO::PARAM_STR);
-            $stmt->bindValue(':MINIMOSTOCK', $post["minimostock"], PDO::PARAM_INT);
+            $stmt->bindValue(':id_producto', $post["id_producto"], PDO::PARAM_INT);
+            $stmt->bindValue(':id_entregas', $post["id_entregas"], PDO::PARAM_INT);
+            $stmt->bindValue(':valorunitario', $valorunitario, PDO::PARAM_STR);
+            $stmt->bindValue(':stock', $post["stock"], PDO::PARAM_INT);
 
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => "Producto registrado exitosamente"]);
+                echo json_encode(['code' => 200, 'msg' => "Inventario registrado exitosamente"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
-                echo json_encode(['code' => 400, 'msg' => "Error al registrar el producto"]);
+                echo json_encode(['code' => 400, 'msg' => "Error al registrar el inventario"]);
             }
 
             $stmt = null;
@@ -56,18 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bd = new Configdb();
         $conn = $bd->conexion();
 
-        $sql = "SELECT p.IdProductoPK as 'id', 
-        p.ProNombre as 'nombre', 
-        p.ProPresentacion as 'presentacion', 
-        p.ProValorUnitario as 'valorunitario', 
-        p.ProMinimoStock as 'minimostock', 
-        i.InveValorUnitario as 'inveValorUnitario' 
- FROM tbproducto p 
- LEFT JOIN tbinventario i ON p.IdProductoPK = i.IdProductoFK";
-
+        $sql = "SELECT IdInventario as 'id', IdProductoFK as 'id_producto', IdEnttregasFK as 'id_entregas', InveValorUnitario as 'valorunitario', InveStock as 'stock' 
+                FROM tbinventario";
 
         if (isset($_GET["id"])) {
-            $sql .= " WHERE p.IdProductoPK = :id";
+            $sql .= " WHERE IdInventario = :id";
         }
 
         $stmt = $conn->prepare($sql);
@@ -99,22 +92,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "DELETE FROM tbproducto WHERE IdProductoPK = :id";
+            $sql = "DELETE FROM tbinventario WHERE IdInventario = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':id', $post["id"], PDO::PARAM_INT);
 
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => "Producto eliminado con éxito"]);
+                echo json_encode(['code' => 200, 'msg' => "Inventario eliminado con éxito"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
-                echo json_encode(['code' => 400, 'msg' => "Error al eliminar el producto"]);
+                echo json_encode(['code' => 400, 'msg' => "Error al eliminar el inventario"]);
             }
             $stmt = null;
             $conn = null;
         } else {
             header("HTTP/1.1 400 Bad Request");
-            echo json_encode(['code' => 400, 'msg' => "ID del producto requerido"]);
+            echo json_encode(['code' => 400, 'msg' => "ID del inventario requerido"]);
         }
     } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
@@ -124,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $post = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($post["id_producto"]) && !empty($post["nombre"]) && !empty($post["presentacion"]) && !empty($post["valorunitario"]) && !empty($post["minimostock"])) {
+        if (!empty($post["id"]) && !empty($post["id_producto"]) && !empty($post["id_entregas"]) && !empty($post["valorunitario"]) && !empty($post["stock"])) {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
@@ -138,21 +131,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 return;
             }
 
-            // Consulta para actualizar en tbproducto
-            $sql = "UPDATE tbproducto   
-                    SET ProNombre = :nombre, ProPresentacion = :presentacion, ProValorUnitario = :valorunitario, ProMinimoStock = :minimostock
-                    WHERE IdProductoPK = :id_producto";
+            // Consulta para actualizar en tbinventario
+            $sql = "UPDATE tbinventario   
+                    SET IdProductoFK = :id_producto, IdEnttregasFK = :id_entregas, InveValorUnitario = :valorunitario, InveStock = :stock
+                    WHERE IdInventario = :id";
 
             $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $post["id"], PDO::PARAM_INT);
             $stmt->bindValue(':id_producto', $post["id_producto"], PDO::PARAM_INT);
-            $stmt->bindValue(':nombre', $post["nombre"], PDO::PARAM_STR);
-            $stmt->bindValue(':presentacion', $post["presentacion"], PDO::PARAM_STR);
+            $stmt->bindValue(':id_entregas', $post["id_entregas"], PDO::PARAM_INT);
             $stmt->bindValue(':valorunitario', $valorunitario, PDO::PARAM_STR);
-            $stmt->bindValue(':minimostock', $post["minimostock"], PDO::PARAM_INT);
+            $stmt->bindValue(':stock', $post["stock"], PDO::PARAM_INT);
 
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => "Producto actualizado con éxito"]);
+                echo json_encode(['code' => 200, 'msg' => "Inventario actualizado con éxito"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
                 echo json_encode(['code' => 400, 'msg' => "Inconvenientes al gestionar la consulta"]);
@@ -169,8 +162,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
-
-
-
-

@@ -3,7 +3,6 @@ import { Ajax, ruta } from "./auxiliares.js";
 // Función para guardar o actualizar producto
 export function guardarproducto(m) {
     let datos = {
-        
         nombre: document.getElementById("nombre").value,
         presentacion: document.getElementById("presentacion").value,
         valorunitario: document.getElementById("valorunitario").value,
@@ -26,10 +25,11 @@ export function guardarproducto(m) {
     });
 }
 
-// Función para lista producto
+// Función para listar productos
 export function listaproducto() {
     let $tinfo = document.getElementById("tinfo"), item = "";
     $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    
     Ajax({
         url: "../control/productos.php",
         method: "GET",
@@ -47,16 +47,31 @@ export function listaproducto() {
                                 <div class="btn-group" role="group">
                                   <button type="button" class="btn btn-outline-primary fa fa-edit u_producto" title='Editar' data-id='${el.id}'></button>
                                   <button type="button" class="btn btn-outline-danger fa fa-trash d_producto" title='Eliminar' data-id='${el.id}'></button>
-                                 
                                 </div>
                               </td>
                             </tr>`;
                 });
                 $tinfo.innerHTML = item;
+                agregarListeners(); // Agregar listeners después de llenar la tabla
             } else {
                 $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
             }
         }
+    });
+}
+
+// Agregar listeners para botones de editar y eliminar
+function agregarListeners() {
+    document.querySelectorAll(".u_producto").forEach(button => {
+        button.addEventListener("click", () => {
+            editarproducto(button.dataset.id);
+        });
+    });
+
+    document.querySelectorAll(".d_producto").forEach(button => {
+        button.addEventListener("click", () => {
+            eliminarproducto(button.dataset.id);
+        });
     });
 }
 
@@ -76,14 +91,13 @@ export function buscarproducto(id, send) {
     });
 }
 
-
 // Función para redirigir a la página de actualización de productos
 export function editarproducto(id) {
     localStorage.setItem("id_producto", id);
     ruta("actualizarproducto.html?id=" + id);
 }
 
-// Función para eliminar una producto
+// Función para eliminar un producto
 export function eliminarproducto(id) {
     let resp = confirm(`¿Desea eliminar el registro de la producto (#${id})?`);
     if (resp) {
@@ -101,3 +115,10 @@ export function eliminarproducto(id) {
         });
     }
 }
+
+// Ejecutar al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    listaproducto();
+});
+
+

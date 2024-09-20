@@ -74,23 +74,28 @@ function validarToken() {
         }
 
         if (location.pathname.includes("registrarproducto") || location.pathname.includes("actualizarproducto")) {
-            
             if (location.pathname.includes("actualizarproducto")) {
                 buscarproducto(localStorage.getItem("id_producto"), (resp) => {
                     let $form = document.getElementById("form-act_producto");
                     if ($form) {
-                        resp.forEach((el) => {
-                            $form.id_producto.value = el.idproducto;
-                            $form.nombre.value = el.nombre;
-                            $form.presentacion.value = el.presentacion;
-                            $form.valorunitario.value = el.valorunitario;
-                            $form.minimostock.value = el.minimostock;
-                            
-                        });
+                        if (resp.length > 0) {
+                            resp.forEach((el) => {
+                                $form.id_producto.value = el.id_producto; // Verifica que la propiedad sea correcta
+                                $form.nombre.value = el.nombre;
+                                $form.presentacion.value = el.presentacion;
+                                $form.valorunitario.value = el.valorunitario; // Asegúrate de que este campo exista
+                                $form.minimostock.value = el.minimostock;
+                            });
+                        } else {
+                            console.error("No se encontraron datos para el producto.");
+                        }
                     }
                 });
             }
         }
+        
+        
+        
 
         if (location.pathname.includes("registrarproveedor") || location.pathname.includes("actualizarproveedor")) {
             banco();
