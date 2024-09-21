@@ -3,6 +3,7 @@ import { guardarUsuario, buscarusuario, editarusuario, listaUsuario, eliminarusu
 import { buscarproveedor, cargarProveedores, editarproveedor, eliminarproveedor, guardarproveedor, listaProveedores } from "./proveedores.js";
 import { guardarentregas, buscarentregas, editarentregas, listadeentregas, eliminarentregas } from "./entregas.js";
 import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, listaproducto } from "./productos.js";
+import { guardaritems, buscaritems, editaritems, listaitems, eliminaritems} from "./items.js";
 
 
 
@@ -35,6 +36,7 @@ function validarToken() {
         if (location.pathname.includes("listaproveedores")) listaProveedores();
         if (location.pathname.includes("listadeentregas")) listadeentregas();
         if (location.pathname.includes("listaproducto")) listaproducto();
+        if (location.pathname.includes("listaitems")) listaitems();
         if (location.pathname.includes("editarolpermisos")) {
             Rol();
             buscarusuario(localStorage.getItem("id_usuario"), (resp) => {
@@ -72,6 +74,27 @@ function validarToken() {
                 });
             }
         }
+
+        if (location.pathname.includes("registraritems") || location.pathname.includes("actualizaritems")) {
+    
+            // Si es la página de actualización de ítems, buscar el ítem y completar el formulario
+            if (location.pathname.includes("actualizaritems")) {
+                buscaritems(localStorage.getItem("id_item"), (resp) => {
+                    let $form = document.getElementById("form-act_items");
+                    if ($form) {
+                        resp.forEach((el) => {
+                            $form.id_item.value = el.iditem;
+                            $form.id_producto.value = el.idproducto;
+                            $form.id_factura.value = el.idfactura;
+                            $form.cantidad.value = el.cantidad;
+                            $form.valor_unitario.value = el.valorunitario;
+                            $form.valor_total.value = el.valortotal;
+                        });
+                    }
+                });
+            }
+        }
+        
 
         if (location.pathname.includes("registrarproducto") || location.pathname.includes("actualizarproducto")) {
             if (location.pathname.includes("actualizarproducto")) {
@@ -120,6 +143,9 @@ function validarToken() {
         }
     }
 }
+
+
+
 
 
 const salida = () => {
@@ -173,6 +199,8 @@ document.addEventListener("click", (e) => {
     if (e.target.matches(".d_entregas")) eliminarentregas(e.target.dataset.id);
     if (e.target.matches(".u_producto")) editarproducto(e.target.dataset.id);
     if (e.target.matches(".d_producto")) eliminarproducto(e.target.dataset.id);
+    if (e.target.matches(".u_items")) editaritems(e.target.dataset.id);
+    if (e.target.matches(".d_items")) eliminaritems(e.target.dataset.id);
    
 
     if (e.target.matches("#btncancelar")) {
@@ -189,7 +217,8 @@ document.addEventListener("submit", (e) => {
     if (e.target.matches("#form-entregas")) guardarentregas("POST");
     if (e.target.matches("#form-act_entregas")) guardarentregas("PUT");
     if (e.target.matches("#form-producto")) guardarproducto("POST");
-    if (e.target.matches("#form-act_producto")) guardarproducto("PUT");
+    if (e.target.matches("#form-act_items")) guardaritems("PUT");
+    if (e.target.matches("#form-items")) guardaritems("POST");
    
 });
 

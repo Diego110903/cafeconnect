@@ -116,10 +116,10 @@ export function eliminarproducto(id) {
     }
 }
 
-// Ejecutar al cargar la página
-document.addEventListener("DOMContentLoaded", () => {
-    listaproducto();
-});
+
+
+
+
 
 
 
