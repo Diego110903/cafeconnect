@@ -45,8 +45,18 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="listaitems.html">listado de venta </a></li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="registraritems.html">registro de venta </a></li>
                             </ul>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Factura 
+                            </a>
+                            <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="listafacturas.html">Listado Factura</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="listafacturas.html">Registro Factura</a></li>
+                            </ul> 
                             
                         
                         
