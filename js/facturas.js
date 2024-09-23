@@ -28,7 +28,7 @@ export function guardarfactura(m) {
 export function listafacturas() {
     localStorage.removeItem("id_factura");
     let $tinfo = document.getElementById("tinfo"), item = "";
-    $tinfo.innerHTML = `<tr><td colspan='8' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
+    $tinfo.innerHTML = `<tr><td colspan='5' class='text-center'><div class="spinner-border text-black" role="status"><span class="sr-only"></span></div><br>Procesando...</td></tr>`;
     
     Ajax({
         url: "../control/facturas.php",
@@ -47,47 +47,26 @@ export function listafacturas() {
                               <td>${el.mediopago}</td>
                              <td> 
                                 <div class="btn-group" role="group">
-                                  <button type="button" class="btn btn-outline-primary fa fa-edit u_proveedor" title='Editar' data-id='${el.id}'></button>
-                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_proveedor" title='Eliminar' data-id='${el.id}'></button>
+                                  <button type="button" class="btn btn-outline-danger fa fa-trash d_factura" title='Eliminar' data-id='${el.id}'></button>
                                 </div>
                               </td>
                             </tr>`;
                 });
                 $tinfo.innerHTML = item;
             } else {
-                $tinfo.innerHTML = `<tr><td colspan='8' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
+                $tinfo.innerHTML = `<tr><td colspan='5' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
             }
         }
     });
 }
 
-export function cargarProveedores() {
-    Ajax({
-        url: "../control/proveedores.php",
-        method: "GET",
-        param: undefined,
-        fSuccess: (resp) => {
-            if (resp.code == 200) {
-                let select = document.getElementById("proveedor");
-                select.innerHTML = "<option value=''>Seleccione uno</option>";
-                resp.data.forEach((proveedor) => {
-                    let option = document.createElement("option");
-                    option.value = proveedor.id;
-                    option.textContent = proveedor.nombre;
-                    select.appendChild(option);
-                });
-            } else {
-                alert("Error al cargar los proveedores: " + resp.msg);
-            }
-        }
-    });
-}
+
         
 
 
-export function buscarproveedor(id, send) {
+export function buscarfactura(id, send) {
     Ajax({
-        url: "../control/proveedores.php",
+        url: "../control/facturas.php",
         method: "GET",
         param: { id },
         fSuccess: (resp) => {
@@ -100,22 +79,18 @@ export function buscarproveedor(id, send) {
     });
 }
 
-export function editarproveedor(id) {
-    
-    localStorage.setItem("id_proveedor", id);
-    ruta("actualizarproveedor.html?id=" + id);
-}
 
-export function eliminarproveedor(id) {
-    let resp = confirm(`¿Desea eliminar el registro del proveedor (#${id})?`);
+
+export function eliminarfactura(id) {
+    let resp = confirm(`¿Desea eliminar el registro de la factura (#${id})?`);
     if (resp) {
         Ajax({
-            url: "../control/proveedores.php",
+            url: "../control/facturas.php",
             method: "DELETE",
             param: { id },
             fSuccess: (resp) => {
                 if (resp.code == 200) {
-                    listaProveedores();
+                    listafacturas();
                 } else {
                     alert("Error en la petición\n" + resp.msg);
                 }

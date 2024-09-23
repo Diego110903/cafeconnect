@@ -3,7 +3,6 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-
 require_once("configdb.php");
 
 header('Content-Type: application/json');
@@ -17,21 +16,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "INSERT INTO `tbfacturas`(`FacFecha`, `FacHora`, `FacValorFactura`, `FacMedioPago";
+            $sql = "INSERT INTO `tbfacturas`(`FacFecha`, `FacHora`, `FacValorFactura`, `IdMedioPagoFK`) 
+                    VALUES (:FECHA, :HORA, :VALORFACTURA, :IDMEDIOPAGO)";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':FECHA', $post["fecha"], PDO::PARAM_STR);
             $stmt->bindValue(':HORA', $post["hora"], PDO::PARAM_STR);
             $stmt->bindValue(':VALORFACTURA', $post["valorfactura"], PDO::PARAM_STR);
-            $stmt->bindValue(':IDMEDIOPAGO', $post["medioapago"], PDO::PARAM_INT); 
-
-            
+            $stmt->bindValue(':IDMEDIOPAGO', $post["mediopago"], PDO::PARAM_INT); 
 
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => "Facturas registradas con éxito"]);
+                echo json_encode(['code' => 200, 'msg' => "Factura registrada con éxito"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
-                echo json_encode(['code' => 400, 'msg' => "Error al registrar las Facturas"]);
+                echo json_encode(['code' => 400, 'msg' => "Error al registrar la factura"]);
             }
             $stmt = null;
             $conn = null;
@@ -51,21 +49,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bd = new Configdb();
         $conn = $bd->conexion();
 
-        $sql = "SELECT t1.IdFacturaPK as 'id', 
-                       t1.FacFecha as 'fecha', 
-                       t1.FacHora as 'hora', 
-                       t1.FacValorFactura as 'valor_factura', 
-                       t2.MedioPagoNombre as 'medio_pago'
-                FROM tbfacturas t1
-                INNER JOIN tbmediopago t2 ON t1.IdMedioPagoFK = t2.IdMedioPagoPK";
-
+        $sql = "SELECT T1.IdFacturaPK as 'id', 
+                       T1.FacFecha as 'fecha', 
+                       T1.FacHora as 'hora', 
+                       T1.FacValorFactura as 'valorfactura', 
+                       T2.MedNombre as 'mediopago'  
+                FROM tbfacturas T1
+                INNER JOIN tbmediopago T2 ON T1.IdMedioPagoFK = T2.IdMedioPagoPK";
 
         if (isset($_GET["id"])) {
-            $sql .= " WHERE t1.IdFcaturaPK = :id";
+            $sql .= " WHERE T1.IdFacturaPK = :id";
         }
 
         $stmt = $conn->prepare($sql);
-
+        
         if (isset($_GET["id"])) {
             $stmt->bindValue(':id', trim($_GET["id"]), PDO::PARAM_INT);
         }
@@ -93,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "DELETE FROM tbfacturas WHERE IdFacturasPK = :id";
+            $sql = "DELETE FROM tbfacturas WHERE IdFacturaPK = :id";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':id', $post["id"], PDO::PARAM_INT);
 
@@ -118,7 +115,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $post = json_decode(file_get_contents('php://input'), true);
 
-        // Asegúrate de que todos los campos estén presentes
         if (!empty($post["id_factura"]) && !empty($post["fecha"]) && !empty($post["hora"]) &&
             !empty($post["valorfactura"]) && !empty($post["mediopago"])) {
             
@@ -126,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn = $bd->conexion();
 
             $sql = "UPDATE tbfacturas
-                    SET FacFecha = :FACTURA, FacHora = :HORA, FacValorFactura = :VALORFACTURA, mediopago = :IDMEDIOPAGO
+                    SET FacFecha = :FECHA, FacHora = :HORA, FacValorFactura = :VALORFACTURA, IdMedioPagoFK = :MEDIOPAGO
                     WHERE IdFacturaPK = :FACTURA";
 
             $stmt = $conn->prepare($sql);
@@ -135,12 +131,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindValue(':HORA', $post["hora"], PDO::PARAM_STR);
             $stmt->bindValue(':VALORFACTURA', $post["valorfactura"], PDO::PARAM_STR);
             $stmt->bindValue(':MEDIOPAGO', $post["mediopago"], PDO::PARAM_INT); 
-            
- 
 
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => "Fcatura actualizada con éxito"]);
+                echo json_encode(['code' => 200, 'msg' => "Factura actualizada con éxito"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
                 $errorInfo = $stmt->errorInfo();
@@ -160,5 +154,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("HTTP/1.1 400 Bad Request");
     echo json_encode(['code' => 400, 'msg' => 'Error, La petición no se pudo procesar']);
 }
-
 ?>
+
+

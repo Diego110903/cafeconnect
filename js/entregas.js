@@ -58,9 +58,7 @@ export function listadeentregas() {
                 $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'>Error en la petición <b>${resp.msg}</b></td></tr>`;
             }
         },
-        fError: (err) => {
-            $tinfo.innerHTML = `<tr><td colspan='6' class='text-center'>Error al cargar los datos</td></tr>`;
-        }
+      
     });
 }
 

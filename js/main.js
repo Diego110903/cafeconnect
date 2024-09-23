@@ -1,10 +1,10 @@
-import { Ajax, Rol, banco, ruta } from "./auxiliares.js";
+import { Ajax, Rol, banco, mediopago, ruta } from "./auxiliares.js";
 import { guardarUsuario, buscarusuario, editarusuario, listaUsuario, eliminarusuario } from "./usuarios.js";
 import { buscarproveedor, cargarProveedores, editarproveedor, eliminarproveedor, guardarproveedor, listaProveedores } from "./proveedores.js";
 import { guardarentregas, buscarentregas, editarentregas, listadeentregas, eliminarentregas } from "./entregas.js";
 import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, listaproducto } from "./productos.js";
 import { guardaritems, buscaritems, editaritems, listaitems, eliminaritems} from "./items.js";
-
+import { guardarfactura, eliminarfactura, listafacturas, buscarfactura, } from "./facturas.js";
 
 
 function validarToken() {
@@ -37,6 +37,7 @@ function validarToken() {
         if (location.pathname.includes("listadeentregas")) listadeentregas();
         if (location.pathname.includes("listaproducto")) listaproducto();
         if (location.pathname.includes("listaitems")) listaitems();
+        if (location.pathname.includes("listafacturas")) listafacturas();
         if (location.pathname.includes("editarolpermisos")) {
             Rol();
             buscarusuario(localStorage.getItem("id_usuario"), (resp) => {
@@ -69,6 +70,24 @@ function validarToken() {
                             $form.cantidad.value = el.cantidad;
                             $form.fecha.value = el.fecha;
                             $form.proveedor.value = el.proveedor;
+                        });
+                    }
+                });
+            }
+        }
+
+        if (location.pathname.includes("registrafacturas") || location.pathname.includes("actualizarfacturas")) {
+            mediopago();
+            if (location.pathname.includes("actualizarfacturas")) {
+                buscarfactura(localStorage.getItem("id_factura"), (resp) => {
+                    let $form = document.getElementById("form-act_facturas");
+                    if ($form) {
+                        resp.forEach((el) => {
+                            $form.id_factura.value = el.idfactura;
+                            $form.fecha.value = el.fecha;
+                            $form.hora.value = el.hora;
+                            $form.valortotal.value = el.valortotal;
+                            $form.mediopago.value = el.mediopago;
                         });
                     }
                 });
@@ -201,6 +220,7 @@ document.addEventListener("click", (e) => {
     if (e.target.matches(".d_producto")) eliminarproducto(e.target.dataset.id);
     if (e.target.matches(".u_items")) editaritems(e.target.dataset.id);
     if (e.target.matches(".d_items")) eliminaritems(e.target.dataset.id);
+    if (e.target.matches(".d_factura")) eliminarfactura(e.target.dataset.id);
    
 
     if (e.target.matches("#btncancelar")) {
@@ -219,6 +239,7 @@ document.addEventListener("submit", (e) => {
     if (e.target.matches("#form-producto")) guardarproducto("POST");
     if (e.target.matches("#form-act_items")) guardaritems("PUT");
     if (e.target.matches("#form-items")) guardaritems("POST");
+    if (e.target.matches("#form-factura")) guardarfactura("POST");
    
 });
 
