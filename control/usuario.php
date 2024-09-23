@@ -49,7 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bd = new Configdb();
         $conn = $bd->conexion();
             
-        $sql = "SELECT T1.IdUsuarioPK as 'id', T2.RolNombre as 'rol', T1.UsuNombre as 'nombre', T1.UsuApellidos as 'apellidos', T1.UsuEmail as 'email' 
+        $sql = "SELECT T1.IdUsuarioPK as 'id', 
+                       T2.RolNombre as 'rol', 
+                       T1.UsuNombre as 'nombre', 
+                       T1.UsuApellidos as 'apellidos', 
+                       T1.UsuEmail as 'email' 
                 FROM tbusuario T1 
                 INNER JOIN tbrol T2 ON T1.IdRolFK = T2.IdRolPK";
 
