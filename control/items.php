@@ -9,35 +9,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $post = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($post["IdproductoFK"]) && !empty($post["IdFacturaFK"]) && !empty($post["ItemCantidad"])) {
+        if (!empty($post["id_producto"]) && !empty($post["id_factura"]) && 
+            !empty($post["cantidad"]) && !empty($post["valortotal"])) {
+            
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            // Obtener el valor unitario
-            $sqlValor = "SELECT inVeValorUnitario FROM tbinventario WHERE id_producto = :idproducto";
-            $stmtValor = $conn->prepare($sqlValor);
-            $stmtValor->bindValue(':idproducto', $post["IdproductoFK"], PDO::PARAM_INT);
-            $stmtValor->execute();
-            $resultadoValor = $stmtValor->fetch(PDO::FETCH_ASSOC);
-            $valorUnitario = $resultadoValor['inVeValorUnitario'];
-            $itemValorTotal = $valorUnitario * $post["ItemCantidad"];
-
+            
             $sql = "INSERT INTO tbitems (IdproductoFK, IdFacturaFK, ItemCantidad, ItemValorTotal) 
-                    VALUES (:IDPRODUCTO, :IDFACTURA, :CANTIDAD, :VALORTOTAL)";
+                    VALUES (:id_producto, :id_factura, :cantidad, :valortotal)";
             $stmt = $conn->prepare($sql);
-            
-            $stmt->bindValue(':IDPRODUCTO', $post["IdproductoFK"], PDO::PARAM_INT);
-            $stmt->bindValue(':IDFACTURA', $post["IdFacturaFK"], PDO::PARAM_INT);
-            $stmt->bindValue(':CANTIDAD', $post["ItemCantidad"], PDO::PARAM_INT);
-            $stmt->bindValue(':VALORTOTAL', $itemValorTotal, PDO::PARAM_STR);
-            
+
+            $stmt->bindValue(':id_producto', $post["id_producto"], PDO::PARAM_INT);
+            $stmt->bindValue(':id_factura', $post["id_factura"], PDO::PARAM_INT);
+            $stmt->bindValue(':cantidad', $post["cantidad"], PDO::PARAM_INT);
+            $stmt->bindValue(':valortotal', $post["valortotal"], PDO::PARAM_STR);
+
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => "OK"]);
+                echo json_encode(['code' => 200, 'msg' => "Item registrado exitosamente"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
-                echo json_encode(['code' => 400, 'msg' => "Inconvenientes al gestionar la consulta"]);
+                echo json_encode(['code' => 400, 'msg' => "Error al registrar el item"]);
             }
+
             $stmt = null;
             $conn = null;
         } else {
@@ -47,40 +42,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
         echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
-    } catch (Exception $ex) {
-        header("HTTP/1.1 400 Bad Request");
-        echo json_encode(['code' => 400, 'msg' => $ex->getMessage()]);
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
     try {
         $bd = new Configdb();
         $conn = $bd->conexion();
+
         $sql = "SELECT 
-        p.IdProductoPK AS 'producto', 
-        f.IdFactura AS 'factura', 
-        i.InveValorUnitario AS 'valorunitario', 
-        t.ItemCantidad AS 'cantidad', 
-        t.ItemValorTotal AS 'valortotal' 
-    FROM tbitems t
-    LEFT JOIN tbproducto p ON t.IdproductoFK = p.IdProductoPK
-    LEFT JOIN tbfacturas f ON t.IdFacturaFK = f.IdFactura
-    LEFT JOIN tbinventario i ON p.IdProductoPK = i.IdProductoFK";
+                    i.IdproductoFK as 'id_producto', 
+                    i.IdFacturaFK as 'id_factura', 
+                    i.ItemCantidad as 'cantidad', 
+                    i.ItemValorTotal as 'valortotal', 
+                    iv.InveValorUnitario as 'valorunitario' 
+                FROM tbitems i 
+                LEFT JOIN tbinventario iv ON i.IdproductoFK = iv.IdProductoFK";
 
-
-
-
-
-
-
-
-        if (isset($_GET["idfactura"])) {
-            $sql .= " WHERE t1.IdFacturaFK = :idfactura";
+        if (isset($_GET["id_producto"]) && isset($_GET["id_factura"])) {
+            $sql .= " WHERE i.IdproductoFK = :id_producto AND i.IdFacturaFK = :id_factura";
         }
 
         $stmt = $conn->prepare($sql);
 
-        if (isset($_GET["idfactura"])) {
-            $stmt->bindValue(':idfactura', trim($_GET["idfactura"]), PDO::PARAM_INT);
+        if (isset($_GET["id_producto"]) && isset($_GET["id_factura"])) {
+            $stmt->bindValue(':id_producto', trim($_GET["id_producto"]), PDO::PARAM_INT);
+            $stmt->bindValue(':id_factura', trim($_GET["id_factura"]), PDO::PARAM_INT);
         }
 
         if ($stmt->execute()) {
@@ -97,21 +82,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
         echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', 'error' => $ex->getMessage()]);
-    } catch (Exception $ex) {
-        header("HTTP/1.1 400 Bad Request");
-        echo json_encode(['code' => 400, 'msg' => $ex->getMessage()]);
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
     try {
         $post = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($post["id_item"])) {
+        if (!empty($post["id_producto"]) && !empty($post["id_factura"])) {
             $bd = new Configdb();
             $conn = $bd->conexion();
 
-            $sql = "DELETE FROM tbitems WHERE id_item = :id_item";
+           
+            $sql = "DELETE FROM tbitems WHERE IdproductoFK = :id_producto AND IdFacturaFK = :id_factura";
             $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':id_item', $post["id_item"], PDO::PARAM_INT);
+            $stmt->bindValue(':id_producto', $post["id_producto"], PDO::PARAM_INT);
+            $stmt->bindValue(':id_factura', $post["id_factura"], PDO::PARAM_INT);
 
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
@@ -124,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn = null;
         } else {
             header("HTTP/1.1 400 Bad Request");
-            echo json_encode(['code' => 400, 'msg' => "ID del item requerido"]);
+            echo json_encode(['code' => 400, 'msg' => "ID del producto y factura requeridos"]);
         }
     } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
@@ -134,25 +118,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $post = json_decode(file_get_contents('php://input'), true);
 
-        if (!empty($post["id_item"]) && !empty($post["IdproductoFK"]) && !empty($post["ItemCantidad"])) {
+        if (!empty($post["id_producto"]) && !empty($post["id_factura"]) && 
+            !empty($post["cantidad"]) && !empty($post["valortotal"])) {
+            
             $bd = new Configdb();
             $conn = $bd->conexion();
 
+            
             $sql = "UPDATE tbitems   
-                    SET IdproductoFK = :idproducto, ItemCantidad = :cantidad
-                    WHERE id_item = :id_item";
+                    SET ItemCantidad = :cantidad, 
+                        ItemValorTotal = :valortotal 
+                    WHERE IdproductoFK = :id_producto AND IdFacturaFK = :id_factura";
 
             $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':id_item', $post["id_item"], PDO::PARAM_INT);
-            $stmt->bindValue(':idproducto', $post["IdproductoFK"], PDO::PARAM_INT);
-            $stmt->bindValue(':cantidad', $post["ItemCantidad"], PDO::PARAM_INT);
+            $stmt->bindValue(':id_producto', $post["id_producto"], PDO::PARAM_INT);
+            $stmt->bindValue(':id_factura', $post["id_factura"], PDO::PARAM_INT);
+            $stmt->bindValue(':cantidad', $post["cantidad"], PDO::PARAM_INT);
+            $stmt->bindValue(':valortotal', $post["valortotal"], PDO::PARAM_STR);
 
             if ($stmt->execute()) {
                 header("HTTP/1.1 200 OK");
-                echo json_encode(['code' => 200, 'msg' => "OK"]);
+                echo json_encode(['code' => 200, 'msg' => "Item actualizado con éxito"]);
             } else {
                 header("HTTP/1.1 400 Bad Request");
-                echo json_encode(['code' => 400, 'msg' => "Error al actualizar el item"]);
+                echo json_encode(['code' => 400, 'msg' => "Inconvenientes al gestionar la consulta"]);
             }
             $stmt = null;
             $conn = null;
@@ -162,10 +151,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } catch (PDOException $ex) {
         header("HTTP/1.1 500 Internal Server Error");
-        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', 'error' => $ex->getMessage()]);
+        echo json_encode(['code' => 500, 'msg' => 'Error interno al procesar su petición', "ERROR" => $ex->getMessage()]);
     }
 }
 ?>
+
+
+
+
+
+
+
 
 
 

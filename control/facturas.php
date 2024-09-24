@@ -1,4 +1,5 @@
 <?php
+// Habilitar la visualización de errores para depuración
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
@@ -12,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $post = json_decode(file_get_contents('php://input'), true);
 
         if (!empty($post["fecha"]) && !empty($post["hora"]) && !empty($post["valorfactura"]) && !empty($post["mediopago"])) {
-
             $bd = new Configdb();
             $conn = $bd->conexion();
 
@@ -56,8 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                        T2.MedNombre as 'mediopago'  
                 FROM tbfacturas T1
                 INNER JOIN tbmediopago T2 ON T1.IdMedioPagoFK = T2.IdMedioPagoPK";
-
-        if (isset($_GET["id"])) {
+if (isset($_GET["id"])) {
             $sql .= " WHERE T1.IdFacturaPK = :id";
         }
 
@@ -152,8 +151,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     header("HTTP/1.1 400 Bad Request");
-    echo json_encode(['code' => 400, 'msg' => 'Error, La petición no se pudo procesar']);
+    echo json_encode(['code' => 400, 'msg' => 'Error, la petición no se pudo procesar']);
 }
 ?>
+
 
 
