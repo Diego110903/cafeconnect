@@ -1,10 +1,10 @@
-import { Ajax, Rol, banco, mediopago, ruta } from "./auxiliares.js";
+import { Ajax, Rol, banco, ruta } from "./auxiliares.js";
 import { guardarUsuario, buscarusuario, editarusuario, listaUsuario, eliminarusuario } from "./usuarios.js";
 import { buscarproveedor, cargarProveedores, editarproveedor, eliminarproveedor, guardarproveedor, listaProveedores } from "./proveedores.js";
 import { guardarentregas, buscarentregas, editarentregas, listadeentregas, eliminarentregas } from "./entregas.js";
 import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, listaproducto } from "./productos.js";
 import { guardaritems, buscaritems, editaritems, listaitems, eliminaritems} from "./items.js";
-import { guardarfactura, eliminarfactura, listafacturas, buscarfactura, } from "./facturas.js";
+import { guardarfactura, eliminarfactura, listafacturas, buscarfactura, cargarMediopago } from "./facturas.js";
 
 
 function validarToken() {
@@ -77,7 +77,7 @@ function validarToken() {
         }
 
         if (location.pathname.includes("registrafacturas") || location.pathname.includes("actualizarfacturas")) {
-            mediopago();
+            cargarMediopago();
             if (location.pathname.includes("actualizarfacturas")) {
                 buscarfactura(localStorage.getItem("id_factura"), (resp) => {
                     let $form = document.getElementById("form-act_facturas");
@@ -96,7 +96,7 @@ function validarToken() {
 
         if (location.pathname.includes("registraritems") || location.pathname.includes("actualizaritems")) {
     
-            // Si es la página de actualización de ítems, buscar el ítem y completar el formulario
+            
             if (location.pathname.includes("actualizaritems")) {
                 buscaritems(localStorage.getItem("id_item"), (resp) => {
                     let $form = document.getElementById("form-act_items");
