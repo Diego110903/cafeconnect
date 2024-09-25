@@ -81,5 +81,8 @@ export function medioPago() {
     });
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 6a4ee41c9f60170231ed355c00739f2bd0bf0559
