@@ -38,15 +38,6 @@
                             <li><a class="dropdown-item" href="listaproducto.html">Listado producto</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="registrarproducto.html">Registrar</a></li>
-                            </ul>                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Gestion de venta 
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="listaitems.html">listado de venta </a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="registraritems.html">registro de venta </a></li>
                             </ul>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

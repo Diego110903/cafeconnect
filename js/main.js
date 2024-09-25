@@ -1,4 +1,4 @@
-import { Ajax, Rol, banco, ruta } from "./auxiliares.js";
+import { Ajax, Rol, banco, ruta, medioPago } from "./auxiliares.js";
 import { guardarUsuario, buscarusuario, editarusuario, listaUsuario, eliminarusuario } from "./usuarios.js";
 import { buscarproveedor, cargarProveedores, editarproveedor, eliminarproveedor, guardarproveedor, listaProveedores } from "./proveedores.js";
 import { guardarentregas, buscarentregas, editarentregas, listadeentregas, eliminarentregas } from "./entregas.js";
@@ -134,10 +134,7 @@ function validarToken() {
                     }
                 });
             }
-        }
-        
-        
-        
+        }       
 
         if (location.pathname.includes("registrarproveedor") || location.pathname.includes("actualizarproveedor")) {
             banco();
@@ -160,6 +157,16 @@ function validarToken() {
                 });
             }
         }
+
+        if (location.pathname.includes("registrofacturas")) {
+            medioPago()
+            let $fecha=document.getElementById("fecha"), $hora=document.getElementById("hora"), $vf=document.getElementById("valorfactura")
+            $fecha.innerHTML= new Date().toLocaleDateString()
+            $hora.innerHTML= new Date().toLocaleTimeString()
+            $vf.innerHTML= "0,0"
+
+        }
+
     }
 }
 

@@ -61,3 +61,23 @@ export function banco() {
 }
 
 
+export function medioPago() {
+    let $div = document.getElementById("dmediopago");
+    $div.innerHTML = `<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>`;
+    
+    Ajax({
+        url: "../control/mediopago.php",
+        method: "GET",
+        param: undefined,
+        fSuccess: (Resp) => {
+            if (Resp.code == 200) {
+                let opc = ``;
+                Resp.data.forEach((el) => {
+                    opc += `<option value="${el.IdMedioPagoPK}">${el.MedNombre}</option>`;
+                });
+                $div.innerHTML = `<label for="mediopago">Medio de pago</label><select class="form-select" name="mediopago" id="mediopago" required><option value="">Seleccione uno</option>${opc}</select>`;
+            }
+        }
+    });
+}
+

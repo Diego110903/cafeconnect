@@ -92,7 +92,7 @@ h2 {
 }
 
 form {
-    max-width: 400px;
+    /* max-width: 400px; */
     margin: 0 auto;
     padding: 30px;
     border-radius: 8px;
