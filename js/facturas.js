@@ -79,27 +79,7 @@ export function buscarfactura(id, send) {
     });
 }
 
-export function cargarMediopago() {
-    Ajax({
-        url: "../control/mediopago.php",
-        method: "GET",
-        param: undefined,
-        fSuccess: (resp) => {
-            if (resp.code == 200) {
-                let select = document.getElementById("mediopago");
-                select.innerHTML = "<option value=''>Seleccione uno</option>";
-                resp.data.forEach((mediopago) => {
-                    let option = document.createElement("option");
-                    option.value = mediopago.id;
-                    option.textContent = mediopago.nombre;
-                    select.appendChild(option);
-                });
-            } else {
-                alert("Error al cargar : " + resp.msg);
-            }
-        }
-    });
-}
+
 
 
 

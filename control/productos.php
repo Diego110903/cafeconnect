@@ -60,10 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         p.ProNombre as 'nombre', 
         p.ProPresentacion as 'presentacion', 
         p.ProValorUnitario as 'valorunitario', 
-        p.ProMinimoStock as 'minimostock', 
-        i.InveValorUnitario as 'inveValorUnitario' 
- FROM tbproducto p 
- LEFT JOIN tbinventario i ON p.IdProductoPK = i.IdProductoFK";
+        p.ProMinimoStock as 'minimostock'
+ FROM tbproducto p ";
 
 
         if (isset($_GET["id"])) {
@@ -169,6 +167,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,10 +1,10 @@
-import { Ajax, Rol, banco, ruta } from "./auxiliares.js";
+import { Ajax, Rol, banco, ruta, medioPago } from "./auxiliares.js";
 import { guardarUsuario, buscarusuario, editarusuario, listaUsuario, eliminarusuario } from "./usuarios.js";
 import { buscarproveedor, cargarProveedores, editarproveedor, eliminarproveedor, guardarproveedor, listaProveedores } from "./proveedores.js";
 import { guardarentregas, buscarentregas, editarentregas, listadeentregas, eliminarentregas } from "./entregas.js";
 import { guardarproducto, buscarproducto, editarproducto, eliminarproducto, listaproducto } from "./productos.js";
 import { guardaritems, buscaritems, editaritems, listaitems, eliminaritems} from "./items.js";
-import { guardarfactura, eliminarfactura, listafacturas, buscarfactura, cargarMediopago } from "./facturas.js";
+import { guardarfactura, eliminarfactura, listafacturas, buscarfactura,  } from "./facturas.js";
 
 
 function validarToken() {
@@ -76,6 +76,7 @@ function validarToken() {
             }
         }
 
+  
         if (location.pathname.includes("registrafacturas") || location.pathname.includes("actualizarfacturas")) {
             cargarMediopago();
             if (location.pathname.includes("actualizarfacturas")) {
@@ -162,6 +163,17 @@ function validarToken() {
         }
     }
 }
+
+if (location.pathname.includes("registrofacturas")) {
+    medioPago()
+    let $fecha=document.getElementById("fecha"), $hora=document.getElementById("hora"), $vf=document.getElementById("valorfactura")
+    $fecha.innerHTML= new Date().toLocaleDateString()
+    $hora.innerHTML= new Date().toLocaleTimeString()
+    $vf.innerHTML= "0,0"
+
+}
+
+
 
 
 

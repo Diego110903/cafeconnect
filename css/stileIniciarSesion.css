@@ -1,99 +1,172 @@
-/* Estilos para el cuerpo de la página */
 body {
-    background-color: #f2f2f2;
+    background-image: url('../imagenes/cafe.png');
+    background-size: cover;
+    height: 100hv;
+    background-position: bottom;
     font-family: Arial, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
     margin: 0;
-}
-
-/* Estilos para el contenedor principal */
-.container {
-    width: 400px; /* Ajusta el ancho del contenedor */
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin: 50px auto;
-}
-
-/* Estilos para el encabezado dentro del contenedor */
-.container h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
-}
-
-/* Estilos para el formulario dentro del contenedor */
-.container form {
-    width: 100%; /* Hace que el formulario ocupe todo el ancho del contenedor */
-}
-
-/* Estilos para los campos de texto y contraseña */
-.container input[type="text"],
-.container input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 0;
     box-sizing: border-box;
-    font-size: 16px;
+    overflow: hidden;
 }
 
-/* Efecto de enfoque para los campos de texto y contraseña */
-.container input[type="text"]:focus,
-.container input[type="password"]:focus {
-    outline: none;
-    box-shadow: 0px 0px 2px 1px #333;
-}
-
-/* Estilos para el contenedor del checkbox */
-.container .checkbox-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-/* Ajuste de margen para el checkbox */
-.container input[type="checkbox"] {
-    margin-left: 5px;
-}
-
-/* Estilos para el botón de envío */
-.container button[type="submit"] {
+.header {
     width: 100%;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+    height: 80px;/**/
+    background: rgb(70, 18, 18);
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Efecto de desplazamiento para el botón de envío */
-.container button[type="submit"]:hover {
-    background-color: #444;
+.header .contenedor-imagen {
+    width: 120px;
 }
 
-/* Estilos para el texto de "Olvidó tu Contraseña" */
-.forgot-password {
-    margin-top: 10px;
-    text-align: center;
+.header .administrador {
+    color: white;
+    position: relative;
+    top: 0;
+    left: -60px;
 }
 
-/* Estilos para el enlace de "Olvidó tu Contraseña" */
-.forgot-password a {
-    color: #333;
+.header .administrador a {
+    color: white;
     text-decoration: none;
 }
 
-/* Efecto de desplazamiento para el enlace de "Olvidó tu Contraseña" */
-.forgot-password a:hover {
-    text-decoration: underline;
+.header .administrador img {
+    width: 80px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.header .contenedor-imagen img {
+    width: 100px;
+    height: 70px;
+}
+
+.container {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar {
+    color: white;
+    position: relative;
+    top: 0;
+    left: -60px;
+    background-color: rgb(85, 35, 35);
+    width: 100px;
+    padding: 120px;
+    color: white;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 40px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
+}
+
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+form {
+    /* max-width: 400px; */
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white; 
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px; /* Espacio entre botones y campos de entrada */
+}
+
+button.cancel {
+    background-color: #ccc;
+    color: #333;
+}
+
+/*/////////////////////////////////////////*/
+
+.table-responsive {
+    
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
 }
 
 
