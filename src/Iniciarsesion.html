@@ -8,12 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 	<link rel="stylesheet" href="../css/style.css">
 	<style>
-            body {
-            overflow-y: auto; 
-            height: 120vh; 
-            margin: 0; 
-            background-size: cover;
-        }
+        
         .logo-container {
             text-align: center;
             margin-bottom: 100px;
@@ -48,36 +43,35 @@
 	<div class="logo-container">
 		<img class="logo" src="../imagenes/logotipo.jpg" alt="logotipo">
 	</div>
-    <div class="container">
-        <div class="m-5 row d-flex align-items-center justify-content-center">
-            <div class="col-md-50 custom-form-padding">
-                <div class="card">
-                    <h3 class="card-header text-center">INICIAR SESION</h3>
-                    <div class="card-body">
-	<div class="container login">
-        <form id="form_login" name="form_login" class="form-control" action="" method="post">
+    <div class="">
+        <div class="m-5">
+            <div class="card">
+                <h3 class="card-header text-center">INICIAR SESION</h3>
+                <div class="card-body">
+                    <form id="form_login" name="form_login" class="form-control" action="" method="post">
              
-            
-            
-            <input type="text" class="form-control" id="user" name="user" placeholder="Correo Electrónico" required value="">
-            
-            <div class="div-contrasena"></div><br><br>
-            <input type="password" class="form-control" id="pass" name="pass" placeholder="Contrasena" required value="" autocomplete="">
-            
-            <br>
-            <button type="submit" id="btn-iniciar" name="btn-iniciar" class="btninicio">Iniciar sesión</button>
-            <button id="btnnuevo" name="btnnuevo" type="button" class="botoninicio">Olvidó su Contraseña</button>
-            
+                <div class="mb-3">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="user" name="user" placeholder="Correo Electrónico" required value="">
+                </div>
+                <div class="mb-3">
+                    <label for="password">Contrasena</label>
+                    <input type="password" class="form-control" id="pass" name="pass" placeholder="Contrasena" required value="" autocomplete="">
+                </div>    
+                <div class="mb-3 button-container"> 
+                    <button name="btnguardar" id="btnguardar" type="submit" class="btn btn-primary">GUARDAR</button>
+                    <button name="btncancelar" id="btncancelar" type="button" class="btn btn-danger">CANCELAR</button>
+                </div>
             <p class="text-center text-red" id="msgLogin"></p>
-        </form>
+                    </form>
+                </div>
+            </div>
+       </div>
     </div>
-</div>
-</div>
-</div>
-</div>
+
         
 		
-	</div>
+	
 	
     <script src="../js/jquery-3.7.1.js"></script>
     <script src="../js/login.js"></script> 

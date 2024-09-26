@@ -1,7 +1,7 @@
 body {
     background-image: url('../imagenes/cafe.png');
     background-size: cover;
-    height: 100hv;
+    height: 100vh; /* Cambié 100hv a 100vh, que es la unidad correcta */
     background-position: bottom;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -12,7 +12,7 @@ body {
 
 .header {
     width: 100%;
-    height: 80px;/**/
+    height: 80px;
     background: rgb(70, 18, 18);
     padding-left: 30px;
     padding-right: 30px;
@@ -63,7 +63,6 @@ body {
     background-color: rgb(85, 35, 35);
     width: 100px;
     padding: 120px;
-    color: white;
 }
 
 .sidebar ul {
@@ -92,8 +91,9 @@ h2 {
 }
 
 form {
-    /* max-width: 400px; */
-    margin: 0 auto;
+    max-height: 400px; /* Establecido para limitar el tamaño del formulario */
+    overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado alto */
+    margin: 20px auto;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -104,24 +104,14 @@ form {
     margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-input,
-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 1rem;
+.button-container {
+    display: flex; /* Activar Flexbox */
+    justify-content: center; /* Centrar horizontalmente */
+    margin-top: 10px; /* Espacio adicional arriba si es necesario */
 }
 
 button {
-    width: 100%;
+    width: 10%; /* Ancho de los botones */
     padding: 10px;
     background-color: #007bff;
     color: #fff;
@@ -129,7 +119,7 @@ button {
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
-    margin-top: 10px; /* Espacio entre botones y campos de entrada */
+    margin: 0 5px; /* Espacio horizontal entre los botones */
 }
 
 button.cancel {
@@ -140,7 +130,6 @@ button.cancel {
 /*/////////////////////////////////////////*/
 
 .table-responsive {
-    
     max-height: 80vh;
     overflow-y: auto;
 }

@@ -1,33 +1,4 @@
-.logo-container {
-  text-align: center;
-  margin-bottom: 50px;
-}
 
-.logo {
-  width: 200px;
-  height: auto;
-}
-
-.content {
-  display: flex;
-  justify-content: center;
-}
-
-.form-container {
-  width: 50%;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.botones {
-  margin-top: 20px;
-}
-
-.btn {
-  margin-right: 10px;
-}
 
 
 

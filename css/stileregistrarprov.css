@@ -1,68 +1,70 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-}
-
-.header {
-    background-color: #343a40;
-    padding: 10px;
-    color: white;
-}
-
-.contenedor-imagen img {
-    max-height: 50px;
-}
-
-.administrador {
+.container {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-end;
-}
-
-.administrador svg {
-    margin-right: 10px;
-}
-
-.navbar {
-    margin-bottom: 20px;
-}
-
-.card {
-    margin-top: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card-header {
-    background-color: #007bff;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.form-control {
-    padding: 20px;
+    padding: 20px; /* Espacio alrededor del contenedor */
 }
 
 .custom-form-padding {
-    padding: 20px;
+    padding: 15px; /* Espacio interno para el formulario */
 }
 
-.mb-3 label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
+.card {
+    width: 400px; /* Ajusta el ancho del formulario */
+    border-radius: 8px; /* Bordes redondeados para la tarjeta */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.card-header {
+    background-color: #007bff; /* Color de fondo del encabezado */
+    color: white; /* Color del texto en el encabezado */
+    padding: 10px; /* Espaciado interno del encabezado */
+}
+
+.card-body {
+    padding: 20px; /* Espaciado interno del cuerpo de la tarjeta */
+    background-color: white; /* Color de fondo del cuerpo de la tarjeta */
+}
+
+.form-control {
+    width: 100%; /* Ancho completo de los campos de entrada */
+    padding: 8px; /* Espaciado interno de los campos de entrada */
+    border: 1px solid #ced4da; /* Borde de los campos de entrada */
+    border-radius: 4px; /* Bordes redondeados para los campos de entrada */
+    box-sizing: border-box; /* Incluir padding y border en el ancho total */
+    margin-bottom: 15px; /* Espaciado inferior entre los campos */
+}
+
+.form-select {
+    width: 100%; /* Ancho completo para los selectores */
+    padding: 8px; /* Espaciado interno de los selectores */
+    border: 1px solid #ced4da; /* Borde de los selectores */
+    border-radius: 4px; /* Bordes redondeados para los selectores */
+    box-sizing: border-box; /* Incluir padding y border en el ancho total */
+    margin-bottom: 15px; /* Espaciado inferior entre los selectores */
+}
+
+button {
+    width: 100%; /* Botones ocupan el ancho completo */
+    padding: 10px; /* Espaciado interno de los botones */
+    border-radius: 4px; /* Bordes redondeados para los botones */
+    font-size: 1rem; /* Tamaño de fuente de los botones */
+    cursor: pointer; /* Cursor tipo puntero para los botones */
+    margin-top: 10px; /* Espacio superior entre los botones */
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #007bff; /* Color de fondo del botón guardar */
+    color: white; /* Color del texto del botón guardar */
+    border: none; /* Sin borde */
 }
 
 .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
+    background-color: #dc3545; /* Color de fondo del botón cancelar */
+    color: white; /* Color del texto del botón cancelar */
+    border: none; /* Sin borde */
 }
+
 
 
 
