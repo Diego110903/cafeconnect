@@ -47,6 +47,9 @@
                             <li><a class="dropdown-item" href="listafacturas.html">Listado Factura</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="registrofacturas.html">Registro Factura</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="factura.html">Factura</a></li>
+                                
                             </ul> 
                             
                         
