@@ -51,22 +51,22 @@
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="Fecha">Fecha</label>
-                                    <label class="form-control" id="fecha" name="Fecha">
+                                    <input type="date" class="form-control" id="fecha" name="Fecha" required>
                                 </div>
                                 <div class="col mb-3">
                                     <label for="hora">Hora</label>
-                                    <label class="form-control" id="hora" name="hora">
-                                </div>                                
+                                    <input type="time" class="form-control" id="hora" name="hora" required>
+                                </div>
                                 <div class="col mb-3" id="dmediopago">
-                                        <label for="mediopago">Medio de pago</label>
-                                        <select class="form-select" name="mediopago" id="mediopago" required>
-                                            <option value="">Seleccione uno</option>
-                                            <!-- Las opciones se llenarán dinámicamente -->
-                                        </select>
+                                    <label for="mediopago">Medio de pago</label>
+                                    <select class="form-select" name="mediopago" id="mediopago" required>
+                                        <option value="">Seleccione uno</option>
+                                        <!-- Las opciones se llenarán dinámicamente -->
+                                    </select>
                                 </div>
                                 <div class="col mb-3">
                                     <label for="ValorFactura">ValorFactura</label>
-                                    <h2 class="text-danger" id="valorfactura" name="ValorFactura"></h2>
+                                    <input type="number" class="form-control text-danger" id="valorfactura" name="ValorFactura" required>
                                 </div>
                             </div>
                             <div class="row d-flex justify-content-evenly">
@@ -74,6 +74,7 @@
                                 <button name="btncancelar" id="btncancelar" type="button" class="btn btn-danger">CANCELAR</button>
                             </div>
                         </form>
+                        
                     </div>    
                 </div>
         </div>
