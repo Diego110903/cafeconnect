@@ -1,100 +1,197 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Facturas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Factura de Venta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            width: 45%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .add-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .add-button:hover {
+            background-color: #3e8e41;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
 </head>
 <body>
-    <div class="header">
-        <div class="contenedor-imagen">
-            <img src="../imagenes/logotipo.jpg" alt="Logotipo">
-        </div>
-        <div class="administrador dropdown">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-            </svg>
-            <a href="#" id="info_user" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Diego Andres Mora</a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#"><button id="salir" name="salir" class="btn btn-danger for control ">Salir</button></a></li>
-            </ul>
-        </div>
-    </div>
-    <header class="header">
-        <nav class="navbar navbar-expand-md bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                   
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div class="container">
+        <h2>Factura de Venta</h2>
+        <div class="section">
+        <div class="form-group">
+            <h3>Información del Producto</h3>
+            <label for="product-name">Nombre del Producto:</label>
+            <input type="text" id="product-name" value="Gaseosa Mercadona 1.5L">
 
-    <div class="container">
-        <div class="m-5">
-            <div class="card">
-                <h3 class="card-header text-center">REGISTRAR FACTURA</h3>
-                <div class="card-body">
-                    <form class="form-control" action="" method="post" id="form-factura" name="form-factura">
-                        <div class="row">
-                            <div class="col mb-3">
-                                <label for="nombreProducto">nombreProducto</label>
-                                <input type="text" class="form-control" id="nombreProducto" name="nombreProducto" required>
-                            </div>
-                            <div class="col mb-3">
-                                <label for="Cantidad">Cantidad</label>
-                                <input type="Cantidad" class="form-control" id="Cantidad" name="Cantidad" required>
-                            </div>
-                        </div>
-                        <div class="row d-flex justify-content-evenly">
-                            <button name="btnguardar" id="btnguardar" type="submit" class="btn btn-primary">GUARDAR</button>
-                            <button name="btncancelar" id="btncancelar" type="button" class="btn btn-danger">CANCELAR</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <label for="product-quantity">Cantidad:</label>
+            <input type="number" id="product-quantity" value="1">
+
+            <button class="add-button">+</button>
         </div>
-    </div>
-    <div class="container">
-        <div class="col"> 
-            <div class="card">
-                <h3 class="card-header text-center">LISTADO DE ENTREGAS</h3>
-                <div class="card-body table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="table-primary">
-                                <th scope="col">#</th>
-                                <th scope="col">nombreProducto</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Valor Unitario</th>
-                                <th scope="col">Valor Total</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tinfo">
-                           
-                        </tbody>
-                    </table>
+        </div>
+
+        <div class="section">
+            <div class="form-group">
+                <h3></h3>
+                <label for="client-date">Fecha:</label>
+                <input type="date" id="client-date" value="2023-03-03">
+
+                <label for="hora">Hora</label>
+                <input type="time" class="form-control" id="hora" name="hora" required>
+
+                
+                    <label for="mediopago">Medio de pago</label>
+                    <select class="form-select" name="mediopago" id="mediopago" required>
+                        <option value="">Seleccione uno</option>
+                        <!-- Las opciones se llenarán dinámicamente -->
+                    </select>
                 </div>
-            </div>
-        </div>       
+
+       
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Nombre del producto</th>
+                    <th>Cantidad</th>
+                    <th>Valor Unitario</th>
+                    <th>Valor Venta</th>
+                    <th>Valor Total</th>
+                    <th>OPC</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Empanadas de Carne</td>
+                    <td>2</td>
+                    <td>2.500</td>
+                    <td>5.000</td>
+                    <td></td>
+                    <td><button class="delete-button">Eliminar</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Sandwich Cubano</td>
+                    <td>1</td>
+                    <td>6.000</td>
+                    <td>6.000</td>
+                    <td></td>
+                    <td><button class="delete-button">Eliminar</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Cafeito de queso con tocino</td>
+                    <td>3</td>
+                    <td>1.500</td>
+                    <td>4.500</td>
+                    <td></td>
+                    <td><button class="delete-button">Eliminar</button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>15.500</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button>GUARDAR</button>
     </div>
-   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="../js/jquery-3.7.1.min.js"></script>
-    <script src="../js/main.js" type="module"></script>
-    
 </body>
 </html>
-
-
+<td>15.500</td>
