@@ -249,6 +249,7 @@ document.addEventListener("submit", (e) => {
     if (e.target.matches("#form-entregas")) guardarentregas("POST");
     if (e.target.matches("#form-act_entregas")) guardarentregas("PUT");
     if (e.target.matches("#form-producto")) guardarproducto("POST");
+    if (e.target.matches("#form-act_producto")) guardarproducto("PUT");
     if (e.target.matches("#form-act_items")) guardaritems("PUT");
     if (e.target.matches("#form-items")) guardaritems("POST");
     if (e.target.matches("#form-factura")) guardarfactura("POST");
